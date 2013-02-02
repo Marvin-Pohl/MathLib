@@ -1,8 +1,28 @@
+#Special Folders
+MathLib/bin
+MathLib/tmp
+MathLib/lib
+
 #Visual Studio 
+*.suo
+*.sdf
+*.opensdf
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
 # Compiled Object files
 *.slo
 *.lo
 *.o
+
 
 # Compiled Dynamic libraries
 *.so
