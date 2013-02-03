@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include <Vector2.h>
+#include <math.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace LinearMath;
@@ -208,6 +209,15 @@ namespace MathLibUnitTest
 			Scalar scal = v1.PerpDotProduct(v2);
 
 			Assert::AreEqual(((-20.0f*30.0f)+(10.0f*40.0f)), scal);
+		}
+
+		TEST_METHOD(Vector2GetRotation)
+		{
+			Vector2 v(10,0);
+
+			Scalar res = v.GetRotation();
+
+			Assert::AreEqual(0.0f, res);
 		}
 	};
 }

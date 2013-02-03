@@ -9,6 +9,8 @@ Precompiled header for the MathLib
 
 //#define _DOUBLE_PRECISION
 
+#define _USE_MATH_DEFINES
+
 #ifdef _DOUBLE_PRECISION
 typedef double Scalar;
 #else

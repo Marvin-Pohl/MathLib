@@ -1,7 +1,7 @@
 #include "precompiledHeader.h"
 #include "Vector2.h"
 
-#include <math.h>
+
 
 namespace LinearMath
 {
@@ -114,6 +114,27 @@ namespace LinearMath
 	Scalar Vector2::DotProduct( const Vector2& v ) const
 	{
 		return *this * v;
+	}
+
+	Scalar Vector2::GetRotation() const
+	{
+		Scalar result = MathHelper::ACos(X / Length());
+
+		return Y >= 0 ? result : -result;
+	}
+
+	Vector2 Vector2::Rotate( const Radian& rad, const bool relative /*= true*/ )
+	{
+		Scalar amount = rad.AsRadianValue();
+		if ( ! relative )
+		{
+			amount -= GetRotation();
+		}
+
+		Scalar sin = MathHelper::Sin(amount);
+		Scalar cos = MathHelper::Cos(amount);
+
+		return Vector2(cos * X - sin * Y, sin * X + cos * Y);
 	}
 
 }

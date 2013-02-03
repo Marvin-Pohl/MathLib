@@ -3,6 +3,7 @@
 #define _MP_VECTOR_2_H_
 
 #include "precompiledHeader.h"
+#include "MathHelper.h"
 
 namespace LinearMath
 {
@@ -57,8 +58,9 @@ public:
 		Vector2 NormalizedCopy( void ) const;
 		Scalar PerpDotProduct( const Vector2& v ) const;
 		Scalar DotProduct( const Vector2& v ) const;
-
-protected:
+		Scalar Vector2::GetRotation() const;
+		Vector2 Vector2::Rotate(const Radian& rad, const bool relative = true);
+	protected:
 
 private:
 
