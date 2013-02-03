@@ -2,6 +2,7 @@
 MathLib/bin
 MathLib/tmp
 MathLib/lib
+ipch
 
 #Visual Studio 
 *.suo
