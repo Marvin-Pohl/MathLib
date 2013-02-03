@@ -8,6 +8,7 @@ ipch
 *.suo
 *.sdf
 *.opensdf
+*.obj
 
 # Windows image file caches
 Thumbs.db
