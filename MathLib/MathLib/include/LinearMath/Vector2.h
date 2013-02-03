@@ -1,3 +1,7 @@
+#pragma once
+#ifndef _MP_VECTOR_2_H_
+#define _MP_VECTOR_2_H_
+
 #include "precompiledHeader.h"
 
 namespace LinearMath
@@ -14,7 +18,7 @@ public:
 
 		Vector2( Scalar x, Scalar y );
 
-		~Vector2( void );
+		~ Vector2( void );
 
 		/**
 		Operators
@@ -22,34 +26,37 @@ public:
 		*/
 
 		// + Operators
-		Vector2 operator +( const Vector2& v );
+		Vector2 operator +( const Vector2& v ) const;
 		Vector2 &operator +=( const Vector2& v );
 
 		// - Operators
-		Vector2 operator -( const Vector2& v );
+		Vector2 operator -( const Vector2& v ) const;
 		Vector2 &operator -=( const Vector2& v );
 
 		// * Operators
-		Vector2 operator *( const Scalar& scalar );
+		Vector2 operator *( const Scalar& scalar ) const;
 		Vector2 &operator *=( const Scalar& scalar );
+		inline friend Vector2 operator*( const Scalar& scalar, const Vector2& v )
+		{
+			return Vector2( scalar * v.X, scalar * v.Y );
+		}
 
-		Scalar operator *( const Vector2& v );
+		Scalar operator *( const Vector2& v ) const;
 
 		// / Operators
-		Vector2 operator /( const Scalar& scalar );
+		Vector2 operator /( const Scalar& scalar ) const;
 		Vector2 &operator /=( const Scalar& scalar );
 
 		Scalar X;
 		Scalar Y;
 
 		// Methods
-
-		Scalar LengthSquared();
-		Scalar Length();
-		void Normalize();
-		Vector2 NormalizedCopy();
-		Vector2 PerpDotProduct(const Vector2& v);
-		Scalar DotProduct( const Vector2& v);
+		Scalar LengthSquared( void ) const;
+		Scalar Length( void ) const;
+		void Normalize( void );
+		Vector2 NormalizedCopy( void ) const;
+		Scalar PerpDotProduct( const Vector2& v ) const;
+		Scalar DotProduct( const Vector2& v ) const;
 
 protected:
 
@@ -57,3 +64,4 @@ private:
 
 	};
 }
+#endif

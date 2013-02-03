@@ -1,3 +1,5 @@
+#pragma once
+
 /**
 Precompiled header for the MathLib
 

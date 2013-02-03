@@ -1,3 +1,6 @@
+#pragma once
+#ifndef _MP_VECTOR_2_H_
+#define _MP_VECTOR_2_H_
 #include "precompiledHeader.h"
 
 namespace LinearMath
@@ -60,3 +63,4 @@ private:
 
 	};
 }
+#endif

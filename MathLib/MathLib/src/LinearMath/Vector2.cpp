@@ -28,8 +28,9 @@ namespace LinearMath
 	{
 	}
 
-	Vector2 Vector2::operator+( const Vector2& v )
+	Vector2 Vector2::operator+( const Vector2& v ) const
 	{
+
 		return Vector2( this->X + v.X, this->Y + v.Y );
 	}
 
@@ -40,7 +41,7 @@ namespace LinearMath
 		return *this;
 	}
 
-	Vector2 Vector2::operator-( const Vector2& v )
+	Vector2 Vector2::operator-( const Vector2& v ) const
 	{
 		return Vector2( this->X - v.X, this->Y - v.Y );
 	}
@@ -52,12 +53,12 @@ namespace LinearMath
 		return *this;
 	}
 
-	Vector2 Vector2::operator*( const Scalar& scalar )
+	Vector2 Vector2::operator*( const Scalar& scalar ) const
 	{
 		return Vector2( X * scalar, Y * scalar );
 	}
 
-	Scalar Vector2::operator*( const Vector2& v )
+	Scalar Vector2::operator*( const Vector2& v ) const
 	{
 		return ( X * v.X ) + ( Y * v.Y );
 	}
@@ -69,7 +70,7 @@ namespace LinearMath
 		return *this;
 	}
 
-	Vector2 Vector2::operator/( const Scalar& scalar )
+	Vector2 Vector2::operator/( const Scalar& scalar ) const
 	{
 		return Vector2( X / scalar, Y / scalar );
 	}
@@ -81,12 +82,12 @@ namespace LinearMath
 		return *this;
 	}
 
-	Scalar Vector2::LengthSquared( void )
+	Scalar Vector2::LengthSquared( void ) const
 	{
 		return ( X * X ) + ( Y * Y );
 	}
 
-	Scalar Vector2::Length( void )
+	Scalar Vector2::Length( void ) const
 	{
 		return sqrt( LengthSquared() );
 	}
@@ -98,19 +99,19 @@ namespace LinearMath
 		Y /= length;
 	}
 
-	Vector2 Vector2::NormalizedCopy( void )
+	Vector2 Vector2::NormalizedCopy( void ) const
 	{
 		Scalar length = Length();
 
 		return Vector2( X / length, Y / length );
 	}
 
-	LinearMath::Vector2 Vector2::PerpDotProduct( const Vector2& v )
+	Scalar Vector2::PerpDotProduct( const Vector2& v ) const
 	{
 		return Vector2(-Y, X) * v;
 	}
 
-	Scalar Vector2::DotProduct( const Vector2& v )
+	Scalar Vector2::DotProduct( const Vector2& v ) const
 	{
 		return *this * v;
 	}
