@@ -20,19 +20,19 @@ namespace LinearMath
 	}
 
 	Radian::Radian( const Degree& deg ) :
-		m_Rad( MathHelper::DegreeToRad( deg ) )
+		m_Rad( MathHelper::DegreeToRad( deg ).AsRadianValue() )
 	{
 	}
 
 	Radian::~Radian( void )
 	{
 	}
-
-	Radian &Radian::operator=( const Scalar& scalar )
-	{
-		m_Rad = scalar;
-		return *this;
-	}
+	
+	//Radian &Radian::operator=( const Scalar& scalar )
+	//{
+	//	m_Rad = scalar;
+	//	return *this;
+	//}
 
 	Radian &Radian::operator=( const Radian& rad )
 	{
@@ -47,7 +47,7 @@ namespace LinearMath
 		return *this;
 	}
 
-	LinearMath::Radian Radian::operator+( const Radian& rad )
+	LinearMath::Radian Radian::operator+( const Radian& rad ) const
 	{
 		return Radian( m_Rad + rad.m_Rad );
 	}
@@ -58,14 +58,9 @@ namespace LinearMath
 		return *this;
 	}
 
-	Radian::operator Degree( void )
+	Radian::operator Degree( void ) const
 	{
 		return MathHelper::RadToDegree( *this );
-	}
-
-	Radian::operator Scalar( void )
-	{
-		return m_Rad;
 	}
 
 	Scalar Radian::AsRadianValue( void ) const
@@ -83,7 +78,7 @@ namespace LinearMath
 		return MathHelper::RadToDegree( *this ).AsDegreeValue();
 	}
 
-	LinearMath::Radian Radian::operator-( const Radian& rad )
+	LinearMath::Radian Radian::operator-( const Radian& rad ) const
 	{
 		return Radian( m_Rad - rad.m_Rad );
 	}
@@ -95,7 +90,7 @@ namespace LinearMath
 		return *this;
 	}
 
-	LinearMath::Radian Radian::operator*( const Scalar& scalar )
+	LinearMath::Radian Radian::operator*( const Scalar& scalar ) const
 	{
 		return Radian( m_Rad * scalar );
 	}
@@ -111,7 +106,7 @@ namespace LinearMath
 		return *this;
 	}
 
-	LinearMath::Radian Radian::operator/( const Scalar& scalar )
+	LinearMath::Radian Radian::operator/( const Scalar& scalar ) const
 	{
 		return Radian( m_Rad / scalar );
 	}
@@ -123,37 +118,37 @@ namespace LinearMath
 		return *this;
 	}
 
-	bool Radian::operator==( const Radian& rad )
+	bool Radian::operator==( const Radian& rad ) const
 	{
 		return m_Rad == rad.m_Rad;
 	}
 
-	bool Radian::operator!=( const Radian& rad )
+	bool Radian::operator!=( const Radian& rad ) const
 	{
 		return m_Rad != rad.m_Rad;
 	}
 
-	bool Radian::operator>=( const Radian& rad )
+	bool Radian::operator>=( const Radian& rad ) const
 	{
 		return m_Rad >= rad.m_Rad;
 	}
 
-	bool Radian::operator<=( const Radian& rad )
+	bool Radian::operator<=( const Radian& rad ) const
 	{
 		return m_Rad <= rad.m_Rad;
 	}
 
-	bool Radian::operator>( const Radian& rad )
+	bool Radian::operator>( const Radian& rad ) const
 	{
 		return m_Rad > rad.m_Rad;
 	}
 
-	bool Radian::operator<( const Radian& rad )
+	bool Radian::operator<( const Radian& rad ) const
 	{
 		return m_Rad < rad.m_Rad;
 	}
 
-	const Scalar MathHelper:: PI = 3.1415926f;
+	const Scalar MathHelper:: PI = 3.14159265358979323846f;
 
 	LinearMath::Radian MathHelper::DegreeToRad( const Degree& deg )
 	{
@@ -276,7 +271,7 @@ namespace LinearMath
 		return p1 + ( ( p2 - p1 ) * lerpVal );
 	}
 
-	Scalar MathHelper::GetPI()
+	const Scalar MathHelper::GetPI()
 	{
 		return PI;
 	}
@@ -305,13 +300,6 @@ namespace LinearMath
 	{
 	}
 
-	Degree &Degree::operator=( const Scalar& scalar )
-	{
-		m_Degree = scalar;
-
-		return *this;
-	}
-
 	Degree &Degree::operator=( const Radian& rad )
 	{
 		m_Degree = MathHelper::RadToDegree( rad ).AsDegreeValue();
@@ -325,14 +313,9 @@ namespace LinearMath
 		return *this;
 	}
 
-	Degree::operator Radian( void )
+	Degree::operator Radian( void ) const
 	{
 		return MathHelper::DegreeToRad( *this );
-	}
-
-	Degree::operator Scalar( void )
-	{
-		return AsDegreeValue();
 	}
 
 	Scalar Degree::AsRadianValue( void ) const
@@ -350,7 +333,7 @@ namespace LinearMath
 		return m_Degree;
 	}
 
-	LinearMath::Degree Degree::operator+( const Degree& deg )
+	LinearMath::Degree Degree::operator+( const Degree& deg ) const
 	{
 		return Degree( m_Degree + deg.m_Degree );
 	}
@@ -362,7 +345,7 @@ namespace LinearMath
 		return *this;
 	}
 
-	LinearMath::Degree Degree::operator-( const Degree& deg )
+	LinearMath::Degree Degree::operator-( const Degree& deg ) const
 	{
 		return Degree( m_Degree - deg.m_Degree );
 	}
@@ -374,7 +357,7 @@ namespace LinearMath
 		return *this;
 	}
 
-	LinearMath::Degree Degree::operator*( const Scalar& scalar )
+	LinearMath::Degree Degree::operator*( const Scalar& scalar ) const
 	{
 		return Degree( m_Degree * scalar );
 	}
@@ -386,7 +369,7 @@ namespace LinearMath
 		return *this;
 	}
 
-	LinearMath::Degree Degree::operator/( const Scalar& scalar )
+	LinearMath::Degree Degree::operator/( const Scalar& scalar ) const
 	{
 		return Degree( m_Degree / scalar );
 	}
@@ -398,36 +381,36 @@ namespace LinearMath
 		return *this;
 	}
 
-	bool Degree::operator==( const Degree& deg )
+	bool Degree::operator==( const Degree& deg ) const
 	{
 		return m_Degree == deg.m_Degree;
 	}
 
-	bool Degree::operator!=( const Degree& deg )
+	bool Degree::operator!=( const Degree& deg ) const
 	{
 
 		return m_Degree != deg.m_Degree;
 	}
 
-	bool Degree::operator>=( const Degree& deg )
+	bool Degree::operator>=( const Degree& deg ) const
 	{
 
 		return m_Degree >= deg.m_Degree;
 	}
 
-	bool Degree::operator<=( const Degree& deg )
+	bool Degree::operator<=( const Degree& deg ) const
 	{
 
 		return m_Degree <= deg.m_Degree;
 	}
 
-	bool Degree::operator>( const Degree& deg )
+	bool Degree::operator>( const Degree& deg ) const
 	{
 
 		return m_Degree > deg.m_Degree;
 	}
 
-	bool Degree::operator<( const Degree& deg )
+	bool Degree::operator<( const Degree& deg ) const
 	{
 
 		return m_Degree < deg.m_Degree;

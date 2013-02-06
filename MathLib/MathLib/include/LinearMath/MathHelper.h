@@ -17,32 +17,31 @@ public:
 		Radian( const Degree& deg );
 		~ Radian( void );
 
-		Radian &operator =( const Scalar& scalar );
+		//Radian &operator =( const Scalar& scalar );
 		Radian &operator =( const Radian& rad );
 		Radian &operator =( const Degree& deg );
 
-		Radian operator +( const Radian& rad );
+		Radian operator +( const Radian& rad ) const;
 		Radian &operator +=( const Radian& rad );
 
-		Radian operator -( const Radian& rad );
+		Radian operator -( const Radian& rad ) const;
 		Radian &operator -=( const Radian& rad );
 
-		Radian operator *( const Scalar& scalar );
+		Radian operator *( const Scalar& scalar ) const;
 		Radian &operator *=( const Scalar& scalar );
 		friend Radian operator *( const Scalar& scalar, const Radian& rad );
 
-		Radian operator /( const Scalar& scalar );
+		Radian operator /( const Scalar& scalar ) const;
 		Radian &operator /=( const Scalar& scalar );
 
-		bool operator ==( const Radian& rad );
-		bool operator !=( const Radian& rad );
-		bool operator >=( const Radian& rad );
-		bool operator <=( const Radian& rad );
-		bool operator >( const Radian& rad );
-		bool operator <( const Radian& rad );
+		bool operator ==( const Radian& rad ) const;
+		bool operator !=( const Radian& rad ) const;
+		bool operator >=( const Radian& rad ) const;
+		bool operator <=( const Radian& rad ) const;
+		bool operator >( const Radian& rad ) const;
+		bool operator <( const Radian& rad ) const;
 
-		operator Degree( void );
-		operator Scalar( void );
+		operator Degree( void ) const;
 
 		Scalar AsRadianValue( void ) const;
 		Degree ToDegree( void ) const;
@@ -64,32 +63,32 @@ public:
 		Degree( const Degree& deg );
 		~ Degree( void );
 
-		Degree &operator =( const Scalar& scalar );
+		//Degree &operator =( const Scalar& scalar );
 		Degree &operator =( const Radian& rad );
 		Degree &operator =( const Degree& deg );
 
-		Degree operator +( const Degree& rad );
+		Degree operator +( const Degree& rad ) const;
 		Degree &operator +=( const Degree& rad );
 
-		Degree operator -( const Degree& rad );
+		Degree operator -( const Degree& rad ) const;
 		Degree &operator -=( const Degree& rad );
 
-		Degree operator *( const Scalar& scalar );
+		Degree operator *( const Scalar& scalar ) const;
 		Degree &operator *=( const Scalar& scalar );
 
-		Degree operator /( const Scalar& scalar );
+		Degree operator /( const Scalar& scalar ) const;
 		Degree &operator /=( const Scalar& scalar );
 
-		bool operator ==( const Degree& rad );
-		bool operator !=( const Degree& rad );
-		bool operator >=( const Degree& rad );
-		bool operator <=( const Degree& rad );
-		bool operator >( const Degree& rad );
-		bool operator < ( const Degree&rad );
+		bool operator ==( const Degree& rad ) const;
+		bool operator !=( const Degree& rad ) const;
+		bool operator >=( const Degree& rad ) const;
+		bool operator <=( const Degree& rad ) const;
+		bool operator >( const Degree& rad ) const;
+		bool operator < ( const Degree&rad ) const;
 
-		operator Radian( void );
-		operator Scalar( void );
+		operator Radian( void ) const;
 
+		//operator Scalar( void );
 		Scalar AsRadianValue( void ) const;
 		Radian ToRad( void ) const;
 		Scalar AsDegreeValue( void ) const;
@@ -106,7 +105,7 @@ public:
 
 		static const Scalar PI;
 
-		static Scalar GetPI( void );
+		static const Scalar GetPI( void );
 
 		static Radian DegreeToRad( const Degree& deg );
 		static Degree RadToDegree( const Radian& rad );
@@ -135,6 +134,7 @@ public:
 private:
 
 		MathHelper( void );
+		MathHelper( const MathHelper&  );
 		~ MathHelper( void );
 	};
 
