@@ -7,19 +7,19 @@
 
 namespace LinearMath
 {
-
-	class DLLExport Vector2
+	template < typename ScalarType > 
+	class Vector2_tpl
 	{
 
 public:
 
-		Vector2( void );
+		Vector2_tpl( void );
 
-		Vector2( Scalar val );
+		Vector2_tpl( ScalarType val );
 
-		Vector2( Scalar x, Scalar y );
+		Vector2_tpl( ScalarType x, ScalarType y );
 
-		~ Vector2( void );
+		~ Vector2_tpl( void );
 
 		/**
 		Operators
@@ -27,43 +27,174 @@ public:
 		*/
 
 		// + Operators
-		Vector2 operator +( const Vector2& v ) const;
-		Vector2 &operator +=( const Vector2& v );
+		Vector2_tpl<ScalarType> operator +( const Vector2_tpl<ScalarType>& v ) const;
+		Vector2_tpl<ScalarType> &operator +=( const Vector2_tpl<ScalarType>& v );
 
 		// - Operators
-		Vector2 operator -( const Vector2& v ) const;
-		Vector2 &operator -=( const Vector2& v );
+		Vector2_tpl<ScalarType> operator -( const Vector2_tpl<ScalarType>& v ) const;
+		Vector2_tpl<ScalarType> &operator -=( const Vector2_tpl<ScalarType>& v );
 
 		// * Operators
-		Vector2 operator *( const Scalar& scalar ) const;
-		Vector2 &operator *=( const Scalar& scalar );
-		inline friend Vector2 operator*( const Scalar& scalar, const Vector2& v )
+		Vector2_tpl<ScalarType> operator *( const ScalarType& scalar ) const;
+		Vector2_tpl<ScalarType> &operator *=( const ScalarType& scalar );
+		inline friend Vector2_tpl<ScalarType> operator*( const ScalarType& scalar, const Vector2_tpl<ScalarType>& v )
 		{
-			return Vector2( scalar * v.X, scalar * v.Y );
+			return Vector2_tpl<ScalarType>( scalar * v.X, scalar * v.Y );
 		}
 
-		Scalar operator *( const Vector2& v ) const;
+		ScalarType operator *( const Vector2_tpl<ScalarType>& v ) const;
 
 		// / Operators
-		Vector2 operator /( const Scalar& scalar ) const;
-		Vector2 &operator /=( const Scalar& scalar );
+		Vector2_tpl<ScalarType> operator /( const ScalarType& scalar ) const;
+		Vector2_tpl<ScalarType> &operator /=( const ScalarType& scalar );
 
-		Scalar X;
-		Scalar Y;
+		ScalarType X;
+		ScalarType Y;
 
 		// Methods
-		Scalar LengthSquared( void ) const;
-		Scalar Length( void ) const;
+		ScalarType LengthSquared( void ) const;
+		ScalarType Length( void ) const;
 		void Normalize( void );
-		Vector2 NormalizedCopy( void ) const;
-		Scalar PerpDotProduct( const Vector2& v ) const;
-		Scalar DotProduct( const Vector2& v ) const;
-		Scalar Vector2::GetRotation() const;
-		Vector2 Vector2::Rotate(const Radian& rad, const bool relative = true);
+		Vector2_tpl<ScalarType> NormalizedCopy( void ) const;
+		ScalarType PerpDotProduct( const Vector2_tpl<ScalarType>& v ) const;
+		ScalarType DotProduct( const Vector2_tpl<ScalarType>& v ) const;
+		ScalarType Vector2_tpl<ScalarType>::GetRotation() const;
+		Vector2_tpl<ScalarType> Vector2_tpl<ScalarType>::Rotate(const Radian_tpl<ScalarType>& rad, const bool relative = true);
 	protected:
 
 private:
 
 	};
+
+	template < typename ScalarType > Vector2_tpl<ScalarType>::Vector2_tpl( void ) :
+		X( 0 ),
+		Y( 0 )
+	{
+	}
+
+	template < typename ScalarType > Vector2_tpl<ScalarType>::Vector2_tpl( ScalarType val ) :
+		X( val ),
+		Y( val )
+	{
+	}
+
+	template < typename ScalarType > Vector2_tpl<ScalarType>::Vector2_tpl( ScalarType x, ScalarType y ) :
+		X( x ),
+		Y( y )
+	{
+	}
+
+	template < typename ScalarType > Vector2_tpl<ScalarType>::~Vector2_tpl( void )
+	{
+	}
+
+	template < typename ScalarType > Vector2_tpl<ScalarType> Vector2_tpl<ScalarType>::operator+( const Vector2_tpl<ScalarType>& v ) const
+	{
+
+		return Vector2_tpl<ScalarType>( this->X + v.X, this->Y + v.Y );
+	}
+
+	template < typename ScalarType > Vector2_tpl<ScalarType> &Vector2_tpl<ScalarType>::operator+=( const Vector2_tpl<ScalarType>& v )
+	{
+		X += v.X;
+		Y += v.Y;
+		return *this;
+	}
+
+	template < typename ScalarType > Vector2_tpl<ScalarType> Vector2_tpl<ScalarType>::operator-( const Vector2_tpl<ScalarType>& v ) const
+	{
+		return Vector2_tpl<ScalarType>( this->X - v.X, this->Y - v.Y );
+	}
+
+	template < typename ScalarType > Vector2_tpl<ScalarType> &Vector2_tpl<ScalarType>::operator-=( const Vector2_tpl<ScalarType>& v )
+	{
+		X -= v.X;
+		Y -= v.Y;
+		return *this;
+	}
+
+	template < typename ScalarType > Vector2_tpl<ScalarType> Vector2_tpl<ScalarType>::operator*( const ScalarType& scalar ) const
+	{
+		return Vector2_tpl<ScalarType>( X * scalar, Y * scalar );
+	}
+
+	template < typename ScalarType > ScalarType Vector2_tpl<ScalarType>::operator*( const Vector2_tpl<ScalarType>& v ) const
+	{
+		return ( X * v.X ) + ( Y * v.Y );
+	}
+
+	template < typename ScalarType > Vector2_tpl<ScalarType> &Vector2_tpl<ScalarType>::operator*=( const ScalarType& scalar )
+	{
+		X *= scalar;
+		Y *= scalar;
+		return *this;
+	}
+
+	template < typename ScalarType > Vector2_tpl<ScalarType> Vector2_tpl<ScalarType>::operator/( const ScalarType& scalar ) const
+	{
+		return Vector2_tpl<ScalarType>( X / scalar, Y / scalar );
+	}
+
+	template < typename ScalarType > Vector2_tpl<ScalarType> &Vector2_tpl<ScalarType>::operator/=( const ScalarType& scalar )
+	{
+		X /= scalar;
+		Y /= scalar;
+		return *this;
+	}
+
+	template < typename ScalarType > ScalarType Vector2_tpl<ScalarType>::LengthSquared( void ) const
+	{
+		return ( X * X ) + ( Y * Y );
+	}
+
+	template < typename ScalarType > ScalarType Vector2_tpl<ScalarType>::Length( void ) const
+	{
+		return sqrt( LengthSquared() );
+	}
+
+	template < typename ScalarType > void Vector2_tpl<ScalarType>::Normalize( void )
+	{
+		ScalarType length = Length();
+		X /= length;
+		Y /= length;
+	}
+
+	template < typename ScalarType > Vector2_tpl<ScalarType> Vector2_tpl<ScalarType>::NormalizedCopy( void ) const
+	{
+		ScalarType length = Length();
+
+		return Vector2_tpl<ScalarType>( X / length, Y / length );
+	}
+
+	template < typename ScalarType > ScalarType Vector2_tpl<ScalarType>::PerpDotProduct( const Vector2_tpl<ScalarType>& v ) const
+	{
+		return Vector2_tpl<ScalarType>(-Y, X) * v;
+	}
+
+	template < typename ScalarType > ScalarType Vector2_tpl<ScalarType>::DotProduct( const Vector2_tpl<ScalarType>& v ) const
+	{
+		return *this * v;
+	}
+
+	template < typename ScalarType > ScalarType Vector2_tpl<ScalarType>::GetRotation() const
+	{
+		ScalarType result = MathHelper_tpl<ScalarType>::ACos(X / Length());
+
+		return Y >= 0 ? result : -result;
+	}
+
+	template < typename ScalarType > Vector2_tpl<ScalarType> Vector2_tpl<ScalarType>::Rotate( const Radian_tpl<ScalarType>& rad, const bool relative /*= true*/ )
+	{
+		ScalarType amount = rad.AsRadianValue();
+		if ( ! relative )
+		{
+			amount -= GetRotation();
+		}
+
+		ScalarType sin = MathHelper_tpl<ScalarType>::Sin(amount);
+		ScalarType cos = MathHelper_tpl<ScalarType>::Cos(amount);
+
+		return Vector2_tpl<ScalarType>(cos * X - sin * Y, sin * X + cos * Y);
+	}
 }
 #endif

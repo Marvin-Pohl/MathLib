@@ -93,8 +93,6 @@
     <ClInclude Include="include\LinearMath\MathHelper.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\LinearMath\MathHelper.cpp" />
-    <ClCompile Include="src\LinearMath\Vector2.cpp" />
     <ClCompile Include="src\LinearMath\Vector3.cpp" />
     <ClCompile Include="src\precompiledHeader.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

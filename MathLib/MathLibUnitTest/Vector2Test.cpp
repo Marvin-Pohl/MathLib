@@ -6,6 +6,8 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace LinearMath;
 
+typedef LinearMath::Vector2_tpl<float> Vector2;
+
 namespace MathLibUnitTest
 {		
 
@@ -15,7 +17,7 @@ namespace MathLibUnitTest
 
 		TEST_METHOD(Vector2Constructor1)
 		{
-			LinearMath::Vector2 v;
+			Vector2 v;
 
 			Assert::AreEqual(0.0f, v.X);
 			Assert::AreEqual(0.0f, v.Y);
@@ -23,7 +25,7 @@ namespace MathLibUnitTest
 
 		TEST_METHOD(Vector2Constructor2)
 		{
-			LinearMath::Vector2 v(5);
+			Vector2 v(5);
 
 			Assert::AreEqual(5.0f, v.X);
 			Assert::AreEqual(5.0f, v.Y);
@@ -31,7 +33,7 @@ namespace MathLibUnitTest
 
 		TEST_METHOD(Vector2Constructor3)
 		{
-			LinearMath::Vector2 v(2.5f,3.7f);
+			Vector2 v(2.5f,3.7f);
 
 			Assert::AreEqual(2.5f, v.X);
 			Assert::AreEqual(3.7f, v.Y);

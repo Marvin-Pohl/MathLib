@@ -7,6 +7,10 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace LinearMath;
 
+typedef LinearMath::Degree_tpl<float> Degree;
+typedef LinearMath::Radian_tpl<float> Radian;
+typedef LinearMath::MathHelper_tpl<float> MathHelper;
+
 namespace MathLibUnitTest
 {		
 	TEST_CLASS(RadianTestClass)
