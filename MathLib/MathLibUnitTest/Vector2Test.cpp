@@ -6,7 +6,9 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace LinearMath;
 
-typedef LinearMath::Vector2_tpl<float> Vector2;
+typedef float Scalar;
+
+typedef LinearMath::Vector2_tpl<Scalar> Vector2;
 
 namespace MathLibUnitTest
 {		
