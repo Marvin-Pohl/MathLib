@@ -38,8 +38,12 @@ namespace LinearMath
 			const ScalarType& m_1_1, const ScalarType& m_1_2, const ScalarType& m_1_3, const ScalarType& m_1_4,
 			const ScalarType& m_2_1, const ScalarType& m_2_2, const ScalarType& m_2_3, const ScalarType& m_2_4,
 			const ScalarType& m_3_1, const ScalarType& m_3_2, const ScalarType& m_3_3, const ScalarType& m_3_4,
-			const ScalarType& m_4_1, const ScalarType& m_4_2, const ScalarType& m_4_3, const ScalarType& m_4_4,
+			const ScalarType& m_4_1, const ScalarType& m_4_2, const ScalarType& m_4_3, const ScalarType& m_4_4
 			);
+
+
+
+		Matrix4x4_tpl operator * ( const Matrix4x4_tpl& matrix );
 
 		static Matrix4x4_tpl CreateScaleMatrix( 
 			const ScalarType& scaleX, const ScalarType& scaleY, const ScalarType& scaleZ );
@@ -69,7 +73,42 @@ namespace LinearMath
 	};
 
 	template < typename ScalarType >
-	Matrix4x4_tpl Matrix4x4_tpl<ScalarType>::CreateTranslationMatrix( 
+	Matrix4x4_tpl< ScalarType > LinearMath::Matrix4x4_tpl<ScalarType>::operator*( const Matrix4x4_tpl& op )
+	{
+				
+		/*
+		this_1_1 * matrix_1_1 + this_1_2 * matrix_2_1 + this_1_3 * matrix_3_1 + this_1_4 * matrix 4_1
+		this_2_1 * matrix_1_2 + this_2_2 * matrix_2_2 + this_2_3 * matrix_3_2 + this_2_4 * matrix 4_2
+		.....
+		*/
+
+		return Matrix4x4_tpl< ScalarType >
+			(
+			( ( M_1_1 * op.M_1_1 ) + ( M_1_2 * op.M_2_1 ) + ( M_1_3 * op.M_3_1 ) + ( M_1_4 * op.M_4_1 ) ) ,
+			( ( M_1_1 * op.M_1_2 ) + ( M_1_2 * op.M_2_2 ) + ( M_1_3 * op.M_3_2 ) + ( M_1_4 * op.M_4_2 ) ) ,
+			( ( M_1_1 * op.M_1_3 ) + ( M_1_2 * op.M_2_3 ) + ( M_1_3 * op.M_3_3 ) + ( M_1_4 * op.M_4_3 ) ) ,
+			( ( M_1_1 * op.M_1_4 ) + ( M_1_2 * op.M_2_4 ) + ( M_1_3 * op.M_3_4 ) + ( M_1_4 * op.M_4_4 ) ) ,
+
+			( ( M_2_1 * op.M_1_1 ) + ( M_2_2 * op.M_2_1 ) + ( M_2_3 * op.M_3_1 ) + ( M_2_4 * op.M_4_1 ) ) ,
+			( ( M_2_1 * op.M_1_2 ) + ( M_2_2 * op.M_2_2 ) + ( M_2_3 * op.M_3_2 ) + ( M_2_4 * op.M_4_2 ) ) ,
+			( ( M_2_1 * op.M_1_3 ) + ( M_2_2 * op.M_2_3 ) + ( M_2_3 * op.M_3_3 ) + ( M_2_4 * op.M_4_3 ) ) ,
+			( ( M_2_1 * op.M_1_4 ) + ( M_2_2 * op.M_2_4 ) + ( M_2_3 * op.M_3_4 ) + ( M_2_4 * op.M_4_4 ) ) ,
+
+			( ( M_3_1 * op.M_1_1 ) + ( M_3_2 * op.M_2_1 ) + ( M_3_3 * op.M_3_1 ) + ( M_3_4 * op.M_4_1 ) ) ,
+			( ( M_3_1 * op.M_1_2 ) + ( M_3_2 * op.M_2_2 ) + ( M_3_3 * op.M_3_2 ) + ( M_3_4 * op.M_4_2 ) ) ,
+			( ( M_3_1 * op.M_1_3 ) + ( M_3_2 * op.M_2_3 ) + ( M_3_3 * op.M_3_3 ) + ( M_3_4 * op.M_4_3 ) ) ,
+			( ( M_3_1 * op.M_1_4 ) + ( M_3_2 * op.M_2_4 ) + ( M_3_3 * op.M_3_4 ) + ( M_3_4 * op.M_4_4 ) ) ,
+
+			( ( M_4_1 * op.M_1_1 ) + ( M_4_2 * op.M_2_1 ) + ( M_4_3 * op.M_3_1 ) + ( M_4_4 * op.M_4_1 ) ) ,
+			( ( M_4_1 * op.M_1_2 ) + ( M_4_2 * op.M_2_2 ) + ( M_4_3 * op.M_3_2 ) + ( M_4_4 * op.M_4_2 ) ) ,
+			( ( M_4_1 * op.M_1_3 ) + ( M_4_2 * op.M_2_3 ) + ( M_4_3 * op.M_3_3 ) + ( M_4_4 * op.M_4_3 ) ) ,
+			( ( M_4_1 * op.M_1_4 ) + ( M_4_2 * op.M_2_4 ) + ( M_4_3 * op.M_3_4 ) + ( M_4_4 * op.M_4_4 ) )
+			);
+
+	}
+
+	template < typename ScalarType >
+	Matrix4x4_tpl<ScalarType> Matrix4x4_tpl<ScalarType>::CreateTranslationMatrix( 
 		const ScalarType& X, const ScalarType& Y, const ScalarType& Z )
 	{
 		return Matrix4x4_tpl(
@@ -87,7 +126,7 @@ namespace LinearMath
 		const ScalarType& m_1_1, const ScalarType& m_1_2, const ScalarType& m_1_3, const ScalarType& m_1_4,
 		const ScalarType& m_2_1, const ScalarType& m_2_2, const ScalarType& m_2_3, const ScalarType& m_2_4,
 		const ScalarType& m_3_1, const ScalarType& m_3_2, const ScalarType& m_3_3, const ScalarType& m_3_4,
-		const ScalarType& m_4_1, const ScalarType& m_4_2, const ScalarType& m_4_3, const ScalarType& m_4_4,
+		const ScalarType& m_4_1, const ScalarType& m_4_2, const ScalarType& m_4_3, const ScalarType& m_4_4
 		) :
 		M_1_1( m_1_1 ),	M_1_2( m_1_2 ),	M_1_3( m_1_3 ),	M_1_4( m_1_4 ),
 		M_2_1( m_2_1 ),	M_2_2( m_2_2 ),	M_2_3( m_2_3 ),	M_2_4( m_2_4 ),
@@ -112,7 +151,7 @@ namespace LinearMath
 	}
 
 	template < typename ScalarType >
-	Matrix4x4_tpl Matrix4x4_tpl<ScalarType>::CreateScaleMatrix( 
+	Matrix4x4_tpl< ScalarType > Matrix4x4_tpl<ScalarType>::CreateScaleMatrix( 
 		const ScalarType& sX, const ScalarType& sY, const ScalarType& sZ )
 	{
 		return Matrix4x4_tpl(
@@ -124,7 +163,7 @@ namespace LinearMath
 	}
 
 	template < typename ScalarType >
-	Matrix4x4_tpl Matrix4x4_tpl<ScalarType>::CreateScaleMatrix( const Vector3_tpl< ScalarType >& scale )
+	Matrix4x4_tpl< ScalarType > Matrix4x4_tpl<ScalarType>::CreateScaleMatrix( const Vector3_tpl< ScalarType >& scale )
 	{
 		return CreateScaleMatrix(scale.X, scale.Y, scale.Z);
 	}
