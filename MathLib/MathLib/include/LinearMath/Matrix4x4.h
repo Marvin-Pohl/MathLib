@@ -42,8 +42,9 @@ namespace LinearMath
 			);
 
 
-
-		Matrix4x4_tpl operator * ( const Matrix4x4_tpl& matrix );
+		Matrix4x4_tpl operator * ( const ScalarType& op ) const;
+		Matrix4x4_tpl operator * ( const Matrix4x4_tpl< ScalarType >& matrix ) const;
+		Matrix4x4_tpl& operator *= ( const Matrix4x4_tpl< ScalarType >& matrix );
 
 		static Matrix4x4_tpl CreateScaleMatrix( 
 			const ScalarType& scaleX, const ScalarType& scaleY, const ScalarType& scaleZ );
@@ -52,6 +53,8 @@ namespace LinearMath
 
 		static Matrix4x4_tpl CreateTranslationMatrix(const ScalarType& X, const ScalarType& Y, const ScalarType& Z );
 		static Matrix4x4_tpl CreateTranslationMatrix(const Vector3_tpl<ScalarType>& translation );
+
+		Matrix4x4_tpl< ScalarType > InvertedCopy();
 
 		~Matrix4x4_tpl();
 
@@ -73,14 +76,144 @@ namespace LinearMath
 	};
 
 	template < typename ScalarType >
-	Matrix4x4_tpl< ScalarType > LinearMath::Matrix4x4_tpl<ScalarType>::operator*( const Matrix4x4_tpl& op )
+	Matrix4x4_tpl< ScalarType > LinearMath::Matrix4x4_tpl<ScalarType>::operator*( const ScalarType& op ) const
 	{
-				
-		/*
-		this_1_1 * matrix_1_1 + this_1_2 * matrix_2_1 + this_1_3 * matrix_3_1 + this_1_4 * matrix 4_1
-		this_2_1 * matrix_1_2 + this_2_2 * matrix_2_2 + this_2_3 * matrix_3_2 + this_2_4 * matrix 4_2
-		.....
-		*/
+		return Matrix4x4_tpl< ScalarType >
+			(
+			op * M_1_1, op * M_1_2, op * M_1_3, op * M_1_4,
+			op * M_2_1, op * M_2_2, op * M_2_3, op * M_2_4,
+			op * M_3_1, op * M_3_2, op * M_3_3, op * M_3_4,
+			op * M_4_1, op * M_4_2, op * M_4_3, op * M_4_4,
+			);
+	}
+
+	template < typename ScalarType >
+	Matrix4x4_tpl< ScalarType > LinearMath::Matrix4x4_tpl<ScalarType>::InvertedCopy()
+	{
+
+			ScalarType 
+				tmpM_1_1 = M_1_1, tmpM_1_2 = M_1_2, tmpM_1_3 = M_1_3, tmpM_1_4 = M_1_4,
+				tmpM_2_1 = M_2_1, tmpM_2_2 = M_2_2, tmpM_2_3 = M_2_3, tmpM_2_4 = M_2_4,
+				tmpM_3_1 = M_3_1, tmpM_3_2 = M_3_2, tmpM_3_3 = M_3_3, tmpM_3_4 = M_3_4,
+				tmpM_4_1 = M_4_1, tmpM_4_2 = M_4_2, tmpM_4_3 = M_4_3, tmpM_4_4 = M_4_4;
+
+			ScalarType 
+				tmp1 = tmpM_3_1 * tmpM_4_2 - tmpM_3_2 * tmpM_4_1,
+				tmp2 = tmpM_3_1 * tmpM_4_3 - tmpM_3_3 * tmpM_4_1,
+				tmp3 = tmpM_3_1 * tmpM_4_4 - tmpM_3_4 * tmpM_4_1,
+				tmp4 = tmpM_3_2 * tmpM_4_3 - tmpM_3_3 * tmpM_4_2,
+				tmp5 = tmpM_3_2 * tmpM_4_4 - tmpM_3_4 * tmpM_4_2,
+				tmp6 = tmpM_3_3 * tmpM_4_4 - tmpM_3_4 * tmpM_4_3;
+
+			ScalarType 
+				t_1_1 = + (tmp6 * tmpM_2_2 - tmp5 * tmpM_2_3 + tmp4 * tmpM_2_4),
+				t_2_1 = - (tmp6 * tmpM_2_1 - tmp3 * tmpM_2_3 + tmp2 * tmpM_2_4),
+				t_3_1 = + (tmp5 * tmpM_2_1 - tmp3 * tmpM_2_2 + tmp1 * tmpM_2_4),
+				t_4_1 = - (tmp4 * tmpM_2_1 - tmp2 * tmpM_2_2 + tmp1 * tmpM_2_3);
+
+			ScalarType inverseDet = 1 / (t_1_1 * tmpM_1_1 + t_2_1 * tmpM_1_2 + t_3_1 * tmpM_1_3 + t_4_1 * tmpM_1_4);
+
+			ScalarType 
+				d_1_1 = t_1_1 * inverseDet,
+				d_2_1 = t_2_1 * inverseDet,
+				d_3_1 = t_3_1 * inverseDet,
+				d_4_1 = t_4_1 * inverseDet;
+
+			ScalarType 
+				d_1_2 = - (tmp6 * tmpM_1_2 - tmp5 * tmpM_1_3 + tmp4 * tmpM_1_4) * inverseDet,
+				d_2_2 = + (tmp6 * tmpM_1_1 - tmp3 * tmpM_1_3 + tmp2 * tmpM_1_4) * inverseDet,
+				d_3_2 = - (tmp5 * tmpM_1_1 - tmp3 * tmpM_1_2 + tmp1 * tmpM_1_4) * inverseDet,
+				d_4_2 = + (tmp4 * tmpM_1_1 - tmp2 * tmpM_1_2 + tmp1 * tmpM_1_3) * inverseDet;
+
+			tmp1 = tmpM_2_1 * tmpM_4_2 - tmpM_2_2 * tmpM_4_1;
+			tmp2 = tmpM_2_1 * tmpM_4_3 - tmpM_2_3 * tmpM_4_1;
+			tmp3 = tmpM_2_1 * tmpM_4_4 - tmpM_2_4 * tmpM_4_1;
+			tmp4 = tmpM_2_2 * tmpM_4_3 - tmpM_2_3 * tmpM_4_2;
+			tmp5 = tmpM_2_2 * tmpM_4_4 - tmpM_2_4 * tmpM_4_2;
+			tmp6 = tmpM_2_3 * tmpM_4_4 - tmpM_2_4 * tmpM_4_3;
+
+			ScalarType 
+				d_1_3 = + (tmp6 * tmpM_1_2 - tmp5 * tmpM_1_3 + tmp4 * tmpM_1_4) * inverseDet,
+				d_2_3 = - (tmp6 * tmpM_1_1 - tmp3 * tmpM_1_3 + tmp2 * tmpM_1_4) * inverseDet,
+				d_3_3 = + (tmp5 * tmpM_1_1 - tmp3 * tmpM_1_2 + tmp1 * tmpM_1_4) * inverseDet,
+				d_4_3 = - (tmp4 * tmpM_1_1 - tmp2 * tmpM_1_2 + tmp1 * tmpM_1_3) * inverseDet;
+
+			tmp1 = tmpM_3_2 * tmpM_2_1 - tmpM_3_1 * tmpM_2_2;
+			tmp2 = tmpM_3_3 * tmpM_2_1 - tmpM_3_1 * tmpM_2_3;
+			tmp3 = tmpM_3_4 * tmpM_2_1 - tmpM_3_1 * tmpM_2_4;
+			tmp4 = tmpM_3_3 * tmpM_2_2 - tmpM_3_2 * tmpM_2_3;
+			tmp5 = tmpM_3_4 * tmpM_2_2 - tmpM_3_2 * tmpM_2_4;
+			tmp6 = tmpM_3_4 * tmpM_2_3 - tmpM_3_3 * tmpM_2_4;
+
+			ScalarType 
+				d_1_4 = - (tmp6 * tmpM_1_2 - tmp5 * tmpM_1_3 + tmp4 * tmpM_1_4) * inverseDet,
+				d_2_4 = + (tmp6 * tmpM_1_1 - tmp3 * tmpM_1_3 + tmp2 * tmpM_1_4) * inverseDet,
+				d_3_4 = - (tmp5 * tmpM_1_1 - tmp3 * tmpM_1_2 + tmp1 * tmpM_1_4) * inverseDet,
+				d_4_4 = + (tmp4 * tmpM_1_1 - tmp2 * tmpM_1_2 + tmp1 * tmpM_1_3) * inverseDet;
+
+			return Matrix4x4_tpl< ScalarType >(
+				d_1_1, d_1_2, d_1_3, d_1_4,
+				d_2_1, d_2_2, d_2_3, d_2_4,
+				d_3_1, d_3_2, d_3_3, d_3_4,
+				d_4_1, d_4_2, d_4_3, d_4_4
+				);
+	}
+
+	template < typename ScalarType >
+	Matrix4x4_tpl< ScalarType >& LinearMath::Matrix4x4_tpl<ScalarType>::operator*=( const Matrix4x4_tpl< ScalarType >& op )
+	{
+		ScalarType 
+			tmpM_1_1, tmpM_1_2, tmpM_1_3, tmpM_1_4, 
+			tmpM_2_1, tmpM_2_2, tmpM_2_3, tmpM_2_4, 
+			tmpM_3_1, tmpM_3_2, tmpM_3_3, tmpM_3_4, 
+			tmpM_4_1, tmpM_4_2, tmpM_4_3, tmpM_4_4;
+
+		tmpM_1_1 = ( ( M_1_1 * op.M_1_1 ) + ( M_1_2 * op.M_2_1 ) + ( M_1_3 * op.M_3_1 ) + ( M_1_4 * op.M_4_1 ) );
+		tmpM_1_2 = ( ( M_1_1 * op.M_1_2 ) + ( M_1_2 * op.M_2_2 ) + ( M_1_3 * op.M_3_2 ) + ( M_1_4 * op.M_4_2 ) );
+		tmpM_1_3 = ( ( M_1_1 * op.M_1_3 ) + ( M_1_2 * op.M_2_3 ) + ( M_1_3 * op.M_3_3 ) + ( M_1_4 * op.M_4_3 ) );
+		tmpM_1_4 = ( ( M_1_1 * op.M_1_4 ) + ( M_1_2 * op.M_2_4 ) + ( M_1_3 * op.M_3_4 ) + ( M_1_4 * op.M_4_4 ) );
+
+		tmpM_2_1 = ( ( M_2_1 * op.M_1_1 ) + ( M_2_2 * op.M_2_1 ) + ( M_2_3 * op.M_3_1 ) + ( M_2_4 * op.M_4_1 ) );
+		tmpM_2_2 = ( ( M_2_1 * op.M_1_2 ) + ( M_2_2 * op.M_2_2 ) + ( M_2_3 * op.M_3_2 ) + ( M_2_4 * op.M_4_2 ) );
+		tmpM_2_3 = ( ( M_2_1 * op.M_1_3 ) + ( M_2_2 * op.M_2_3 ) + ( M_2_3 * op.M_3_3 ) + ( M_2_4 * op.M_4_3 ) );
+		tmpM_2_4 = ( ( M_2_1 * op.M_1_4 ) + ( M_2_2 * op.M_2_4 ) + ( M_2_3 * op.M_3_4 ) + ( M_2_4 * op.M_4_4 ) );
+
+		tmpM_3_1 = ( ( M_3_1 * op.M_1_1 ) + ( M_3_2 * op.M_2_1 ) + ( M_3_3 * op.M_3_1 ) + ( M_3_4 * op.M_4_1 ) );
+		tmpM_3_2 = ( ( M_3_1 * op.M_1_2 ) + ( M_3_2 * op.M_2_2 ) + ( M_3_3 * op.M_3_2 ) + ( M_3_4 * op.M_4_2 ) );
+		tmpM_3_3 = ( ( M_3_1 * op.M_1_3 ) + ( M_3_2 * op.M_2_3 ) + ( M_3_3 * op.M_3_3 ) + ( M_3_4 * op.M_4_3 ) );
+		tmpM_3_4 = ( ( M_3_1 * op.M_1_4 ) + ( M_3_2 * op.M_2_4 ) + ( M_3_3 * op.M_3_4 ) + ( M_3_4 * op.M_4_4 ) );
+
+		tmpM_4_1 = ( ( M_4_1 * op.M_1_1 ) + ( M_4_2 * op.M_2_1 ) + ( M_4_3 * op.M_3_1 ) + ( M_4_4 * op.M_4_1 ) );
+		tmpM_4_2 = ( ( M_4_1 * op.M_1_2 ) + ( M_4_2 * op.M_2_2 ) + ( M_4_3 * op.M_3_2 ) + ( M_4_4 * op.M_4_2 ) );
+		tmpM_4_3 = ( ( M_4_1 * op.M_1_3 ) + ( M_4_2 * op.M_2_3 ) + ( M_4_3 * op.M_3_3 ) + ( M_4_4 * op.M_4_3 ) );
+		tmpM_4_4 = ( ( M_4_1 * op.M_1_4 ) + ( M_4_2 * op.M_2_4 ) + ( M_4_3 * op.M_3_4 ) + ( M_4_4 * op.M_4_4 ) );
+
+		M_1_1 = tmpM_1_1;
+		M_1_2 = tmpM_1_2;
+		M_1_3 = tmpM_1_3;
+		M_1_4 = tmpM_1_4;
+
+		M_2_1 = tmpM_2_1;
+		M_2_2 = tmpM_2_2;
+		M_2_3 = tmpM_2_3;
+		M_2_4 = tmpM_2_4;
+
+		M_3_1 = tmpM_3_1;
+		M_3_2 = tmpM_3_2;
+		M_3_3 = tmpM_3_3;
+		M_3_4 = tmpM_3_4;
+
+		M_4_1 = tmpM_4_1;
+		M_4_2 = tmpM_4_2;
+		M_4_3 = tmpM_4_3;
+		M_4_4 = tmpM_4_4;
+
+		return *this;
+	}
+
+	template < typename ScalarType >
+	Matrix4x4_tpl< ScalarType > LinearMath::Matrix4x4_tpl<ScalarType>::operator*( const Matrix4x4_tpl& op ) const
+	{
 
 		return Matrix4x4_tpl< ScalarType >
 			(
