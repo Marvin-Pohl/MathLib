@@ -4,6 +4,7 @@
 
 #include "precompiledHeader.h"
 #include "Vector3.h"
+#include "Vector2.h"
 #include "MathHelper.h"
 
 namespace LinearMath
@@ -21,6 +22,18 @@ namespace LinearMath
 		| 0 | 0 | 1 | 0 |
 		| 0 | 0 | 0 | 1 |
 	
+		*/
+		static const Matrix4x4_tpl< ScalarType > IDENTITY;
+
+		static const Matrix4x4_tpl< ScalarType > ZERO;
+
+		static const Matrix4x4_tpl< ScalarType > ZERO_AFFINE;
+
+
+
+		/**
+		\brief Creates an uninitialized Matrix
+		
 		*/
 		Matrix4x4_tpl();
 
@@ -44,6 +57,8 @@ namespace LinearMath
 
 		Matrix4x4_tpl operator * ( const ScalarType& op ) const;
 		Matrix4x4_tpl operator * ( const Matrix4x4_tpl< ScalarType >& matrix ) const;
+		Vector3_tpl< ScalarType > operator * ( const Vector3_tpl< ScalarType >& vec) const;
+		Vector2_tpl< ScalarType > operator * ( const Vector2_tpl< ScalarType >& vec) const;
 		Matrix4x4_tpl& operator *= ( const Matrix4x4_tpl< ScalarType >& matrix );
 
 		static Matrix4x4_tpl CreateScaleMatrix( 
@@ -76,7 +91,55 @@ namespace LinearMath
 	};
 
 	template < typename ScalarType >
-	Matrix4x4_tpl< ScalarType > LinearMath::Matrix4x4_tpl<ScalarType>::operator*( const ScalarType& op ) const
+		const Matrix4x4_tpl< ScalarType > LinearMath::Matrix4x4_tpl<ScalarType>::ZERO_AFFINE
+			(
+			0, 0, 0, 0,
+			0, 0, 0, 0,
+			0, 0, 0, 0,
+			0, 0, 0, 1
+			);
+
+	template < typename ScalarType >
+		const Matrix4x4_tpl< ScalarType > LinearMath::Matrix4x4_tpl<ScalarType>::ZERO
+			(
+			0, 0, 0, 0,
+			0, 0, 0, 0,
+			0, 0, 0, 0,
+			0, 0, 0, 0
+			);
+
+	template < typename ScalarType >
+		const Matrix4x4_tpl< ScalarType > LinearMath::Matrix4x4_tpl<ScalarType>::IDENTITY
+			(
+			1, 0, 0, 0,
+			0, 1, 0, 0,
+			0, 0, 1, 0,
+			0, 0, 0, 1
+			);
+
+	template < typename ScalarType >
+	Vector2_tpl< ScalarType > Matrix4x4_tpl<ScalarType>::operator*( const Vector2_tpl< ScalarType >& vec ) const
+	{
+		return Vector2_tpl< ScalarType >
+			(
+			vec.X * M_1_1 + vec.Y * M_1_2 + M_1_4,
+			vec.Y * M_2_1 + vec.Y * M_2_2 + M_2_4 
+			);
+	}
+
+	template < typename ScalarType >
+	Vector3_tpl< ScalarType > Matrix4x4_tpl<ScalarType>::operator*( const Vector3_tpl< ScalarType >& vec ) const
+	{
+		return Vector3_tpl< ScalarType >
+			(
+			vec.X * M_1_1 + vec.Y * M_1_2 * vec.Z * M_1_3 + M_1_4,
+			vec.X * M_2_1 + vec.Y * M_2_2 * vec.Z * M_2_3 + M_2_4,
+			vec.X * M_3_1 + vec.Y * M_3_2 * vec.Z * M_3_3 + M_3_4
+			);
+	}
+
+	template < typename ScalarType >
+	Matrix4x4_tpl< ScalarType > Matrix4x4_tpl<ScalarType>::operator*( const ScalarType& op ) const
 	{
 		return Matrix4x4_tpl< ScalarType >
 			(
@@ -88,7 +151,7 @@ namespace LinearMath
 	}
 
 	template < typename ScalarType >
-	Matrix4x4_tpl< ScalarType > LinearMath::Matrix4x4_tpl<ScalarType>::InvertedCopy()
+	Matrix4x4_tpl< ScalarType > Matrix4x4_tpl<ScalarType>::InvertedCopy()
 	{
 
 			ScalarType 
@@ -106,10 +169,10 @@ namespace LinearMath
 				tmp6 = tmpM_3_3 * tmpM_4_4 - tmpM_3_4 * tmpM_4_3;
 
 			ScalarType 
-				t_1_1 = + (tmp6 * tmpM_2_2 - tmp5 * tmpM_2_3 + tmp4 * tmpM_2_4),
-				t_2_1 = - (tmp6 * tmpM_2_1 - tmp3 * tmpM_2_3 + tmp2 * tmpM_2_4),
-				t_3_1 = + (tmp5 * tmpM_2_1 - tmp3 * tmpM_2_2 + tmp1 * tmpM_2_4),
-				t_4_1 = - (tmp4 * tmpM_2_1 - tmp2 * tmpM_2_2 + tmp1 * tmpM_2_3);
+				t_1_1 = + ( tmp6 * tmpM_2_2 - tmp5 * tmpM_2_3 + tmp4 * tmpM_2_4 ),
+				t_2_1 = - ( tmp6 * tmpM_2_1 - tmp3 * tmpM_2_3 + tmp2 * tmpM_2_4 ),
+				t_3_1 = + ( tmp5 * tmpM_2_1 - tmp3 * tmpM_2_2 + tmp1 * tmpM_2_4 ),
+				t_4_1 = - ( tmp4 * tmpM_2_1 - tmp2 * tmpM_2_2 + tmp1 * tmpM_2_3 );
 
 			ScalarType inverseDet = 1 / (t_1_1 * tmpM_1_1 + t_2_1 * tmpM_1_2 + t_3_1 * tmpM_1_3 + t_4_1 * tmpM_1_4);
 
@@ -120,10 +183,10 @@ namespace LinearMath
 				d_4_1 = t_4_1 * inverseDet;
 
 			ScalarType 
-				d_1_2 = - (tmp6 * tmpM_1_2 - tmp5 * tmpM_1_3 + tmp4 * tmpM_1_4) * inverseDet,
-				d_2_2 = + (tmp6 * tmpM_1_1 - tmp3 * tmpM_1_3 + tmp2 * tmpM_1_4) * inverseDet,
-				d_3_2 = - (tmp5 * tmpM_1_1 - tmp3 * tmpM_1_2 + tmp1 * tmpM_1_4) * inverseDet,
-				d_4_2 = + (tmp4 * tmpM_1_1 - tmp2 * tmpM_1_2 + tmp1 * tmpM_1_3) * inverseDet;
+				d_1_2 = - ( tmp6 * tmpM_1_2 - tmp5 * tmpM_1_3 + tmp4 * tmpM_1_4 ) * inverseDet,
+				d_2_2 = + ( tmp6 * tmpM_1_1 - tmp3 * tmpM_1_3 + tmp2 * tmpM_1_4 ) * inverseDet,
+				d_3_2 = - ( tmp5 * tmpM_1_1 - tmp3 * tmpM_1_2 + tmp1 * tmpM_1_4 ) * inverseDet,
+				d_4_2 = + ( tmp4 * tmpM_1_1 - tmp2 * tmpM_1_2 + tmp1 * tmpM_1_3 ) * inverseDet;
 
 			tmp1 = tmpM_2_1 * tmpM_4_2 - tmpM_2_2 * tmpM_4_1;
 			tmp2 = tmpM_2_1 * tmpM_4_3 - tmpM_2_3 * tmpM_4_1;
@@ -133,10 +196,10 @@ namespace LinearMath
 			tmp6 = tmpM_2_3 * tmpM_4_4 - tmpM_2_4 * tmpM_4_3;
 
 			ScalarType 
-				d_1_3 = + (tmp6 * tmpM_1_2 - tmp5 * tmpM_1_3 + tmp4 * tmpM_1_4) * inverseDet,
-				d_2_3 = - (tmp6 * tmpM_1_1 - tmp3 * tmpM_1_3 + tmp2 * tmpM_1_4) * inverseDet,
-				d_3_3 = + (tmp5 * tmpM_1_1 - tmp3 * tmpM_1_2 + tmp1 * tmpM_1_4) * inverseDet,
-				d_4_3 = - (tmp4 * tmpM_1_1 - tmp2 * tmpM_1_2 + tmp1 * tmpM_1_3) * inverseDet;
+				d_1_3 = + ( tmp6 * tmpM_1_2 - tmp5 * tmpM_1_3 + tmp4 * tmpM_1_4 ) * inverseDet,
+				d_2_3 = - ( tmp6 * tmpM_1_1 - tmp3 * tmpM_1_3 + tmp2 * tmpM_1_4 ) * inverseDet,
+				d_3_3 = + ( tmp5 * tmpM_1_1 - tmp3 * tmpM_1_2 + tmp1 * tmpM_1_4 ) * inverseDet,
+				d_4_3 = - ( tmp4 * tmpM_1_1 - tmp2 * tmpM_1_2 + tmp1 * tmpM_1_3 ) * inverseDet;
 
 			tmp1 = tmpM_3_2 * tmpM_2_1 - tmpM_3_1 * tmpM_2_2;
 			tmp2 = tmpM_3_3 * tmpM_2_1 - tmpM_3_1 * tmpM_2_3;
@@ -146,10 +209,10 @@ namespace LinearMath
 			tmp6 = tmpM_3_4 * tmpM_2_3 - tmpM_3_3 * tmpM_2_4;
 
 			ScalarType 
-				d_1_4 = - (tmp6 * tmpM_1_2 - tmp5 * tmpM_1_3 + tmp4 * tmpM_1_4) * inverseDet,
-				d_2_4 = + (tmp6 * tmpM_1_1 - tmp3 * tmpM_1_3 + tmp2 * tmpM_1_4) * inverseDet,
-				d_3_4 = - (tmp5 * tmpM_1_1 - tmp3 * tmpM_1_2 + tmp1 * tmpM_1_4) * inverseDet,
-				d_4_4 = + (tmp4 * tmpM_1_1 - tmp2 * tmpM_1_2 + tmp1 * tmpM_1_3) * inverseDet;
+				d_1_4 = - ( tmp6 * tmpM_1_2 - tmp5 * tmpM_1_3 + tmp4 * tmpM_1_4 ) * inverseDet,
+				d_2_4 = + ( tmp6 * tmpM_1_1 - tmp3 * tmpM_1_3 + tmp2 * tmpM_1_4 ) * inverseDet,
+				d_3_4 = - ( tmp5 * tmpM_1_1 - tmp3 * tmpM_1_2 + tmp1 * tmpM_1_4 ) * inverseDet,
+				d_4_4 = + ( tmp4 * tmpM_1_1 - tmp2 * tmpM_1_2 + tmp1 * tmpM_1_3 ) * inverseDet;
 
 			return Matrix4x4_tpl< ScalarType >(
 				d_1_1, d_1_2, d_1_3, d_1_4,
@@ -160,7 +223,7 @@ namespace LinearMath
 	}
 
 	template < typename ScalarType >
-	Matrix4x4_tpl< ScalarType >& LinearMath::Matrix4x4_tpl<ScalarType>::operator*=( const Matrix4x4_tpl< ScalarType >& op )
+	Matrix4x4_tpl< ScalarType >& Matrix4x4_tpl<ScalarType>::operator*=( const Matrix4x4_tpl< ScalarType >& op )
 	{
 		ScalarType 
 			tmpM_1_1, tmpM_1_2, tmpM_1_3, tmpM_1_4, 
@@ -212,7 +275,7 @@ namespace LinearMath
 	}
 
 	template < typename ScalarType >
-	Matrix4x4_tpl< ScalarType > LinearMath::Matrix4x4_tpl<ScalarType>::operator*( const Matrix4x4_tpl& op ) const
+	Matrix4x4_tpl< ScalarType > Matrix4x4_tpl<ScalarType>::operator*( const Matrix4x4_tpl& op ) const
 	{
 
 		return Matrix4x4_tpl< ScalarType >
@@ -275,11 +338,7 @@ namespace LinearMath
 	}
 
 	template < typename ScalarType>
-	Matrix4x4_tpl<ScalarType>::Matrix4x4_tpl() :
-		M_1_1( 1 ), M_1_2( 0 ), M_1_3( 0 ), M_1_4( 0 ),
-		M_2_1( 0 ),	M_2_2( 1 ),	M_2_3( 0 ),	M_2_4( 0 ),
-		M_3_1( 0 ),	M_3_2( 0 ),	M_3_3( 1 ),	M_3_4( 0 ),
-		M_4_1( 0 ),	M_4_2( 0 ),	M_4_3( 0 ),	M_4_4( 1 )
+	Matrix4x4_tpl<ScalarType>::Matrix4x4_tpl()
 	{
 	}
 

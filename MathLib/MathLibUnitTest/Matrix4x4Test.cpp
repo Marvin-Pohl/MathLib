@@ -18,6 +18,8 @@ namespace MathLibUnitTest
 		{
 			Matrix4x4 m;
 
+			m = Matrix4x4::IDENTITY;
+
 			Assert::AreEqual(1.0f, m.M_1_1);
 			Assert::AreEqual(0.0f, m.M_1_2);
 			Assert::AreEqual(0.0f, m.M_1_3);
@@ -34,6 +36,45 @@ namespace MathLibUnitTest
 			Assert::AreEqual(0.0f, m.M_4_2);
 			Assert::AreEqual(0.0f, m.M_4_3);
 			Assert::AreEqual(1.0f, m.M_4_4);
+
+			m = Matrix4x4::ZERO;
+
+			Assert::AreEqual(0.0f, m.M_1_1);
+			Assert::AreEqual(0.0f, m.M_1_2);
+			Assert::AreEqual(0.0f, m.M_1_3);
+			Assert::AreEqual(0.0f, m.M_1_4);
+			Assert::AreEqual(0.0f, m.M_2_1);
+			Assert::AreEqual(0.0f, m.M_2_2);
+			Assert::AreEqual(0.0f, m.M_2_3);
+			Assert::AreEqual(0.0f, m.M_2_4);
+			Assert::AreEqual(0.0f, m.M_3_1);
+			Assert::AreEqual(0.0f, m.M_3_2);
+			Assert::AreEqual(0.0f, m.M_3_3);
+			Assert::AreEqual(0.0f, m.M_3_4);
+			Assert::AreEqual(0.0f, m.M_4_1);
+			Assert::AreEqual(0.0f, m.M_4_2);
+			Assert::AreEqual(0.0f, m.M_4_3);
+			Assert::AreEqual(0.0f, m.M_4_4);
+
+			m = Matrix4x4::ZERO_AFFINE;
+
+			Assert::AreEqual(0.0f, m.M_1_1);
+			Assert::AreEqual(0.0f, m.M_1_2);
+			Assert::AreEqual(0.0f, m.M_1_3);
+			Assert::AreEqual(0.0f, m.M_1_4);
+			Assert::AreEqual(0.0f, m.M_2_1);
+			Assert::AreEqual(0.0f, m.M_2_2);
+			Assert::AreEqual(0.0f, m.M_2_3);
+			Assert::AreEqual(0.0f, m.M_2_4);
+			Assert::AreEqual(0.0f, m.M_3_1);
+			Assert::AreEqual(0.0f, m.M_3_2);
+			Assert::AreEqual(0.0f, m.M_3_3);
+			Assert::AreEqual(0.0f, m.M_3_4);
+			Assert::AreEqual(0.0f, m.M_4_1);
+			Assert::AreEqual(0.0f, m.M_4_2);
+			Assert::AreEqual(0.0f, m.M_4_3);
+			Assert::AreEqual(1.0f, m.M_4_4);
+
 		}
 
 		TEST_METHOD(Matrix4x4InvertTest)
