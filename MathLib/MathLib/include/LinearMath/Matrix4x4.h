@@ -60,6 +60,9 @@ namespace LinearMath
 		Matrix4x4_tpl operator + ( const Matrix4x4_tpl& mat ) const;
 		Matrix4x4_tpl& operator += ( const Matrix4x4_tpl& mat );
 
+		Matrix4x4_tpl operator - ( const Matrix4x4_tpl& mat ) const;
+		Matrix4x4_tpl& operator -= ( const Matrix4x4_tpl& mat );
+
 		Matrix4x4_tpl operator * ( const ScalarType& op ) const;
 		inline friend Matrix4x4_tpl< ScalarType > 
 			operator *( const ScalarType& scalar, const Matrix4x4_tpl< ScalarType >& mat )
@@ -141,6 +144,38 @@ namespace LinearMath
 	Matrix4x4_tpl< ScalarType > LinearMath::Matrix4x4_tpl<ScalarType>::operator+( const Matrix4x4_tpl& mat ) const
 	{
 		return Matrix4x4_tpl< ScalarType >( *this )+= mat;
+	}
+
+	template < typename ScalarType >
+	Matrix4x4_tpl< ScalarType >& LinearMath::Matrix4x4_tpl<ScalarType>::operator-=( const Matrix4x4_tpl& mat )
+	{
+		M_1_1 -= mat.M_1_1;
+		M_1_2 -= mat.M_1_2;
+		M_1_3 -= mat.M_1_3;
+		M_1_4 -= mat.M_1_4;
+
+		M_2_1 -= mat.M_2_1;
+		M_2_2 -= mat.M_2_2;
+		M_2_3 -= mat.M_2_3;
+		M_2_4 -= mat.M_2_4;
+
+		M_3_1 -= mat.M_3_1;
+		M_3_2 -= mat.M_3_2;
+		M_3_3 -= mat.M_3_3;
+		M_3_4 -= mat.M_3_4;
+
+		M_4_1 -= mat.M_4_1;
+		M_4_2 -= mat.M_4_2;
+		M_4_3 -= mat.M_4_3;
+		M_4_4 -= mat.M_4_4;
+
+		return *this;
+	}
+
+	template < typename ScalarType >
+	Matrix4x4_tpl< ScalarType > LinearMath::Matrix4x4_tpl<ScalarType>::operator-( const Matrix4x4_tpl& mat ) const
+	{
+		return Matrix4x4_tpl< ScalarType >( *this )-= mat;
 	}
 
 	template < typename ScalarType >
