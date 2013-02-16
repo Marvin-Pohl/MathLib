@@ -10,6 +10,9 @@
 namespace LinearMath
 {
 
+	/**
+	\brief Describes a 4 times 4 Matrix with column-major order
+	*/
 	template < typename ScalarType >
 	class Matrix4x4_tpl
 	{
@@ -54,10 +57,27 @@ namespace LinearMath
 			const ScalarType& m_4_1, const ScalarType& m_4_2, const ScalarType& m_4_3, const ScalarType& m_4_4
 			);
 
+		Matrix4x4_tpl operator + ( const Matrix4x4_tpl& mat ) const;
+		Matrix4x4_tpl& operator += ( const Matrix4x4_tpl& mat );
 
 		Matrix4x4_tpl operator * ( const ScalarType& op ) const;
+		inline friend Matrix4x4_tpl< ScalarType > 
+			operator *( const ScalarType& scalar, const Matrix4x4_tpl< ScalarType >& mat )
+		{
+			return mat * scalar;
+		}
 		Matrix4x4_tpl operator * ( const Matrix4x4_tpl< ScalarType >& matrix ) const;
 		Vector3_tpl< ScalarType > operator * ( const Vector3_tpl< ScalarType >& vec) const;
+		
+		
+		/**
+		\brief Multiplies a Vector2 with the matrix.
+		
+		\param vec The vector which will be transformed by the matrix.
+		The Vector will be treated as a Vector4 with (X,Y,0,1)
+		
+		\return Vector2_tpl< ScalarType > The transformed Vector
+		 */
 		Vector2_tpl< ScalarType > operator * ( const Vector2_tpl< ScalarType >& vec) const;
 		Matrix4x4_tpl& operator *= ( const Matrix4x4_tpl< ScalarType >& matrix );
 
@@ -76,6 +96,7 @@ namespace LinearMath
 
 		//Fields
 		/*
+		Indexed as follows
 		| 1_1 | 1_2 | 1_3 | 1_4 |
 		| 2_1 | 2_2 | 2_3 | 2_4 |
 		| 3_1 | 3_2 | 3_3 | 3_4 |
@@ -89,6 +110,38 @@ namespace LinearMath
 	private:
 
 	};
+
+	template < typename ScalarType >
+	Matrix4x4_tpl< ScalarType >& LinearMath::Matrix4x4_tpl<ScalarType>::operator+=( const Matrix4x4_tpl& mat )
+	{
+		M_1_1 += mat.M_1_1;
+		M_1_2 += mat.M_1_2;
+		M_1_3 += mat.M_1_3;
+		M_1_4 += mat.M_1_4;
+
+		M_2_1 += mat.M_2_1;
+		M_2_2 += mat.M_2_2;
+		M_2_3 += mat.M_2_3;
+		M_2_4 += mat.M_2_4;
+		
+		M_3_1 += mat.M_3_1;
+		M_3_2 += mat.M_3_2;
+		M_3_3 += mat.M_3_3;
+		M_3_4 += mat.M_3_4;
+		
+		M_4_1 += mat.M_4_1;
+		M_4_2 += mat.M_4_2;
+		M_4_3 += mat.M_4_3;
+		M_4_4 += mat.M_4_4;
+
+		return *this;
+	}
+
+	template < typename ScalarType >
+	Matrix4x4_tpl< ScalarType > LinearMath::Matrix4x4_tpl<ScalarType>::operator+( const Matrix4x4_tpl& mat ) const
+	{
+		return Matrix4x4_tpl< ScalarType >( *this )+= mat;
+	}
 
 	template < typename ScalarType >
 		const Matrix4x4_tpl< ScalarType > LinearMath::Matrix4x4_tpl<ScalarType>::ZERO_AFFINE
@@ -225,12 +278,13 @@ namespace LinearMath
 	template < typename ScalarType >
 	Matrix4x4_tpl< ScalarType >& Matrix4x4_tpl<ScalarType>::operator*=( const Matrix4x4_tpl< ScalarType >& op )
 	{
+		//Need temp Values because otherwise the calculations are going to be incorrect
 		ScalarType 
 			tmpM_1_1, tmpM_1_2, tmpM_1_3, tmpM_1_4, 
 			tmpM_2_1, tmpM_2_2, tmpM_2_3, tmpM_2_4, 
 			tmpM_3_1, tmpM_3_2, tmpM_3_3, tmpM_3_4, 
 			tmpM_4_1, tmpM_4_2, tmpM_4_3, tmpM_4_4;
-
+		
 		tmpM_1_1 = ( ( M_1_1 * op.M_1_1 ) + ( M_1_2 * op.M_2_1 ) + ( M_1_3 * op.M_3_1 ) + ( M_1_4 * op.M_4_1 ) );
 		tmpM_1_2 = ( ( M_1_1 * op.M_1_2 ) + ( M_1_2 * op.M_2_2 ) + ( M_1_3 * op.M_3_2 ) + ( M_1_4 * op.M_4_2 ) );
 		tmpM_1_3 = ( ( M_1_1 * op.M_1_3 ) + ( M_1_2 * op.M_2_3 ) + ( M_1_3 * op.M_3_3 ) + ( M_1_4 * op.M_4_3 ) );
