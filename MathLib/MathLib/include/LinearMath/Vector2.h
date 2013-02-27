@@ -60,7 +60,7 @@ public:
 		ScalarType DotProduct( const Vector2_tpl<ScalarType>& v ) const;
 		ScalarType Vector2_tpl<ScalarType>::GetRotation() const;
 		Vector2_tpl<ScalarType> Vector2_tpl<ScalarType>::Rotate(const Radian_tpl<ScalarType>& rad, const bool relative = true);
-	protected:
+protected:
 
 private:
 

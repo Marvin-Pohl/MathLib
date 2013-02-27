@@ -30,9 +30,15 @@
     <ClInclude Include="include\LinearMath\Matrix4x4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\LinearMath\SSEVector3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\precompiledHeader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SSEVector3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
