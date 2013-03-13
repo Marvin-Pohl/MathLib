@@ -2,7 +2,7 @@
 #ifndef _MP_VECTOR_2_H_
 #define _MP_VECTOR_2_H_
 
-#include "precompiledHeader.h"
+#include "MathLibPCH.h"
 #include "MathHelper.h"
 
 namespace LinearMath

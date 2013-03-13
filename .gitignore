@@ -1,7 +1,10 @@
 #Special Folders
-MathLib/bin
+MathLib/bin32
+MathLib/bin64
 MathLib/tmp
-MathLib/lib
+MathLib/lib32
+MathLib/lib64
+MathLib/include
 ipch
 
 #Visual Studio 

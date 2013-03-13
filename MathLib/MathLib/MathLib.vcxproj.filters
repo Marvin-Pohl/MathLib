@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\precompiledHeader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\LinearMath\Vector2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -33,12 +30,15 @@
     <ClInclude Include="include\LinearMath\SSEVector3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\MathLibPCH.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\precompiledHeader.cpp">
+    <ClCompile Include="src\LinearMath\SSEVector3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\SSEVector3.cpp">
+    <ClCompile Include="src\MathLibPCH.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,5 @@
 #pragma once
-#include "precompiledHeader.h"
+#include "MathLibPCH.h"
 #include <vector>
 
 namespace LinearMath

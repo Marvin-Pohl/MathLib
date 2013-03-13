@@ -1,4 +1,4 @@
-#include "precompiledHeader.h"
+#include "MathLibPCH.h"
 #include "SSEVector3.h"
 #include <smmintrin.h>
 
@@ -61,7 +61,7 @@ namespace LinearMath
 	float SSEVector3::operator*( const SSEVector3& v ) const
 	{
 		float result[4];
-		//Store in lowest float, do not multiply fourth value: 0111 0001
+		//Store in lowest float, do not multiply fourth value: 1110 0001
 		const int mask = 0xE1;
 		_mm_store_ss(result, _mm_dp_ps(vec, v.vec, mask));
 		return result[0];
@@ -126,6 +126,7 @@ namespace LinearMath
 	{
 		float result[4];
 		float lengthSquared = LengthSquared();
+		//Store in all floats, do not multiply fourth value: 0111 1111
 		const int mask = 0xEF;
 		_mm_store_ss(result, _mm_sqrt_ss( _mm_dp_ps(vec, vec, mask) ));
 		return result[0];
@@ -133,7 +134,7 @@ namespace LinearMath
 
 	void SSEVector3::Normalize()
 	{
-		//Store in lowest float, do not multiply fourth value: 0111 0001
+		//Store in all floats, do not multiply fourth value: 0111 1111
 		const int mask = 0xEF;
 		vec =  _mm_div_ps( vec, _mm_sqrt_ps( _mm_dp_ps(vec, vec, mask) ));
 	}

@@ -1,7 +1,7 @@
 #pragma once
 #ifndef _MP_VECTOR_3_H_
 #define _MP_VECTOR_3_H_
-#include "precompiledHeader.h"
+#include "MathLibPCH.h"
 
 namespace LinearMath
 {
