@@ -172,13 +172,16 @@ xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\LinearMath\Matrix4x4.h" />
+    <ClInclude Include="include\LinearMath\SSEMatrix4x4.h" />
     <ClInclude Include="include\LinearMath\SSEVector3.h" />
     <ClInclude Include="include\LinearMath\Vector2.h" />
     <ClInclude Include="include\LinearMath\Vector3.h" />
     <ClInclude Include="include\LinearMath\MathHelper.h" />
     <ClInclude Include="include\MathLibPCH.h" />
+    <ClInclude Include="include\LinearMath\SSEVector2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\LinearMath\SSEMatrix4x4.cpp" />
     <ClCompile Include="src\LinearMath\SSEVector3.cpp" />
     <ClCompile Include="src\MathLibPCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -186,6 +189,7 @@ xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\LinearMath\SSEVector2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

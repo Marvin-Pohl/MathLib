@@ -13,12 +13,12 @@ namespace LinearMath
 
 	SSEVector3::SSEVector3( float val )
 	{
-		vec = _mm_set_ps( val, val, val, 0 );
+		vec = _mm_set_ps( val, val, val, 1 );
 	}
 
 	SSEVector3::SSEVector3( float X, float Y, float Z )
 	{
-		vec = _mm_set_ps( Z, Y, X, 0 );
+		vec = _mm_set_ps( Z, Y, X, 1 );
 	}
 
 	SSEVector3::SSEVector3( const SSEVector3& val )

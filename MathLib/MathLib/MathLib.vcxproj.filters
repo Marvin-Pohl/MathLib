@@ -33,12 +33,24 @@
     <ClInclude Include="include\MathLibPCH.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\LinearMath\SSEMatrix4x4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LinearMath\SSEVector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\LinearMath\SSEVector3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\MathLibPCH.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LinearMath\SSEMatrix4x4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LinearMath\SSEVector2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

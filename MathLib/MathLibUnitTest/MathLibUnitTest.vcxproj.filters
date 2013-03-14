@@ -44,5 +44,8 @@
     <ClCompile Include="SSEVector3Test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SSEVector2Test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
