@@ -237,7 +237,7 @@ namespace MathLibUnitTest
 				986.0f, 1028.0f, 1070.0f, 1112.0f, 
 				1354.0f, 1412.0f, 1470.0f, 1528.0f
 				);
-			
+
 			MatrixAreEqual(result,expected);
 
 			MatrixAreEqual(m1,expected);

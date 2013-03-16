@@ -167,8 +167,9 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Matrix4x4Test.cpp" />
+    <ClCompile Include="SSEMatrix4x4Test.cpp" />
     <ClCompile Include="RadianTest.cpp" />
+    <ClCompile Include="Matrix4x4Test.cpp" />
     <ClCompile Include="SSEVector2Test.cpp" />
     <ClCompile Include="SSEVector3Test.cpp" />
     <ClCompile Include="stdafx.cpp">
