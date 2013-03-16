@@ -66,8 +66,6 @@ namespace LinearMath
 
 	private:
 
-		float GetSpecificFloat( __m128 col, const unsigned int pos ) const;
-
 		__m128 m_col0, m_col1, m_col2, m_col3;
 
 	};

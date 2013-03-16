@@ -34,7 +34,7 @@ namespace MathLibUnitTest
 			Assert::AreEqual(expected.GetM_4_4() , result.GetM_4_4());
 		}
 
-		TEST_METHOD(Matrix4x4ConstructorTest)
+		TEST_METHOD(SSEMatrix4x4ConstructorTest)
 		{
 			Matrix4x4 m;
 
@@ -95,9 +95,28 @@ namespace MathLibUnitTest
 			Assert::AreEqual(0.0f, m.GetM_4_3());
 			Assert::AreEqual(1.0f, m.GetM_4_4());
 
+			Matrix4x4 m1;
+
+			Assert::AreEqual(0.0f, m1.GetM_1_1());
+			Assert::AreEqual(0.0f, m1.GetM_1_2());
+			Assert::AreEqual(0.0f, m1.GetM_1_3());
+			Assert::AreEqual(0.0f, m1.GetM_1_4());
+			Assert::AreEqual(0.0f, m1.GetM_2_1());
+			Assert::AreEqual(0.0f, m1.GetM_2_2());
+			Assert::AreEqual(0.0f, m1.GetM_2_3());
+			Assert::AreEqual(0.0f, m1.GetM_2_4());
+			Assert::AreEqual(0.0f, m1.GetM_3_1());
+			Assert::AreEqual(0.0f, m1.GetM_3_2());
+			Assert::AreEqual(0.0f, m1.GetM_3_3());
+			Assert::AreEqual(0.0f, m1.GetM_3_4());
+			Assert::AreEqual(0.0f, m1.GetM_4_1());
+			Assert::AreEqual(0.0f, m1.GetM_4_2());
+			Assert::AreEqual(0.0f, m1.GetM_4_3());
+			Assert::AreEqual(0.0f, m1.GetM_4_4());
+
 		}
 
-		TEST_METHOD(Matrix4x4SubtractionTest)
+		TEST_METHOD(SSEMatrix4x4SubtractionTest)
 		{
 			Matrix4x4 m1(
 				1.0f, 2.0f, 3.0f, 4.0f, 
@@ -130,7 +149,7 @@ namespace MathLibUnitTest
 			MatrixAreEqual(m1, expected);
 		}
 
-		TEST_METHOD(Matrix4x4AdditionTest)
+		TEST_METHOD(SSEMatrix4x4AdditionTest)
 		{
 			Matrix4x4 m1(
 				1.0f, 2.0f, 3.0f, 4.0f, 
@@ -164,7 +183,7 @@ namespace MathLibUnitTest
 		}
 
 
-		TEST_METHOD(Matrix4x4InvertTest)
+		TEST_METHOD(SSEMatrix4x4InvertTest)
 		{
 			Matrix4x4 m
 				(
@@ -193,22 +212,42 @@ namespace MathLibUnitTest
 
 			m = m * m.InvertedCopy();
 
-			Assert::AreEqual(1.0f, m.GetM_1_1() );
-			Assert::AreEqual(0.0f, m.GetM_1_2() );
-			Assert::AreEqual(0.0f, m.GetM_1_3() );
-			Assert::AreEqual(0.0f, m.GetM_1_4() );
-			Assert::AreEqual(0.0f, m.GetM_2_1() );
-			Assert::AreEqual(1.0f, m.GetM_2_2() );
-			Assert::AreEqual(0.0f, m.GetM_2_3() );
-			Assert::AreEqual(0.0f, m.GetM_2_4() );
-			Assert::AreEqual(0.0f, m.GetM_3_1() );
-			Assert::AreEqual(0.0f, m.GetM_3_2() );
-			Assert::AreEqual(1.0f, m.GetM_3_3() );
-			Assert::AreEqual(0.0f, m.GetM_3_4() );
-			Assert::AreEqual(0.0f, m.GetM_4_1() );
-			Assert::AreEqual(0.0f, m.GetM_4_2() );
-			Assert::AreEqual(0.0f, m.GetM_4_3() );
-			Assert::AreEqual(1.0f, m.GetM_4_4() );
+			Assert::IsTrue( m.GetM_1_1() < 1.001f && m.GetM_1_1() > 0.999f);
+			Assert::IsTrue( m.GetM_1_2() < 0.001f && m.GetM_1_2() > -0.001f);
+			Assert::IsTrue( m.GetM_1_3() < 0.001f && m.GetM_1_3() > -0.001f);
+			Assert::IsTrue( m.GetM_1_4() < 0.001f && m.GetM_1_4() > -0.001f);
+
+			Assert::IsTrue( m.GetM_2_1() < 0.001f && m.GetM_2_1() > -0.001f);
+			Assert::IsTrue( m.GetM_2_2() < 1.001f && m.GetM_2_2() > 0.999f);
+			Assert::IsTrue( m.GetM_2_3() < 0.001f && m.GetM_2_3() > -0.001f);
+			Assert::IsTrue( m.GetM_2_4() < 0.001f && m.GetM_2_4() > -0.001f);
+
+			Assert::IsTrue( m.GetM_3_1() < 0.001f && m.GetM_3_1() > -0.001f);
+			Assert::IsTrue( m.GetM_3_2() < 0.001f && m.GetM_3_2() > -0.001f);
+			Assert::IsTrue( m.GetM_3_3() < 1.001f && m.GetM_3_3() > 0.999f);
+			Assert::IsTrue( m.GetM_3_4() < 0.001f && m.GetM_3_4() > -0.001f);
+
+			Assert::IsTrue( m.GetM_4_1() < 0.001f && m.GetM_4_1() > -0.001f);
+			Assert::IsTrue( m.GetM_4_2() < 0.001f && m.GetM_4_2() > -0.001f);
+			Assert::IsTrue( m.GetM_4_3() < 0.001f && m.GetM_4_3() > -0.001f);
+			Assert::IsTrue( m.GetM_4_4() < 1.001f && m.GetM_4_4() > 0.999f);
+
+			//Assert::AreEqual(1.0f, m.GetM_1_1() );
+			//Assert::AreEqual(0.0f, m.GetM_1_2() );
+			//Assert::AreEqual(0.0f, m.GetM_1_3() );
+			//Assert::AreEqual(0.0f, m.GetM_1_4() );
+			//Assert::AreEqual(0.0f, m.GetM_2_1() );
+			//Assert::AreEqual(1.0f, m.GetM_2_2() );
+			//Assert::AreEqual(0.0f, m.GetM_2_3() );
+			//Assert::AreEqual(0.0f, m.GetM_2_4() );
+			//Assert::AreEqual(0.0f, m.GetM_3_1() );
+			//Assert::AreEqual(0.0f, m.GetM_3_2() );
+			//Assert::AreEqual(1.0f, m.GetM_3_3() );
+			//Assert::AreEqual(0.0f, m.GetM_3_4() );
+			//Assert::AreEqual(0.0f, m.GetM_4_1() );
+			//Assert::AreEqual(0.0f, m.GetM_4_2() );
+			//Assert::AreEqual(0.0f, m.GetM_4_3() );
+			//Assert::AreEqual(1.0f, m.GetM_4_4() );
 		}
 
 		TEST_METHOD(MatrixMult)
