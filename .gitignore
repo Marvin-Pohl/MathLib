@@ -39,3 +39,5 @@ $RECYCLE.BIN/
 *.lai
 *.la
 *.a
+bin
+lib
