@@ -1,6 +1,7 @@
 #include "MathLibPCH.h"
 #include "SSEMatrix4x4.h"
 #include <smmintrin.h>
+#include "SSEVector3.h"
 
 namespace LinearMath
 {
@@ -385,6 +386,49 @@ namespace LinearMath
 		float result[ 4 ];
 		_mm_storeu_ps( result, m_col3 );
 		return result[ 3 ];	
+	}
+
+	LinearMath::SSEMatrix4x4 SSEMatrix4x4::CreateLookAt( const SSEVector3& from, const SSEVector3& to, const SSEVector3& up )
+	{
+		SSEVector3 x, y, z;
+
+		z = (to - from).NormalizedCopy();
+		x = z.CrossProduct(up.NormalizedCopy()).NormalizedCopy();
+		y = x.CrossProduct(z);
+		z *= -1;
+
+		return SSEMatrix4x4 (
+			x.GetX(), x.GetY(), x.GetZ(), -x.DotProduct(from),
+			y.GetX(), y.GetY(), y.GetZ(), -y.DotProduct(from),
+			z.GetX(), z.GetY(), z.GetZ(), -z.DotProduct(from),
+			0, 0, 0, 1
+		);
+
+	}
+
+	LinearMath::SSEMatrix4x4 SSEMatrix4x4::CreateLookDir( const SSEVector3& dir, const SSEVector3& up )
+	{
+		SSEVector3 x, y, z;
+
+		z = dir.NormalizedCopy();
+		x = z.CrossProduct(up.NormalizedCopy()).NormalizedCopy();
+		y = x.CrossProduct(z);
+		z *= -1;
+
+		return SSEMatrix4x4 (
+			x.GetX(), x.GetY(), x.GetZ(), 0,
+			y.GetX(), y.GetY(), y.GetZ(), 0,
+			z.GetX(), z.GetY(), z.GetZ(), 0,
+			0, 0, 0, 1
+			);
+	}
+
+	void SSEMatrix4x4::GetAsFloatArray( float* arr ) const
+	{
+		_mm_storeu_ps( arr, m_col0 );
+		_mm_storeu_ps( arr+4, m_col1 );
+		_mm_storeu_ps( arr+8, m_col2 );
+		_mm_storeu_ps( arr+12, m_col3 );
 	}
 
 }

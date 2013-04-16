@@ -8,6 +8,8 @@
 
 namespace LinearMath
 {
+	class SSEVector3;
+
 	class SSEMatrix4x4
 	{
 	public:
@@ -34,12 +36,16 @@ namespace LinearMath
 		static const SSEMatrix4x4 ZERO_AFFINE;
 		static const SSEMatrix4x4 IDENTITY;
 
+		static SSEMatrix4x4 CreateLookAt( const SSEVector3& from, const SSEVector3& to, const SSEVector3& up );
+		static SSEMatrix4x4 CreateLookDir( const SSEVector3& dir, const SSEVector3& up );
 
 		void Invert();
 		SSEMatrix4x4 InvertedCopy() const;
 
 		SSEMatrix4x4 TransposedCopy() const;
 		void Transpose();
+
+		void GetAsFloatArray(float* arr) const;
 
 		float GetM_1_1() const;
 		float GetM_1_2() const;
