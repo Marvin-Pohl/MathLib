@@ -2,6 +2,7 @@
 
 #include "MathLibPCH.h"
 #include <xmmintrin.h>
+#include "MathHelper.h"
 
 #ifndef SSEMatrix4x4_h__
 #define SSEMatrix4x4_h__
@@ -38,6 +39,17 @@ namespace LinearMath
 
 		static SSEMatrix4x4 CreateLookAt( const SSEVector3& from, const SSEVector3& to, const SSEVector3& up );
 		static SSEMatrix4x4 CreateLookDir( const SSEVector3& dir, const SSEVector3& up );
+		static SSEMatrix4x4 CreateProjectionMatrix( float viewAngle, float aspectRatio, float nearPlane, float farPlane );
+
+		static SSEMatrix4x4 CreateRotationX( const Radian_tpl<float>& angle );
+		static SSEMatrix4x4 CreateRotationY( const Radian_tpl<float>& angle );
+		static SSEMatrix4x4 CreateRotationZ( const Radian_tpl<float>& angle );
+
+
+		static SSEMatrix4x4 CreateTranslation( const SSEVector3& translation );
+
+
+		static SSEMatrix4x4 CreateScale( const SSEVector3& scale );
 
 		void Invert();
 		SSEMatrix4x4 InvertedCopy() const;

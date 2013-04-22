@@ -2,6 +2,7 @@
 #include "SSEMatrix4x4.h"
 #include <smmintrin.h>
 #include "SSEVector3.h"
+#include "MathHelper.h"
 
 namespace LinearMath
 {
@@ -31,10 +32,11 @@ namespace LinearMath
 
 	SSEMatrix4x4::SSEMatrix4x4()
 	{
-		m_col0 = _mm_set_ps( 0, 0, 0, 0 );
-		m_col1 = _mm_set_ps( 0, 0, 0, 0 );
-		m_col2 = _mm_set_ps( 0, 0, 0, 0 );
-		m_col3 = _mm_set_ps( 0, 0, 0, 0 );
+		float tmp[] = { 0, 0, 0, 0};
+		m_col0 = _mm_loadu_ps( tmp );
+		m_col1 = _mm_loadu_ps( tmp );
+		m_col2 = _mm_loadu_ps( tmp );
+		m_col3 = _mm_loadu_ps( tmp );
 	}
 
 	SSEMatrix4x4::SSEMatrix4x4( const __m128& col0, const __m128& col1, const __m128& col2, const __m128& col3 ) :
@@ -429,6 +431,86 @@ namespace LinearMath
 		_mm_storeu_ps( arr+4, m_col1 );
 		_mm_storeu_ps( arr+8, m_col2 );
 		_mm_storeu_ps( arr+12, m_col3 );
+	}
+
+	LinearMath::SSEMatrix4x4 SSEMatrix4x4::CreateProjectionMatrix( float viewAngle, float aspectRatio, float nearPlane, float farPlane )
+	{
+		viewAngle = 1.0f / MathHelper_tpl<float>::Tan((viewAngle / 180.0f * MathHelper_tpl<float>::GetPI())/2.0f);
+
+		return SSEMatrix4x4(
+			viewAngle/aspectRatio, 0, 0, 0,
+			0, viewAngle, 0,0,
+			0,0, -(farPlane + nearPlane)/(farPlane - nearPlane), -1,
+			0,0, -(2* farPlane * nearPlane)/( farPlane - nearPlane ), 0 
+		);
+	}
+
+	LinearMath::SSEMatrix4x4 SSEMatrix4x4::CreateRotationX( const Radian_tpl<float>& rad )
+	{
+		float sin = MathHelper_tpl< float >::Sin(rad.AsRadianValue());
+		float cos = MathHelper_tpl< float >::Cos(rad.AsRadianValue());
+
+		return SSEMatrix4x4
+			(
+			1, 0, 0, 0,
+			0, cos, -sin, 0,
+			0, sin, cos, 0,
+			0, 0, 0, 1
+			);
+	}
+
+	LinearMath::SSEMatrix4x4 SSEMatrix4x4::CreateRotationY( const Radian_tpl<float>& rad )
+	{
+		float sin = MathHelper_tpl< float >::Sin(rad.AsRadianValue());
+		float cos = MathHelper_tpl< float >::Cos(rad.AsRadianValue());
+
+		return SSEMatrix4x4
+			(
+			cos, 0, sin, 0,
+			0, 1, 0, 0,
+			-sin, 0, cos, 0,
+			0, 0, 0, 1
+			);
+	}
+
+	LinearMath::SSEMatrix4x4 SSEMatrix4x4::CreateRotationZ( const Radian_tpl<float>& rad )
+	{
+		float sin = MathHelper_tpl< float >::Sin(rad.AsRadianValue());
+		float cos = MathHelper_tpl< float >::Cos(rad.AsRadianValue());
+
+		return SSEMatrix4x4
+			(
+			cos, -sin, 0, 0,
+			sin, cos, 0, 0,
+			0, 0, 1, 0,
+			0, 0, 0, 1
+			);
+	}
+
+	LinearMath::SSEMatrix4x4 SSEMatrix4x4::CreateTranslation( const SSEVector3& translation )
+	{
+		float values[4];
+		_mm_storeu_ps( values, translation.vec);
+
+		return SSEMatrix4x4(
+			1, 0, 0, values[1],
+			0, 1, 0, values[2],
+			0, 0, 1, values[3],
+			0, 0, 0, 1
+			);
+	}
+
+	LinearMath::SSEMatrix4x4 SSEMatrix4x4::CreateScale( const SSEVector3& scale )
+	{
+		float values[4];
+		_mm_storeu_ps( values, scale.vec);
+
+		return SSEMatrix4x4(
+			values[1], 0, 0, 0,
+			0, values[2], 0, 0,
+			0, 0,  values[3],0,
+			0, 0, 0, 1
+			);
 	}
 
 }
