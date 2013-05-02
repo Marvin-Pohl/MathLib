@@ -318,7 +318,7 @@ namespace LinearMath
 			op * M_1_1, op * M_1_2, op * M_1_3, op * M_1_4,
 			op * M_2_1, op * M_2_2, op * M_2_3, op * M_2_4,
 			op * M_3_1, op * M_3_2, op * M_3_3, op * M_3_4,
-			op * M_4_1, op * M_4_2, op * M_4_3, op * M_4_4,
+			op * M_4_1, op * M_4_2, op * M_4_3, op * M_4_4
 			   );
 	}
 
