@@ -39,6 +39,9 @@
     <ClInclude Include="include\LinearMath\SSEVector2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\LinearMath\Quaternion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\LinearMath\SSEVector3.cpp">

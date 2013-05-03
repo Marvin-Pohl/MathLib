@@ -172,6 +172,7 @@ xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\LinearMath\Matrix4x4.h" />
+    <ClInclude Include="include\LinearMath\Quaternion.h" />
     <ClInclude Include="include\LinearMath\SSEMatrix4x4.h" />
     <ClInclude Include="include\LinearMath\SSEVector3.h" />
     <ClInclude Include="include\LinearMath\Vector2.h" />
