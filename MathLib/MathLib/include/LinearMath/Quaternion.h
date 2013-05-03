@@ -3,6 +3,9 @@
 	#define Quaternion_h__
 
 	#include "MathLibPCH.h"
+#include "MathHelper.h"
+#include "Vector3.h"
+#include "Matrix4x4.h"
 
 namespace LinearMath
 {

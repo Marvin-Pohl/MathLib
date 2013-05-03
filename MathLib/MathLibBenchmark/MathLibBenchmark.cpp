@@ -2,29 +2,29 @@
 //
 
 #include "stdafx.h"
-#include <SSEVector3.h>
+//#include <SSEVector3.h>
 #include <windows.h>
-#include "Matrix4x4.h"
+//#include "Matrix4x4.h"
 #include <iostream>
-#include "..\MathLib\include\LinearMath\Quaternion.h"
+#include "Quaternion.h"
 
 using namespace LinearMath;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	SSEVector3 test1(151,32,876);
-	SSEVector3 test2(561,24,313);
-
-	SSEVector3 res = test1 ^ test2;
-
-	printf("Values: %f, %f, %f\n", res.GetX(), res.GetY(), res.GetZ());
+	//SSEVector3 test1(151,32,876);
+	//SSEVector3 test2(561,24,313);
+	//
+	//SSEVector3 res = test1 ^ test2;
+	//
+	//printf("Values: %f, %f, %f\n", res.GetX(), res.GetY(), res.GetZ());
 	LARGE_INTEGER frequenzy, start, end;
 
-	typedef Matrix4x4_tpl<float> Matrix4;
+	//typedef Matrix4x4_tpl<float> Matrix4;
 
 	typedef Quaternion_tpl<float> Quaternion;
 
-	Matrix4 res2;
+	//Matrix4 res2;
 
 	QueryPerformanceFrequency( &frequenzy );
 
