@@ -218,7 +218,7 @@ namespace LinearMath
 	Vector2_tpl< ScalarType > Vector2_tpl< ScalarType >::Rotate( const Radian_tpl< ScalarType >& rad,
 		const bool relative	/*= true*/ )
 	{
-		ScalarType amount = rad.AsRadianValue();
+		Radian_tpl< ScalarType > amount = rad;
 
 		if( !relative )
 		{

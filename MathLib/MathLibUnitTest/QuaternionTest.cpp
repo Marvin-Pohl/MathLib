@@ -8,6 +8,9 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 typedef Quaternion_tpl< float > Quaternion;
 
+template class __declspec( dllexport ) Quaternion_tpl< float >;
+template class __declspec( dllexport ) Quaternion_tpl< double >;
+
 namespace MathLibUnitTest
 {
 	void CompareQuaternion( const Quaternion& quat1, const Quaternion& quat2 )

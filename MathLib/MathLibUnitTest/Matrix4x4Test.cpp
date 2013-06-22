@@ -7,6 +7,9 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 typedef Matrix4x4_tpl< float > Matrix4x4;
 
+template class __declspec( dllexport ) Matrix4x4_tpl< float >;
+template class __declspec( dllexport ) Matrix4x4_tpl< double >;
+
 namespace MathLibUnitTest
 {
 	TEST_CLASS( Matrix4x4TestClass )

@@ -10,6 +10,8 @@ typedef float Scalar;
 
 typedef LinearMath::Vector3_tpl< Scalar > Vector3;
 
+template class __declspec( dllexport ) Vector3_tpl< Scalar >;
+
 namespace MathLibUnitTest
 {
 	TEST_CLASS( Vector3Test )

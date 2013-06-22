@@ -6,7 +6,7 @@ namespace LinearMath
 {
 	template< typename ScalarType >
 	class Degree_tpl;
-	template <typename ScalarType >
+	template< typename ScalarType >
 	class Radian_tpl;
 
 	template< typename ScalarType >
@@ -19,7 +19,6 @@ namespace LinearMath
 		Radian_tpl( const Radian_tpl& rad );
 		~Radian_tpl( void );
 
-		// Radian &operator =( const T& scalar );
 		Radian_tpl& operator =( const Radian_tpl& rad );
 
 		Radian_tpl& operator =( const Degree_tpl< ScalarType >& deg );
@@ -54,7 +53,7 @@ namespace LinearMath
 
 		bool operator <( const Radian_tpl& rad ) const;
 
-		operator Degree_tpl< ScalarType >( void )const;
+		operator Degree_tpl< ScalarType >( void ) const;
 
 		ScalarType AsRadianValue( void ) const;
 
@@ -62,11 +61,10 @@ namespace LinearMath
 
 		ScalarType AsDegreeValue( void ) const;
 
-		friend Radian_tpl< ScalarType > operator * ( const ScalarType& scalar, const Radian_tpl< ScalarType >& rad )
+		friend Radian_tpl< ScalarType > operator *( const ScalarType& scalar, const Radian_tpl< ScalarType >& rad )
 		{
 			return Radian_tpl< ScalarType >( scalar * rad.m_Rad );
 		}
-
 	private:
 
 		ScalarType m_Rad;
@@ -97,8 +95,6 @@ namespace LinearMath
 
 		Degree_tpl< ScalarType >& operator -=( const Degree_tpl< ScalarType >& rad );
 
-		MATHLIB_API friend Degree_tpl< ScalarType > operator * ( const ScalarType& scalar, const Degree_tpl< ScalarType >& degrees);
-
 		Degree_tpl< ScalarType > operator *( const ScalarType& scalar ) const;
 
 		Degree_tpl< ScalarType >& operator *=( const ScalarType& scalar );
@@ -128,11 +124,10 @@ namespace LinearMath
 
 		ScalarType AsDegreeValue( void ) const;
 
-		friend Degree_tpl< ScalarType > operator * ( const ScalarType& scalar, const Degree_tpl< ScalarType >& degree )
+		friend Degree_tpl< ScalarType > operator *( const ScalarType& scalar, const Degree_tpl< ScalarType >& degree )
 		{
 			return Degree_tpl< ScalarType >( scalar * degree.m_Degree );
 		}
-
 	private:
 
 		ScalarType m_Degree;
@@ -272,7 +267,7 @@ namespace LinearMath
 	}
 
 	template< typename ScalarType >
-	Radian_tpl< ScalarType > Radian_tpl<ScalarType>::operator -( void ) const
+	Radian_tpl< ScalarType > Radian_tpl< ScalarType >::operator -( void ) const
 	{
 		return Radian_tpl< ScalarType >( -m_Rad );
 	}
@@ -366,7 +361,7 @@ namespace LinearMath
 		// r/(2*PI) = alpha/(360°)
 		// <=> r = alpha * (PI/180°)
 		// <=> alpha = r * 180/pi
-		return Degree_tpl( rad.AsRadianValue() * ( 180.0f / PI ) );
+		return Degree_tpl< ScalarType >( rad.AsRadianValue() * ( 180.0f / PI ) );
 	}
 
 	template< typename ScalarType >
@@ -388,7 +383,7 @@ namespace LinearMath
 	template< typename ScalarType >
 	Radian_tpl< ScalarType > MathHelper_tpl< ScalarType >::ASin( const ScalarType& scalar )
 	{
-		return asin( scalar );
+		return Radian_tpl< ScalarType >( asin( scalar ));
 	}
 
 	template< typename ScalarType >
@@ -400,7 +395,7 @@ namespace LinearMath
 	template< typename ScalarType >
 	Radian_tpl< ScalarType > MathHelper_tpl< ScalarType >::ACos( const ScalarType& scalar )
 	{
-		return Radian_tpl< ScalarType >( acos( scalar ));
+		return Radian_tpl< ScalarType >( acos( scalar ) );
 	}
 
 	template< typename ScalarType >
@@ -412,7 +407,7 @@ namespace LinearMath
 	template< typename ScalarType >
 	Radian_tpl< ScalarType > MathHelper_tpl< ScalarType >::ATan( const ScalarType& scalar )
 	{
-		return atan( scalar );
+		return Radian_tpl< ScalarType >( atan( scalar ) );
 	}
 
 	template< typename ScalarType >
@@ -428,7 +423,8 @@ namespace LinearMath
 	}
 
 	template< typename ScalarType >
-	ScalarType MathHelper_tpl< ScalarType >::Max( const std::vector< ScalarType >& values, const ScalarType valueIfEmpty )
+	ScalarType MathHelper_tpl< ScalarType >::Max( const std::vector< ScalarType >& values,
+		const ScalarType valueIfEmpty )
 	{
 		if( values.size() > 0 )
 		{
@@ -461,7 +457,8 @@ namespace LinearMath
 	}
 
 	template< typename ScalarType >
-	ScalarType MathHelper_tpl< ScalarType >::Min( const std::vector< ScalarType >& values, const ScalarType valueIfEmpty )
+	ScalarType MathHelper_tpl< ScalarType >::Min( const std::vector< ScalarType >& values,
+		const ScalarType valueIfEmpty )
 	{
 		if( values.size() > 0 )
 		{
@@ -607,7 +604,6 @@ namespace LinearMath
 	{
 		return Degree_tpl< ScalarType >( m_Degree * scalar );
 	}
-
 
 	template< typename ScalarType >
 	Degree_tpl< ScalarType >& Degree_tpl< ScalarType >::operator *=( const ScalarType& scalar )

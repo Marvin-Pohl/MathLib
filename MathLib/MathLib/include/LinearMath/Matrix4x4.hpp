@@ -140,8 +140,8 @@ namespace LinearMath
 	Matrix4x4_tpl< ScalarType >
 	LinearMath::Matrix4x4_tpl< ScalarType >::CreateRotationXAxisMatrix( const Radian_tpl< ScalarType >& rad )
 	{
-		ScalarType sin = MathHelper_tpl< ScalarType >::Sin( rad.AsRadianValue() );
-		ScalarType cos = MathHelper_tpl< ScalarType >::Cos( rad.AsRadianValue() );
+		ScalarType sin = MathHelper_tpl< ScalarType >::Sin( rad );
+		ScalarType cos = MathHelper_tpl< ScalarType >::Cos( rad );
 
 		return Matrix4x4_tpl< ScalarType >
 			   (
@@ -163,8 +163,8 @@ namespace LinearMath
 	Matrix4x4_tpl< ScalarType >
 	LinearMath::Matrix4x4_tpl< ScalarType >::CreateRotationYAxisMatrix( const Radian_tpl< ScalarType >& rad )
 	{
-		ScalarType sin = MathHelper_tpl< ScalarType >::Sin( rad.AsRadianValue() );
-		ScalarType cos = MathHelper_tpl< ScalarType >::Cos( rad.AsRadianValue() );
+		ScalarType sin = MathHelper_tpl< ScalarType >::Sin( rad );
+		ScalarType cos = MathHelper_tpl< ScalarType >::Cos( rad );
 
 		return Matrix4x4_tpl< ScalarType >
 			   (
@@ -186,8 +186,8 @@ namespace LinearMath
 	Matrix4x4_tpl< ScalarType >
 	LinearMath::Matrix4x4_tpl< ScalarType >::CreateRotationZAxisMatrix( const Radian_tpl< ScalarType >& rad )
 	{
-		ScalarType sin = MathHelper_tpl< ScalarType >::Sin( rad.AsRadianValue() );
-		ScalarType cos = MathHelper_tpl< ScalarType >::Cos( rad.AsRadianValue() );
+		ScalarType sin = MathHelper_tpl< ScalarType >::Sin( rad );
+		ScalarType cos = MathHelper_tpl< ScalarType >::Cos( rad );
 
 		return Matrix4x4_tpl< ScalarType >
 			   (
