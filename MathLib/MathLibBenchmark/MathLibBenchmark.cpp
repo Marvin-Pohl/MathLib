@@ -1,33 +1,35 @@
 // MathLibBenchmark.cpp : Defines the entry point for the console application.
+
 //
 
-#include "stdafx.h"
-//#include <SSEVector3.h>
+#include "stdafx.hpp"
+
+// #include <SSEVector3.h>
 #include <windows.h>
-//#include "Matrix4x4.h"
+
+// #include "Matrix4x4.hpp"
 #include <iostream>
-#include "Quaternion.h"
+#include "Quaternion.hpp"
 
 using namespace LinearMath;
 
-int _tmain(int argc, _TCHAR* argv[])
+int _tmain( int argc, _TCHAR* argv[] )
 {
-	//SSEVector3 test1(151,32,876);
-	//SSEVector3 test2(561,24,313);
+	// SSEVector3 test1(151,32,876);
+	// SSEVector3 test2(561,24,313);
 	//
-	//SSEVector3 res = test1 ^ test2;
+	// SSEVector3 res = test1 ^ test2;
 	//
-	//printf("Values: %f, %f, %f\n", res.GetX(), res.GetY(), res.GetZ());
+	// printf("Values: %f, %f, %f\n", res.GetX(), res.GetY(), res.GetZ());
 	LARGE_INTEGER frequenzy, start, end;
 
-	//typedef Matrix4x4_tpl<float> Matrix4;
+	// typedef Matrix4x4_tpl<float> Matrix4;
 
-	typedef Quaternion_tpl<float> Quaternion;
+	typedef Quaternion_tpl< float > Quaternion;
 
-	//Matrix4 res2;
+	// Matrix4 res2;
 
 	QueryPerformanceFrequency( &frequenzy );
-
 
 	float a = 1.0f;
 	float b = 2.0f;
@@ -48,15 +50,11 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	QueryPerformanceCounter( &start );
 
-	//Add Benchmark here
+	// Add Benchmark here
 
 	QueryPerformanceCounter( &end );
 
-	std::cout << "Load Val: " << (end.LowPart - start.LowPart) / (float) frequenzy.LowPart<< std::endl;
-
-
-
+	std::cout << "Load Val: " << ( end.LowPart - start.LowPart ) / ( float )frequenzy.LowPart << std::endl;
 
 	return 0;
 }
-

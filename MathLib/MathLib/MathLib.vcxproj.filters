@@ -15,31 +15,31 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\LinearMath\Vector2.h">
+    <ClInclude Include="include\LinearMath\MathHelper.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\LinearMath\Vector3.h">
+    <ClInclude Include="include\LinearMath\Matrix4x4.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\LinearMath\MathHelper.h">
+    <ClInclude Include="include\LinearMath\Quaternion.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\LinearMath\Matrix4x4.h">
+    <ClInclude Include="include\LinearMath\SSEMatrix4x4.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\LinearMath\SSEVector3.h">
+    <ClInclude Include="include\LinearMath\SSEVector2.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\MathLibPCH.h">
+    <ClInclude Include="include\LinearMath\SSEVector3.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\LinearMath\SSEMatrix4x4.h">
+    <ClInclude Include="include\LinearMath\Vector2.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\LinearMath\SSEVector2.h">
+    <ClInclude Include="include\LinearMath\Vector3.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\LinearMath\Quaternion.h">
+    <ClInclude Include="include\MathLibPCH.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

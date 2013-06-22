@@ -1,6 +1,6 @@
-#include "stdafx.h"
+#include "stdafx.hpp"
 #include "CppUnitTest.h"
-#include <SSEVector2.h>
+#include <SSEVector2.hpp>
 #include <math.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;

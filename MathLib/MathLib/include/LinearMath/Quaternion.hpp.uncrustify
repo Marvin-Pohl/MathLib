@@ -2,10 +2,10 @@
 #ifndef Quaternion_h__
 	#define Quaternion_h__
 
-	#include "MathLibPCH.h"
-#include "MathHelper.h"
-#include "Vector3.h"
-#include "Matrix4x4.h"
+	#include "MathLibPCH.hpp"
+	#include "MathHelper.hpp"
+	#include "Vector3.hpp"
+	#include "Matrix4x4.hpp"
 
 namespace LinearMath
 {
@@ -97,12 +97,12 @@ namespace LinearMath
 		ScalarType zw = 2 * Z * W;
 
 		return Matrix4x4_tpl< ScalarType >
-			(
+			   (
 			ww + xx - yy - zz, xy + zw, xz - yw, 0,
 			xy - zw, ww - xx + yy - zz, yz + xw, 0,
 			xz + yw, yz - xw, ww - xx - yy + zz, 0,
 			0, 0, 0, 1
-			);
+			   );
 	}
 
 	template< typename ScalarType >

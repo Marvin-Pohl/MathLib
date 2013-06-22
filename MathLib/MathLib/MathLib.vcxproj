@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;MATHLIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)/include/LinearMath;$(ProjectDir)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PrecompiledHeaderFile>MathLibPCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>MathLibPCH.hpp</PrecompiledHeaderFile>
       <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
@@ -111,7 +111,7 @@ xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;MATHLIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)/include/LinearMath;$(ProjectDir)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PrecompiledHeaderFile>MathLibPCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>MathLibPCH.hpp</PrecompiledHeaderFile>
       <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
@@ -129,7 +129,7 @@ xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;MATHLIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)/include/LinearMath;$(ProjectDir)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PrecompiledHeaderFile>MathLibPCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>MathLibPCH.hpp</PrecompiledHeaderFile>
       <FloatingPointModel>Fast</FloatingPointModel>
       <EnableEnhancedInstructionSet>
       </EnableEnhancedInstructionSet>
@@ -157,7 +157,7 @@ xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;MATHLIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)/include/LinearMath;$(ProjectDir)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PrecompiledHeaderFile>MathLibPCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>MathLibPCH.hpp</PrecompiledHeaderFile>
       <FloatingPointModel>Fast</FloatingPointModel>
       <EnableEnhancedInstructionSet>
       </EnableEnhancedInstructionSet>
@@ -171,15 +171,15 @@ xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\LinearMath\Matrix4x4.h" />
-    <ClInclude Include="include\LinearMath\Quaternion.h" />
-    <ClInclude Include="include\LinearMath\SSEMatrix4x4.h" />
-    <ClInclude Include="include\LinearMath\SSEVector3.h" />
-    <ClInclude Include="include\LinearMath\Vector2.h" />
-    <ClInclude Include="include\LinearMath\Vector3.h" />
-    <ClInclude Include="include\LinearMath\MathHelper.h" />
-    <ClInclude Include="include\MathLibPCH.h" />
-    <ClInclude Include="include\LinearMath\SSEVector2.h" />
+    <ClInclude Include="include\LinearMath\Matrix4x4.hpp" />
+    <ClInclude Include="include\LinearMath\Quaternion.hpp" />
+    <ClInclude Include="include\LinearMath\SSEMatrix4x4.hpp" />
+    <ClInclude Include="include\LinearMath\SSEVector3.hpp" />
+    <ClInclude Include="include\LinearMath\Vector2.hpp" />
+    <ClInclude Include="include\LinearMath\Vector3.hpp" />
+    <ClInclude Include="include\LinearMath\MathHelper.hpp" />
+    <ClInclude Include="include\MathLibPCH.hpp" />
+    <ClInclude Include="include\LinearMath\SSEVector2.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\LinearMath\SSEMatrix4x4.cpp" />

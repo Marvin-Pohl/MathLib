@@ -2,10 +2,10 @@
 #ifndef _MP_MATRIX_4_4_H_
 	#define _MP_MATRIX_4_4_H_
 
-	#include "MathLibPCH.h"
-	#include "Vector3.h"
-	#include "Vector2.h"
-	#include "MathHelper.h"
+	#include "MathLibPCH.hpp"
+	#include "Vector3.hpp"
+	#include "Vector2.hpp"
+	#include "MathHelper.hpp"
 
 namespace LinearMath
 {
@@ -111,7 +111,6 @@ namespace LinearMath
 		static Matrix4x4_tpl CreateRotationZAxisMatrix( const Degree_tpl< ScalarType >& deg );
 
 		Matrix4x4_tpl< ScalarType > InvertedCopy();
-
 
 		// Fields
 
@@ -548,4 +547,4 @@ namespace LinearMath
 	}
 }
 
-#endif // ifndef _MP_MATRIX_4_4_H_
+#endif	// ifndef _MP_MATRIX_4_4_H_

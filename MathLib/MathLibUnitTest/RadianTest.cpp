@@ -1,6 +1,6 @@
-#include "stdafx.h"
+#include "stdafx.hpp"
 #include "CppUnitTest.h"
-#include <MathHelper.h>
+#include <MathHelper.hpp>
 #include <math.h>
 #include <string>
 
