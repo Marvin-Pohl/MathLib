@@ -455,7 +455,7 @@ namespace LinearMath
 		float farPlane )
 	{
 		viewAngle = 1.0f / MathHelper_tpl< float >::Tan(
-			( viewAngle / 180.0f * MathHelper_tpl< float >::GetPI() ) / 2.0f );
+			( Radian_tpl< float >( viewAngle / 180.0f * MathHelper_tpl< float >::GetPI() ) / 2.0f ) );
 
 		return SSEMatrix4x4(
 			viewAngle / aspectRatio, 0, 0, 0,
@@ -467,8 +467,8 @@ namespace LinearMath
 
 	LinearMath::SSEMatrix4x4 SSEMatrix4x4::CreateRotationX( const Radian_tpl< float >& rad )
 	{
-		float sin = MathHelper_tpl< float >::Sin( rad.AsRadianValue() );
-		float cos = MathHelper_tpl< float >::Cos( rad.AsRadianValue() );
+		float sin = MathHelper_tpl< float >::Sin( rad );
+		float cos = MathHelper_tpl< float >::Cos( rad );
 
 		return SSEMatrix4x4
 			   (
@@ -481,8 +481,8 @@ namespace LinearMath
 
 	LinearMath::SSEMatrix4x4 SSEMatrix4x4::CreateRotationY( const Radian_tpl< float >& rad )
 	{
-		float sin = MathHelper_tpl< float >::Sin( rad.AsRadianValue() );
-		float cos = MathHelper_tpl< float >::Cos( rad.AsRadianValue() );
+		float sin = MathHelper_tpl< float >::Sin( rad );
+		float cos = MathHelper_tpl< float >::Cos( rad );
 
 		return SSEMatrix4x4
 			   (
@@ -495,8 +495,8 @@ namespace LinearMath
 
 	LinearMath::SSEMatrix4x4 SSEMatrix4x4::CreateRotationZ( const Radian_tpl< float >& rad )
 	{
-		float sin = MathHelper_tpl< float >::Sin( rad.AsRadianValue() );
-		float cos = MathHelper_tpl< float >::Cos( rad.AsRadianValue() );
+		float sin = MathHelper_tpl< float >::Sin( rad );
+		float cos = MathHelper_tpl< float >::Cos( rad );
 
 		return SSEMatrix4x4
 			   (

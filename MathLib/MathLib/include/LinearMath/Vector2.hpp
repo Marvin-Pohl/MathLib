@@ -68,7 +68,7 @@ namespace LinearMath
 
 		ScalarType DotProduct( const Vector2_tpl< ScalarType >& v ) const;
 
-		ScalarType Vector2_tpl< ScalarType >::GetRotation() const;
+		Radian_tpl< ScalarType > Vector2_tpl< ScalarType >::GetRotation() const;
 
 		Vector2_tpl< ScalarType > Vector2_tpl< ScalarType >::Rotate( const Radian_tpl< ScalarType >& rad,
 			const bool relative = true );
@@ -207,9 +207,9 @@ namespace LinearMath
 	}
 
 	template< typename ScalarType >
-	ScalarType Vector2_tpl< ScalarType >::GetRotation() const
+	Radian_tpl< ScalarType > Vector2_tpl< ScalarType >::GetRotation() const
 	{
-		ScalarType result = MathHelper_tpl< ScalarType >::ACos( X / Length() );
+		Radian_tpl< ScalarType > result = MathHelper_tpl< ScalarType >::ACos( X / Length() );
 
 		return Y >= 0 ? result : -result;
 	}

@@ -58,14 +58,14 @@ namespace LinearMath
 		const Vector3_tpl< ScalarType >& axis,
 		const Radian_tpl< ScalarType >& angle )
 	{
-		ScalarType halfAngle = 0.5f * angle.AsRadianValue();
+		Radian_tpl< ScalarType > halfAngle = 0.5f * angle;
 
 		W = MathHelper_tpl< ScalarType >::Cos( halfAngle );
 
-		halfAngle = MathHelper_tpl< ScalarType >::Sin( halfAngle );
-		X = halfAngle * axis.X;
-		Y = halfAngle * axis.Y;
-		Z = halfAngle * axis.Z;
+		ScalarType sin = MathHelper_tpl< ScalarType >::Sin( halfAngle );
+		X = sin * axis.X;
+		Y = sin * axis.Y;
+		Z = sin * axis.Z;
 	}
 
 	template< typename ScalarType >

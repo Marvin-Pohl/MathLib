@@ -216,9 +216,9 @@ namespace MathLibUnitTest
 		{
 			Vector2 v( 10, 0 );
 
-			Scalar res = v.GetRotation();
+			Radian_tpl< Scalar > res = v.GetRotation();
 
-			Assert::AreEqual( 0.0f, res );
+			Assert::AreEqual( 0.0f, res.AsRadianValue() );
 		}
 	};
 }
