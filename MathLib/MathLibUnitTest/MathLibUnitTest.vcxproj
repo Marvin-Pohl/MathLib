@@ -165,6 +165,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AABB3DTest.cpp" />
     <ClCompile Include="QuaternionTest.cpp" />
     <ClCompile Include="SSEMatrix4x4Test.cpp" />
     <ClCompile Include="RadianTest.cpp" />
