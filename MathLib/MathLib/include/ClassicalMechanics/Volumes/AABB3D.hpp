@@ -114,7 +114,7 @@ namespace ClassicalMechanics
 		{
 			using namespace Numerics;
 
-			for( uint8 i = 0; i < 8; ++i )
+			for( uint8 i = 0; i < 8U; ++i )
 			{
 				data[ i ] = LinearMath::Vector3_tpl< ScalarType >(
 					( 1U & i ) ? m_Maximum.X : m_Minimum.X,
