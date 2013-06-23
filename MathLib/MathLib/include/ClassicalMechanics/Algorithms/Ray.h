@@ -14,6 +14,8 @@ namespace ClassicalMechanics
 		{
 		public:
 
+			RayResult_tpl( void );
+
 			RayResult_tpl( const LinearMath::Vector3_tpl< ScalarType >& collisionPoint, bool collisionOccurred );
 
 			const LinearMath::Vector3_tpl< ScalarType > CollisionPoint( void ) const;
@@ -27,6 +29,14 @@ namespace ClassicalMechanics
 			LinearMath::Vector3_tpl< ScalarType > m_CollisionPoint;
 			bool m_CollisionOccurred;
 		};
+
+		template< typename ScalarType >
+		ClassicalMechanics::Algorithms::RayResult_tpl<ScalarType>::RayResult_tpl( void ) :
+			m_CollisionOccurred( false ),
+			m_CollisionPoint( LinearMath::Vector3_tpl< ScalarType >( 0 ) )
+		{
+
+		}
 
 		template< typename ScalarType >
 		class Ray3D_tpl
