@@ -12,7 +12,7 @@ namespace LinearMath
 
 		Vector3_tpl( void );
 
-		Vector3_tpl( ScalarType val );
+		explicit Vector3_tpl( ScalarType val );
 
 		Vector3_tpl( ScalarType x, ScalarType y, ScalarType z );
 
@@ -22,6 +22,8 @@ namespace LinearMath
 		Operators
 
 		*/
+
+		Vector3_tpl< ScalarType >& operator =( const Vector3_tpl< ScalarType >& v);
 
 		// + Operators
 		Vector3_tpl< ScalarType > operator +( const Vector3_tpl< ScalarType >& v ) const;
@@ -81,6 +83,16 @@ namespace LinearMath
 
 	private:
 	};
+
+	template< typename ScalarType >
+	Vector3_tpl< ScalarType >& LinearMath::Vector3_tpl<ScalarType>::operator=( const Vector3_tpl< ScalarType >& v )
+	{
+		X = v.X;
+		Y = v.Y;
+		Z = v.Z;
+
+		return *this;
+	}
 
 	template< typename ScalarType >
 	ScalarType LinearMath::Vector3_tpl< ScalarType >::GetZ( void ) const

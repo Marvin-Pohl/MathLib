@@ -14,7 +14,7 @@ namespace LinearMath
 
 		Vector2_tpl( void );
 
-		Vector2_tpl( ScalarType val );
+		explicit Vector2_tpl( ScalarType val );
 
 		Vector2_tpl( ScalarType x, ScalarType y );
 
@@ -24,6 +24,8 @@ namespace LinearMath
 		Operators
 
 		*/
+
+		Vector2_tpl< ScalarType >& operator =( const Vector2_tpl< ScalarType >& v );
 
 		// + Operators
 		Vector2_tpl< ScalarType > operator +( const Vector2_tpl< ScalarType >& v ) const;
@@ -77,6 +79,14 @@ namespace LinearMath
 
 	private:
 	};
+
+	template< typename ScalarType >
+	Vector2_tpl< ScalarType >& LinearMath::Vector2_tpl<ScalarType>::operator=( const Vector2_tpl< ScalarType >& v )
+	{
+		X = v.X;
+		Y = v.Y;
+		return *this;
+	}
 
 	template< typename ScalarType >
 	Vector2_tpl< ScalarType >::Vector2_tpl( void ) :
@@ -231,4 +241,4 @@ namespace LinearMath
 		return Vector2_tpl< ScalarType >( cos * X - sin * Y, sin * X + cos * Y );
 	}
 }
-#endif // ifndef _MP_VECTOR_2_H_
+#endif	// ifndef _MP_VECTOR_2_H_
