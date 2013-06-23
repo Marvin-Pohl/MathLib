@@ -167,6 +167,7 @@
   <ItemGroup>
     <ClCompile Include="AABB3DTest.cpp" />
     <ClCompile Include="QuaternionTest.cpp" />
+    <ClCompile Include="RayCast3DTest.cpp" />
     <ClCompile Include="SSEMatrix4x4Test.cpp" />
     <ClCompile Include="RadianTest.cpp" />
     <ClCompile Include="Matrix4x4Test.cpp" />

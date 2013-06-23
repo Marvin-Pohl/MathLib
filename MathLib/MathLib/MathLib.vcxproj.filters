@@ -45,6 +45,9 @@
     <ClInclude Include="include\ClassicalMechanics\Volumes\AABB3D.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\ClassicalMechanics\Algorithms\Ray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\LinearMath\SSEVector3.cpp">
