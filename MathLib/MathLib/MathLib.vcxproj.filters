@@ -45,7 +45,7 @@
     <ClInclude Include="include\ClassicalMechanics\Volumes\AABB3D.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ClassicalMechanics\Algorithms\Ray.h">
+    <ClInclude Include="include\ClassicalMechanics\Algorithms\Ray.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

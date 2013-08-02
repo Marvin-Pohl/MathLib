@@ -9,24 +9,73 @@ namespace ClassicalMechanics
 {
 	namespace Algorithms
 	{
+		/**
+		\brief Class to hold the results of a ClassicalMechanics::Algorithms::Ray3D_tpl
+
+		In this class the collision information is held of a RayCast:
+		- If a collision occurred
+		- The point of the collision
+
+		\param ScalarType the type of the numbers stored.
+		
+		\since 1.0
+
+		*/
 		template< typename ScalarType >
 		class RayResult_tpl
 		{
 		public:
 
+			
+			/**
+			\brief Creates a new RayResult_tpl which does not collide. This state is not changeable (by now)
+
+			\since 1.0
+			
+			*/
 			RayResult_tpl( void );
 
-			RayResult_tpl( const LinearMath::Vector3_tpl< ScalarType >& collisionPoint, bool collisionOccurred );
+			/**
+			\brief Creates a fully parameterized result. 
+			
+			By now you can only stored the point of the collision and no additional information.
 
+			\param collisionPoint The point where the collision occurred
+			\param collisionOccurred Whether the collision occurred or not (default = true)
+
+			\since 1.0
+			*/
+			RayResult_tpl( const LinearMath::Vector3_tpl< ScalarType >& collisionPoint, bool collisionOccurred = true );
+
+			
+			/**
+			\brief Returns the collision point of the RayCast
+			
+			\return The point of the collision as LinearMath::Vector3_tpl. 
+			If no collision occurred the defualt is (0,0,0).
+			
+			*/
 			const LinearMath::Vector3_tpl< ScalarType > CollisionPoint( void ) const;
 
+			
+			/**
+			\brief Returns \c true if a collision has occurred or \c false if not
+			
+			
+			*/
 			const bool CollisionOccurred( void ) const;
 
 		protected:
 
 		private:
 
+			/**
+			\brief Stores the information where the collision occurred.
+			*/
 			LinearMath::Vector3_tpl< ScalarType > m_CollisionPoint;
+			/**
+			\brief Stores whether a collision occurred or not.
+			*/
 			bool m_CollisionOccurred;
 		};
 
@@ -43,19 +92,61 @@ namespace ClassicalMechanics
 		{
 		public:
 
+			
+			/**
+			\brief Creates a new RayCast
+
+			The ray starts at the origin and traverses in the direction of the direction parameter 
+			the world about the length parameter.
+			
+			\remark This Constructor only creates a new RayCast but does not run any checks. For this use the 
+			- LinearMath::RayCast_tpl::CheckCollisionTriangle
+			methods
+
+			\param origin The start of the RayCast
+			\param direction The direction of the RayCast. The direction will be normalized upon this call.
+			\param length The length of the RayCast
+		
+			*/
 			Ray3D_tpl( const LinearMath::Vector3_tpl< ScalarType >& origin,
 				const LinearMath::Vector3_tpl< ScalarType >& direction,
 				ScalarType length );
 
+			
+			/**
+			\brief Checks the given RayCast with the given Triangle.
+			
+			\param triangle The triangle as LinearMath::Vector3_tpl in CCW order.
+			Indices are as follows:
+			<pre>
+			  2
+			 / \
+			0 - 1
+			</pre>
+			
+			\return A ClassicalMechanics::Algorithms::RayResult_tpl which holds the information 
+			whether the RayCast collided with he triangle or not. Additionally the point of the collision is returned.
+			
+			*/
 			RayResult_tpl< ScalarType > CheckCollisionTriangle( const LinearMath::Vector3_tpl< ScalarType >* triangle );
 
 		protected:
 
 		private:
 
+			/**
+			\brief Stores the start point of the RayCast.
+			*/
 			LinearMath::Vector3_tpl< ScalarType > m_Origin;
+
+			/**
+			\brief Stores the direction of the RayCast.
+			*/
 			LinearMath::Vector3_tpl< ScalarType > m_Direction;
 
+			/**
+			\brief Stores the length of the RayCast.
+			*/
 			ScalarType m_Length;
 		};
 

@@ -1,6 +1,6 @@
 #include "stdafx.hpp"
 #include "CppUnitTest.h"
-#include "ClassicalMechanics/Algorithms/Ray.h"
+#include "ClassicalMechanics/Algorithms/Ray.hpp"
 #include <math.h>
 #include <string>
 
