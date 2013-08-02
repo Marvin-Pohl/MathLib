@@ -41,3 +41,5 @@ $RECYCLE.BIN/
 *.a
 bin
 lib
+MathLib/MathLib/doc/html/
+MathLib/MathLib/doc/warnings.log

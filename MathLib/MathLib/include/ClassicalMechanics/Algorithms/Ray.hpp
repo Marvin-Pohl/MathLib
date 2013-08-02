@@ -100,7 +100,7 @@ namespace ClassicalMechanics
 			the world about the length parameter.
 			
 			\remark This Constructor only creates a new RayCast but does not run any checks. For this use the 
-			- LinearMath::RayCast_tpl::CheckCollisionTriangle
+			- ClassicalMechanics::Algorithms::Ray3D_tpl<T>::CheckCollisionTriangle
 			methods
 
 			\param origin The start of the RayCast
