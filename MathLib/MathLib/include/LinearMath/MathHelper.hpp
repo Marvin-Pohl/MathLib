@@ -183,7 +183,7 @@ namespace LinearMath
 	};
 
 	template< typename ScalarType >
-	ScalarType LinearMath::MathHelper_tpl< ScalarType >::Clamp( 
+	ScalarType LinearMath::MathHelper_tpl< ScalarType >::Clamp(
 		const ScalarType& val,
 		const ScalarType& min,
 		const ScalarType& max )
@@ -436,7 +436,7 @@ namespace LinearMath
 	template< typename ScalarType >
 	ScalarType MathHelper_tpl< ScalarType >::Sqrt( const ScalarType& scalar )
 	{
-		return sqrt( scalar );
+		return ( ScalarType )sqrt( ( double )scalar );
 	}
 
 	template< >
