@@ -2,7 +2,7 @@
 #ifndef _MP_VECTOR_2_H_
 	#define _MP_VECTOR_2_H_
 
-	#include "MathLibPCH.hpp"
+	#include "../MathLibPCH.hpp"
 	#include "MathHelper.hpp"
 
 namespace LinearMath
@@ -54,6 +54,10 @@ namespace LinearMath
 
 		Vector2_tpl< ScalarType >& operator /=( const ScalarType& scalar );
 
+		// == Operators
+		bool operator ==( const Vector2_tpl< ScalarType >& vec );
+		bool operator !=( const Vector2_tpl< ScalarType >& vec );
+
 		ScalarType X;
 		ScalarType Y;
 
@@ -70,15 +74,27 @@ namespace LinearMath
 
 		ScalarType DotProduct( const Vector2_tpl< ScalarType >& v ) const;
 
-		Radian_tpl< ScalarType > Vector2_tpl< ScalarType >::GetRotation() const;
+		Radian_tpl< ScalarType > GetRotation() const;
 
-		Vector2_tpl< ScalarType > Vector2_tpl< ScalarType >::Rotate( const Radian_tpl< ScalarType >& rad,
+		Vector2_tpl< ScalarType > Rotate( const Radian_tpl< ScalarType >& rad,
 			const bool relative = true );
 
 	protected:
 
 	private:
 	};
+
+	template< typename ScalarType >
+	bool LinearMath::Vector2_tpl<ScalarType>::operator!=( const Vector2_tpl< ScalarType >& vec )
+	{
+		return ( X != vec.X || Y != vec.Y );
+	}
+
+	template< typename ScalarType >
+	bool LinearMath::Vector2_tpl<ScalarType>::operator==( const Vector2_tpl< ScalarType >& vec )
+	{
+		return ( X == vec.X && Y == vec.Y );
+	}
 
 	template< typename ScalarType >
 	Vector2_tpl< ScalarType >& LinearMath::Vector2_tpl<ScalarType>::operator=( const Vector2_tpl< ScalarType >& v )

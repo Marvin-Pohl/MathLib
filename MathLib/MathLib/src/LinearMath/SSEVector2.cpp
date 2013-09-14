@@ -1,5 +1,5 @@
 #include "MathLibPCH.hpp"
-#include "SSEVector2.hpp"
+#include "LinearMath/SSEVector2.hpp"
 #include <smmintrin.h>
 
 namespace LinearMath

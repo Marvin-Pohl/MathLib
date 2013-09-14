@@ -1,8 +1,8 @@
 #include "MathLibPCH.hpp"
-#include "SSEMatrix4x4.hpp"
+#include "LinearMath/SSEMatrix4x4.hpp"
 #include <smmintrin.h>
-#include "SSEVector3.hpp"
-#include "MathHelper.hpp"
+#include "LinearMath/SSEVector3.hpp"
+#include "LinearMath/MathHelper.hpp"
 
 namespace LinearMath
 {

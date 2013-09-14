@@ -1,5 +1,6 @@
 #pragma once
 #include "MathLibPCH.hpp"
+#include <math.h>
 #include <vector>
 
 namespace LinearMath
@@ -53,7 +54,7 @@ namespace LinearMath
 
 		bool operator <( const Radian_tpl& rad ) const;
 
-		operator Degree_tpl< ScalarType >( void ) const;
+		operator Degree_tpl< ScalarType >( void )const;
 
 		ScalarType AsRadianValue( void ) const;
 
@@ -162,6 +163,8 @@ namespace LinearMath
 
 		static ScalarType Max( const ScalarType& scalar1, const ScalarType& scalar2 );
 
+		static ScalarType Clamp( const ScalarType& val, const ScalarType& min, const ScalarType& max );
+
 		static ScalarType Max( const std::vector< ScalarType >& values, const ScalarType valueIfEmpty = 0 );
 
 		static ScalarType Min( const ScalarType& scalar1, const ScalarType& scalar2 );
@@ -178,6 +181,26 @@ namespace LinearMath
 		MathHelper_tpl< ScalarType >( const MathHelper_tpl< ScalarType >&  );
 		~MathHelper_tpl( void );
 	};
+
+	template< typename ScalarType >
+	ScalarType LinearMath::MathHelper_tpl< ScalarType >::Clamp( 
+		const ScalarType& val,
+		const ScalarType& min,
+		const ScalarType& max )
+	{
+		if( val < min )
+		{
+			return min;
+		}
+		else if( val > max )
+		{
+			return max;
+		}
+		else
+		{
+			return val;
+		}
+	}
 
 	template< typename ScalarType >
 	Radian_tpl< ScalarType >::Radian_tpl( void ) :
@@ -383,7 +406,7 @@ namespace LinearMath
 	template< typename ScalarType >
 	Radian_tpl< ScalarType > MathHelper_tpl< ScalarType >::ASin( const ScalarType& scalar )
 	{
-		return Radian_tpl< ScalarType >( asin( scalar ));
+		return Radian_tpl< ScalarType >( asin( scalar ) );
 	}
 
 	template< typename ScalarType >
@@ -414,6 +437,12 @@ namespace LinearMath
 	ScalarType MathHelper_tpl< ScalarType >::Sqrt( const ScalarType& scalar )
 	{
 		return sqrt( scalar );
+	}
+
+	template< >
+	inline float MathHelper_tpl< float >::Sqrt( const float& scalar )
+	{
+		return sqrtf( scalar );
 	}
 
 	template< typename ScalarType >
