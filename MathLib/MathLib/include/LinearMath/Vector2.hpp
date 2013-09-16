@@ -55,11 +55,22 @@ namespace LinearMath
 		Vector2_tpl< ScalarType >& operator /=( const ScalarType& scalar );
 
 		// == Operators
-		bool operator ==( const Vector2_tpl< ScalarType >& vec );
-		bool operator !=( const Vector2_tpl< ScalarType >& vec );
+		bool operator ==( const Vector2_tpl< ScalarType >& vec ) const;
+		bool operator !=( const Vector2_tpl< ScalarType >& vec ) const;
 
-		ScalarType X;
-		ScalarType Y;
+		union
+		{
+			ScalarType X;
+			ScalarType x;
+		};
+
+		union
+		{
+			ScalarType Y;
+			ScalarType y;
+
+		};
+
 
 		// Methods
 		ScalarType LengthSquared( void ) const;
@@ -85,13 +96,13 @@ namespace LinearMath
 	};
 
 	template< typename ScalarType >
-	bool LinearMath::Vector2_tpl<ScalarType>::operator!=( const Vector2_tpl< ScalarType >& vec )
+	bool LinearMath::Vector2_tpl<ScalarType>::operator!=( const Vector2_tpl< ScalarType >& vec ) const
 	{
 		return ( X != vec.X || Y != vec.Y );
 	}
 
 	template< typename ScalarType >
-	bool LinearMath::Vector2_tpl<ScalarType>::operator==( const Vector2_tpl< ScalarType >& vec )
+	bool LinearMath::Vector2_tpl<ScalarType>::operator==( const Vector2_tpl< ScalarType >& vec ) const
 	{
 		return ( X == vec.X && Y == vec.Y );
 	}
@@ -201,7 +212,7 @@ namespace LinearMath
 	template< typename ScalarType >
 	ScalarType Vector2_tpl< ScalarType >::Length( void ) const
 	{
-		return sqrt( LengthSquared() );
+		return MathHelper_tpl< ScalarType >::Sqrt( LengthSquared() );
 	}
 
 	template< typename ScalarType >
