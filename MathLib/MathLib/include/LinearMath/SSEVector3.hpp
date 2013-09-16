@@ -2,7 +2,7 @@
 #ifndef _MP_SSEVECTOR_3_H_
 	#define _MP_SSEVECTOR_3_H_
 
-	#include "MathLibPCH.hpp"
+	#include "../MathLibPCH.hpp"
 	#include <xmmintrin.h>
 
 namespace LinearMath

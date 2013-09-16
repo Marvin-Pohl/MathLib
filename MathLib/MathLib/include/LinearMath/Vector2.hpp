@@ -12,6 +12,8 @@ namespace LinearMath
 	{
 	public:
 
+		typedef ScalarType data_type;
+
 		Vector2_tpl( void );
 
 		explicit Vector2_tpl( ScalarType val );
@@ -60,16 +62,27 @@ namespace LinearMath
 
 		union
 		{
-			ScalarType X;
-			ScalarType x;
+			struct
+			{
+				union
+				{
+					ScalarType X;
+					ScalarType x;
+				};
+
+				union
+				{
+					ScalarType Y;
+					ScalarType y;
+
+				};
+				
+			};
+			
+			ScalarType data[2];
+
 		};
 
-		union
-		{
-			ScalarType Y;
-			ScalarType y;
-
-		};
 
 
 		// Methods

@@ -1,7 +1,7 @@
 #pragma once
 #ifndef _MP_VECTOR_3_H_
 	#define _MP_VECTOR_3_H_
-	#include "MathLibPCH.hpp"
+	#include "../MathLibPCH.hpp"
 
 namespace LinearMath
 {
@@ -9,6 +9,8 @@ namespace LinearMath
 	class Vector3_tpl
 	{
 	public:
+
+		typedef ScalarType data_type;
 
 		Vector3_tpl( void );
 
@@ -52,12 +54,44 @@ namespace LinearMath
 
 		Vector3_tpl< ScalarType >& operator /=( const ScalarType& scalar );
 
+		// == Operators
+		bool operator ==( const Vector3_tpl< ScalarType >& v ) const;
+
+		bool operator !=( const Vector3_tpl< ScalarType >& v ) const;
+
+
 		// ^ Operators
 		Vector3_tpl< ScalarType > operator ^( const Vector3_tpl< ScalarType >& v ) const;
 
-		ScalarType X;
-		ScalarType Y;
-		ScalarType Z;
+		union
+		{
+			struct
+			{
+				union
+				{
+					ScalarType X;
+					ScalarType x;
+				};
+
+				union
+				{
+					ScalarType Y;
+					ScalarType y;
+
+				};
+
+				union
+				{
+					ScalarType Z;
+					ScalarType z;
+
+				};
+				
+			};
+			
+			ScalarType data[3];
+
+		};
 
 		// Methods
 
@@ -206,6 +240,18 @@ namespace LinearMath
 		Y /= scalar;
 		Z /= scalar;
 		return *this;
+	}
+
+	template< typename ScalarType >
+	bool LinearMath::Vector3_tpl<ScalarType>::operator!=( const Vector3_tpl< ScalarType >& vec ) const
+	{
+		return ( X != vec.X || Y != vec.Y || Z != vec.Z );
+	}
+
+	template< typename ScalarType >
+	bool LinearMath::Vector3_tpl<ScalarType>::operator==( const Vector3_tpl< ScalarType >& vec ) const
+	{
+		return ( X == vec.X && Y == vec.Y && Z == vec.Z );
 	}
 
 	template< typename ScalarType >

@@ -2,7 +2,7 @@
 #ifndef Quaternion_h__
 	#define Quaternion_h__
 
-	#include "MathLibPCH.hpp"
+	#include "../MathLibPCH.hpp"
 	#include "MathHelper.hpp"
 	#include "Vector3.hpp"
 	#include "Matrix4x4.hpp"
@@ -13,6 +13,8 @@ namespace LinearMath
 	class Quaternion_tpl
 	{
 	public:
+
+		typedef ScalarType data_type;	
 
 		Quaternion_tpl( void );
 
@@ -32,6 +34,8 @@ namespace LinearMath
 		Radian_tpl< ScalarType > GetAngle( void ) const;
 
 		ScalarType W, X, Y, Z;
+
+	protected:
 
 	private:
 	};
@@ -58,7 +62,7 @@ namespace LinearMath
 		const Vector3_tpl< ScalarType >& axis,
 		const Radian_tpl< ScalarType >& angle )
 	{
-		Radian_tpl< ScalarType > halfAngle = 0.5f * angle;
+		Radian_tpl< ScalarType > halfAngle = (ScalarType)0.5 * angle;
 
 		W = MathHelper_tpl< ScalarType >::Cos( halfAngle );
 

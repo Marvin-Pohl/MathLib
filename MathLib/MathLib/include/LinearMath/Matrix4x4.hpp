@@ -17,6 +17,8 @@ namespace LinearMath
 	{
 	public:
 
+		typedef ScalarType data_type;
+
 		/**
 		\brief Creates an Identity Matrix
 
@@ -121,10 +123,21 @@ namespace LinearMath
 		| 3_1 | 3_2 | 3_3 | 3_4 |
 		| 4_1 | 4_2 | 4_3 | 4_4 |
 		*/
-		ScalarType M_1_1, M_1_2, M_1_3, M_1_4;
-		ScalarType M_2_1, M_2_2, M_2_3, M_2_4;
-		ScalarType M_3_1, M_3_2, M_3_3, M_3_4;
-		ScalarType M_4_1, M_4_2, M_4_3, M_4_4;
+
+		union
+		{
+			struct 
+			{
+				ScalarType M_1_1, M_1_2, M_1_3, M_1_4;
+				ScalarType M_2_1, M_2_2, M_2_3, M_2_4;
+				ScalarType M_3_1, M_3_2, M_3_3, M_3_4;
+				ScalarType M_4_1, M_4_2, M_4_3, M_4_4;
+			};
+
+			ScalarType data[16];
+		};
+
+	protected:
 
 	private:
 	};

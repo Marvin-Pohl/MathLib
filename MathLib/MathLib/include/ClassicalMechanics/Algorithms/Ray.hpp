@@ -2,8 +2,8 @@
 #ifndef Ray_h__
 	#define Ray_h__
 
-	#include "MathLibPCH.hpp"
-	#include "LinearMath/Vector3.hpp"
+	#include "../../MathLibPCH.hpp"
+	#include "../../LinearMath/Vector3.hpp"
 
 namespace ClassicalMechanics
 {
@@ -25,6 +25,8 @@ namespace ClassicalMechanics
 		class RayResult_tpl
 		{
 		public:
+
+			typedef ScalarType data_type;
 
 			
 			/**
@@ -67,8 +69,6 @@ namespace ClassicalMechanics
 
 		protected:
 
-		private:
-
 			/**
 			\brief Stores the information where the collision occurred.
 			*/
@@ -77,6 +77,9 @@ namespace ClassicalMechanics
 			\brief Stores whether a collision occurred or not.
 			*/
 			bool m_CollisionOccurred;
+			
+		private:
+
 		};
 
 		template< typename ScalarType >

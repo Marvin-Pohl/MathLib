@@ -2,9 +2,9 @@
 #ifndef AABB3D_h__
 	#define AABB3D_h__
 
-	#include "MathLibPCH.hpp"
-	#include "LinearMath/Vector3.hpp"
-	#include "LinearMath/MathHelper.hpp"
+	#include "../../MathLibPCH.hpp"
+	#include "../../LinearMath/MathHelper.hpp"
+	#include "../../LinearMath/Vector3.hpp"
 
 namespace ClassicalMechanics
 {
@@ -19,6 +19,8 @@ namespace ClassicalMechanics
 		class AABB3D_tpl
 		{
 		public:
+
+			typedef ScalarType data_type;
 
 			
 			/**
