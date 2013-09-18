@@ -20,6 +20,9 @@ namespace LinearMath
 
 		Vector2_tpl( ScalarType x, ScalarType y );
 
+		template< typename T >
+		Vector2_tpl( const Vector2_tpl< T >& v );
+
 		~Vector2_tpl( void );
 
 		/**
@@ -27,29 +30,37 @@ namespace LinearMath
 
 		*/
 
-		Vector2_tpl< ScalarType >& operator =( const Vector2_tpl< ScalarType >& v );
+		template< typename T >
+		Vector2_tpl< ScalarType >& operator =( const Vector2_tpl< T >& v );
 
 		// + Operators
-		Vector2_tpl< ScalarType > operator +( const Vector2_tpl< ScalarType >& v ) const;
+		template< typename T >
+		Vector2_tpl< ScalarType > operator +( const Vector2_tpl< T >& v ) const;
 
-		Vector2_tpl< ScalarType >& operator +=( const Vector2_tpl< ScalarType >& v );
+		template< typename T >
+		Vector2_tpl< ScalarType >& operator +=( const Vector2_tpl< T >& v );
 
 		// - Operators
-		Vector2_tpl< ScalarType > operator -( const Vector2_tpl< ScalarType >& v ) const;
+		template< typename T >
+		Vector2_tpl< ScalarType > operator -( const Vector2_tpl< T >& v ) const;
 
-		Vector2_tpl< ScalarType >& operator -=( const Vector2_tpl< ScalarType >& v );
+		template< typename T >
+		Vector2_tpl< ScalarType >& operator -=( const Vector2_tpl< T >& v );
 
 		// * Operators
 		Vector2_tpl< ScalarType > operator *( const ScalarType& scalar ) const;
 
 		Vector2_tpl< ScalarType >& operator *=( const ScalarType& scalar );
 
-		inline friend Vector2_tpl< ScalarType > operator *( const ScalarType& scalar,
+		inline friend Vector2_tpl< ScalarType > operator *( 
+			const ScalarType& scalar,
 			const Vector2_tpl< ScalarType >& v )
 		{
 			return Vector2_tpl< ScalarType >( scalar * v.X, scalar * v.Y );
 		}
-		ScalarType operator *( const Vector2_tpl< ScalarType >& v ) const;
+
+		template< typename T >
+		ScalarType operator *( const Vector2_tpl< T >& v ) const;
 
 		// / Operators
 		Vector2_tpl< ScalarType > operator /( const ScalarType& scalar ) const;
@@ -94,9 +105,11 @@ namespace LinearMath
 
 		Vector2_tpl< ScalarType > NormalizedCopy( void ) const;
 
-		ScalarType PerpDotProduct( const Vector2_tpl< ScalarType >& v ) const;
+		template< typename T >
+		ScalarType PerpDotProduct( const Vector2_tpl< T >& v ) const;
 
-		ScalarType DotProduct( const Vector2_tpl< ScalarType >& v ) const;
+		template< typename T >
+		ScalarType DotProduct( const Vector2_tpl< T >& v ) const;
 
 		Radian_tpl< ScalarType > GetRotation() const;
 
@@ -150,32 +163,45 @@ namespace LinearMath
 	}
 
 	template< typename ScalarType >
+	template< typename T >
+	Vector2_tpl< ScalarType >::Vector2_tpl( const Vector2_tpl< T >& v ) :
+		X( ( ScalarType ) v.X ),
+		Y( ( ScalarType ) v.Y )
+	{
+
+	}
+
+	template< typename ScalarType >
 	Vector2_tpl< ScalarType >::~Vector2_tpl( void )
 	{
 	}
 
 	template< typename ScalarType >
-	Vector2_tpl< ScalarType > Vector2_tpl< ScalarType >::operator +( const Vector2_tpl< ScalarType >& v ) const
+	template< typename T >
+	Vector2_tpl< ScalarType > Vector2_tpl< ScalarType >::operator +( const Vector2_tpl< T >& v ) const
 	{
-		return Vector2_tpl< ScalarType >( this->X + v.X, this->Y + v.Y );
+		return Vector2_tpl< ScalarType >( this->X + ( ScalarType ) v.X, this->Y + ( ScalarType ) v.Y );
 	}
 
 	template< typename ScalarType >
-	Vector2_tpl< ScalarType >& Vector2_tpl< ScalarType >::operator +=( const Vector2_tpl< ScalarType >& v )
+	template< typename T >
+	Vector2_tpl< ScalarType >& Vector2_tpl< ScalarType >::operator +=( const Vector2_tpl< T >& v )
 	{
-		X += v.X;
-		Y += v.Y;
+		X += ( ScalarType )v.X;
+		Y += ( ScalarType )v.Y;
 		return *this;
 	}
 
 	template< typename ScalarType >
-	Vector2_tpl< ScalarType > Vector2_tpl< ScalarType >::operator -( const Vector2_tpl< ScalarType >& v ) const
+	template< typename T >
+	Vector2_tpl< ScalarType > Vector2_tpl< ScalarType >::operator -( const Vector2_tpl< T >& v ) const
 	{
 		return Vector2_tpl< ScalarType >( this->X - v.X, this->Y - v.Y );
 	}
 
 	template< typename ScalarType >
-	Vector2_tpl< ScalarType >& Vector2_tpl< ScalarType >::operator -=( const Vector2_tpl< ScalarType >& v )
+	template< typename T >
+	Vector2_tpl< ScalarType >& Vector2_tpl< ScalarType >::operator -=( const Vector2_tpl< T >& v )
 	{
 		X -= v.X;
 		Y -= v.Y;
@@ -189,9 +215,10 @@ namespace LinearMath
 	}
 
 	template< typename ScalarType >
-	ScalarType Vector2_tpl< ScalarType >::operator *( const Vector2_tpl< ScalarType >& v ) const
+	template< typename T >
+	ScalarType Vector2_tpl< ScalarType >::operator *( const Vector2_tpl< T >& v ) const
 	{
-		return ( X * v.X ) + ( Y * v.Y );
+		return ( X * ( ScalarType ) v.X ) + ( Y * ( ScalarType ) v.Y );
 	}
 
 	template< typename ScalarType >
@@ -245,13 +272,15 @@ namespace LinearMath
 	}
 
 	template< typename ScalarType >
-	ScalarType Vector2_tpl< ScalarType >::PerpDotProduct( const Vector2_tpl< ScalarType >& v ) const
+	template< typename T >
+	ScalarType Vector2_tpl< ScalarType >::PerpDotProduct( const Vector2_tpl< T >& v ) const
 	{
 		return Vector2_tpl< ScalarType >( -Y, X ) * v;
 	}
 
 	template< typename ScalarType >
-	ScalarType Vector2_tpl< ScalarType >::DotProduct( const Vector2_tpl< ScalarType >& v ) const
+	template< typename T >
+	ScalarType Vector2_tpl< ScalarType >::DotProduct( const Vector2_tpl< T >& v ) const
 	{
 		return *this * v;
 	}
