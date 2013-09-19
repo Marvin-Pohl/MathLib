@@ -134,10 +134,11 @@ namespace LinearMath
 	}
 
 	template< typename ScalarType >
-	Vector2_tpl< ScalarType >& LinearMath::Vector2_tpl<ScalarType>::operator=( const Vector2_tpl< ScalarType >& v )
+	template< typename T >
+	Vector2_tpl< ScalarType >& LinearMath::Vector2_tpl<ScalarType>::operator=( const Vector2_tpl< T >& v )
 	{
-		X = v.X;
-		Y = v.Y;
+		X = ( ScalarType ) v.X;
+		Y = ( ScalarType ) v.Y;
 		return *this;
 	}
 
