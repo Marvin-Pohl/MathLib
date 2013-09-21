@@ -45,6 +45,27 @@ namespace MathLibUnitTest
 			Assert::AreEqual( 42.0f, v.Z );
 		}
 
+		TEST_METHOD ( Vector3Constructor4 )
+		{
+			Vector3 v1( 1.0f , 2.0f , 3.0f );
+			Vector3 v( v1 );
+
+			Assert::AreEqual( 1.0f, v.X );
+			Assert::AreEqual( 2.0f, v.Y );
+			Assert::AreEqual( 3.0f, v.Z );
+
+		}
+
+		TEST_METHOD( Vector3Getters )
+		{
+			Vector3 v( 1.0f, 2.0f, 3.0f );
+
+
+			Assert::AreEqual( 1.0f, v.GetX() );
+			Assert::AreEqual( 2.0f, v.GetY() );
+			Assert::AreEqual( 3.0f, v.GetZ() );
+		}
+
 		TEST_METHOD( Vector3Add )
 		{
 			Vector3 v1( 10, 20, 30 );
@@ -228,6 +249,20 @@ namespace MathLibUnitTest
 			Assert::AreEqual( 0.0f, out.X );
 			Assert::AreEqual( 0.0f, out.Y );
 			Assert::AreEqual( 1.0f, out.Z );
+		}
+
+		TEST_METHOD ( Vector3Compare )
+		{
+			Vector3 v1( 1.0f, 2.0f, 3.0f );
+			Vector3 v2( 1.0f, 2.0f, 3.0f );
+
+			Assert::IsTrue( v1 == v2 );
+			Assert::IsFalse( v1 != v2 );
+
+			v2 = Vector3( 1.0f, 2.0f, 4.0f );
+
+			Assert::IsTrue( v1 != v2 );
+			Assert::IsFalse( v1 == v2 );
 		}
 	};
 }

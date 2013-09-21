@@ -7,10 +7,8 @@ using namespace ClassicalMechanics::Volumes;
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 template class __declspec ( dllexport )LinearMath::Vector3_tpl< float >;
-template class __declspec ( dllexport )LinearMath::Vector3_tpl< double >;
 
 template class __declspec ( dllexport )AABB3D_tpl< float >;
-template class __declspec ( dllexport )AABB3D_tpl< double >;
 
 typedef LinearMath::Vector3_tpl< float > Vector3;
 typedef AABB3D_tpl< float > AABB3D;

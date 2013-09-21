@@ -16,10 +16,6 @@ template class __declspec( dllexport ) Degree_tpl< float >;
 template class __declspec( dllexport ) Radian_tpl< float >;
 
 
-template class __declspec( dllexport ) MathHelper_tpl< double >;
-template class __declspec( dllexport ) Degree_tpl< double >;
-template class __declspec( dllexport ) Radian_tpl< double >;
-
 namespace MathLibUnitTest
 {		
 	TEST_CLASS(RadianTestClass)
