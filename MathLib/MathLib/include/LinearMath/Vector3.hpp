@@ -18,6 +18,9 @@ namespace LinearMath
 
 		Vector3_tpl( ScalarType x, ScalarType y, ScalarType z );
 
+		template< typename T >
+		explicit Vector3_tpl( const Vector3_tpl< T >& vec );
+
 		~Vector3_tpl( void );
 
 		/**
@@ -25,17 +28,22 @@ namespace LinearMath
 
 		*/
 
-		Vector3_tpl< ScalarType >& operator =( const Vector3_tpl< ScalarType >& v);
+		Vector3_tpl< ScalarType >& operator =( const Vector3_tpl< ScalarType >& v );
 
 		// + Operators
-		Vector3_tpl< ScalarType > operator +( const Vector3_tpl< ScalarType >& v ) const;
+		template< typename T >
+		Vector3_tpl< ScalarType > operator +( const Vector3_tpl< T >& v ) const;
 
-		Vector3_tpl< ScalarType >& operator +=( const Vector3_tpl< ScalarType >& v );
+		template< typename T >
+		Vector3_tpl< ScalarType >& operator +=( const Vector3_tpl< T >& v );
 
 		// - Operators
-		Vector3_tpl< ScalarType > operator -( const Vector3_tpl< ScalarType >& v ) const;
 
-		Vector3_tpl< ScalarType >& operator -=( const Vector3_tpl< ScalarType >& v );
+		template< typename T >
+		Vector3_tpl< ScalarType > operator -( const Vector3_tpl< T >& v ) const;
+
+		template< typename T >
+		Vector3_tpl< ScalarType >& operator -=( const Vector3_tpl< T >& v );
 
 		// * Operators
 		Vector3_tpl< ScalarType > operator *( const ScalarType& scalar ) const;
@@ -47,21 +55,25 @@ namespace LinearMath
 		{
 			return Vector3_tpl< ScalarType >( v.X * scalar, v.Y * scalar, v.Z * scalar );
 		}
-		ScalarType operator *( const Vector3_tpl< ScalarType >& v ) const;
+
+		template< typename T >
+		ScalarType operator *( const Vector3_tpl< T >& v ) const;
 
 		// / Operators
-		Vector3_tpl< ScalarType > operator /( const ScalarType& scalar ) const;
+		template< typename T >
+		Vector3_tpl< ScalarType > operator /( const T& scalar ) const;
 
-		Vector3_tpl< ScalarType >& operator /=( const ScalarType& scalar );
+		template< typename T >
+		Vector3_tpl< ScalarType >& operator /=( const T& scalar );
 
 		// == Operators
 		bool operator ==( const Vector3_tpl< ScalarType >& v ) const;
 
 		bool operator !=( const Vector3_tpl< ScalarType >& v ) const;
 
-
 		// ^ Operators
-		Vector3_tpl< ScalarType > operator ^( const Vector3_tpl< ScalarType >& v ) const;
+		template< typename T >
+		Vector3_tpl< ScalarType > operator ^( const Vector3_tpl< T >& v ) const;
 
 		union
 		{
@@ -77,20 +89,16 @@ namespace LinearMath
 				{
 					ScalarType Y;
 					ScalarType y;
-
 				};
 
 				union
 				{
 					ScalarType Z;
 					ScalarType z;
-
 				};
-				
 			};
-			
-			ScalarType data[3];
 
+			ScalarType data[ 3 ];
 		};
 
 		// Methods
@@ -109,9 +117,11 @@ namespace LinearMath
 
 		Vector3_tpl< ScalarType > NormalizedCopy() const;
 
-		Vector3_tpl< ScalarType > CrossProduct( const Vector3_tpl< ScalarType >& v ) const;
+		template< typename T >
+		Vector3_tpl< ScalarType > CrossProduct( const Vector3_tpl< T >& v ) const;
 
-		ScalarType DotProduct( const Vector3_tpl< ScalarType >& v ) const;
+		template< typename T >
+		ScalarType DotProduct( const Vector3_tpl< T >& v ) const;
 
 	protected:
 
@@ -119,7 +129,16 @@ namespace LinearMath
 	};
 
 	template< typename ScalarType >
-	Vector3_tpl< ScalarType >& LinearMath::Vector3_tpl<ScalarType>::operator=( const Vector3_tpl< ScalarType >& v )
+	template< typename T >
+	LinearMath::Vector3_tpl< ScalarType >::Vector3_tpl( const Vector3_tpl< T >& vec ) :
+		X( ( ScalarType )vec.X ),
+		Y( ( ScalarType )vec.Y ),
+		Z( ( ScalarType )vec.Z )
+	{
+	}
+
+	template< typename ScalarType >
+	Vector3_tpl< ScalarType >& LinearMath::Vector3_tpl< ScalarType >::operator =( const Vector3_tpl< ScalarType >& v )
 	{
 		X = v.X;
 		Y = v.Y;
@@ -176,33 +195,40 @@ namespace LinearMath
 	}
 
 	template< typename ScalarType >
-	Vector3_tpl< ScalarType > Vector3_tpl< ScalarType >::operator +( const Vector3_tpl< ScalarType >& v ) const
+	template< typename T >
+	Vector3_tpl< ScalarType > Vector3_tpl< ScalarType >::operator +( const Vector3_tpl< T >& v ) const
 	{
-		return Vector3_tpl< ScalarType >( X + v.X, Y + v.Y, Z + v.Z );
+		return Vector3_tpl< ScalarType >( X + ( ScalarType )v.X, Y + ( ScalarType )v.Y, Z + ( ScalarType )v.Z );
 	}
 
 	template< typename ScalarType >
-	Vector3_tpl< ScalarType >& Vector3_tpl< ScalarType >::operator +=( const Vector3_tpl< ScalarType >& v )
+	template< typename T >
+	Vector3_tpl< ScalarType >& Vector3_tpl< ScalarType >::operator +=( const Vector3_tpl< T >& v )
 	{
-		X += v.X;
-		Y += v.Y;
-		Z += v.Z;
+		X += ( ScalarType )v.X;
+		Y += ( ScalarType )v.Y;
+		Z += ( ScalarType )v.Z;
 		return *this;
 	}
 
 	template< typename ScalarType >
+	template< typename T >
 	LinearMath::Vector3_tpl< ScalarType >
-	Vector3_tpl< ScalarType >::operator -( const Vector3_tpl< ScalarType >& v ) const
+	Vector3_tpl< ScalarType >::operator -( const Vector3_tpl< T >& v ) const
 	{
-		return Vector3_tpl< ScalarType >( X - v.X, Y - v.Y, Z - v.Z );
+		return Vector3_tpl< ScalarType >(
+			X - ( ScalarType )v.X,
+			Y - ( ScalarType )v.Y,
+			Z - ( ScalarType )v.Z );
 	}
 
 	template< typename ScalarType >
-	Vector3_tpl< ScalarType >& Vector3_tpl< ScalarType >::operator -=( const Vector3_tpl< ScalarType >& v )
+	template< typename T >
+	Vector3_tpl< ScalarType >& Vector3_tpl< ScalarType >::operator -=( const Vector3_tpl< T >& v )
 	{
-		X -= v.X;
-		Y -= v.Y;
-		Z -= v.Z;
+		X -= ( ScalarType )v.X;
+		Y -= ( ScalarType )v.Y;
+		Z -= ( ScalarType )v.Z;
 		return *this;
 	}
 
@@ -213,9 +239,12 @@ namespace LinearMath
 	}
 
 	template< typename ScalarType >
-	ScalarType Vector3_tpl< ScalarType >::operator *( const Vector3_tpl< ScalarType >& v ) const
+	template< typename T >
+	ScalarType Vector3_tpl< ScalarType >::operator *( const Vector3_tpl< T >& v ) const
 	{
-		return ( X * v.X ) + ( Y * v.Y ) + ( Z * v.Z );
+		return ( X * ( ScalarType )v.X )
+			   + ( Y * ( ScalarType )v.Y )
+			   + ( Z * ( ScalarType )v.Z );
 	}
 
 	template< typename ScalarType >
@@ -228,13 +257,15 @@ namespace LinearMath
 	}
 
 	template< typename ScalarType >
-	LinearMath::Vector3_tpl< ScalarType > Vector3_tpl< ScalarType >::operator /( const ScalarType& scalar ) const
+	template< typename T >
+	LinearMath::Vector3_tpl< ScalarType > Vector3_tpl< ScalarType >::operator /( const T& scalar ) const
 	{
 		return Vector3_tpl< ScalarType >( X / scalar, Y / scalar, Z / scalar );
 	}
 
 	template< typename ScalarType >
-	Vector3_tpl< ScalarType >& Vector3_tpl< ScalarType >::operator /=( const ScalarType& scalar )
+	template< typename T >
+	Vector3_tpl< ScalarType >& Vector3_tpl< ScalarType >::operator /=( const T& scalar )
 	{
 		X /= scalar;
 		Y /= scalar;
@@ -243,15 +274,15 @@ namespace LinearMath
 	}
 
 	template< typename ScalarType >
-	bool LinearMath::Vector3_tpl<ScalarType>::operator!=( const Vector3_tpl< ScalarType >& vec ) const
+	bool LinearMath::Vector3_tpl< ScalarType >::operator !=( const Vector3_tpl< ScalarType >& vec ) const
 	{
-		return ( X != vec.X || Y != vec.Y || Z != vec.Z );
+		return X != vec.X || Y != vec.Y || Z != vec.Z;
 	}
 
 	template< typename ScalarType >
-	bool LinearMath::Vector3_tpl<ScalarType>::operator==( const Vector3_tpl< ScalarType >& vec ) const
+	bool LinearMath::Vector3_tpl< ScalarType >::operator ==( const Vector3_tpl< ScalarType >& vec ) const
 	{
-		return ( X == vec.X && Y == vec.Y && Z == vec.Z );
+		return X == vec.X && Y == vec.Y && Z == vec.Z;
 	}
 
 	template< typename ScalarType >
@@ -283,27 +314,32 @@ namespace LinearMath
 	}
 
 	template< typename ScalarType >
+	template< typename T >
 	LinearMath::Vector3_tpl< ScalarType >
-	Vector3_tpl< ScalarType >::operator ^( const Vector3_tpl< ScalarType >& v ) const
+	Vector3_tpl< ScalarType >::operator ^( const Vector3_tpl< T >& v ) const
 	{
 		return Vector3_tpl< ScalarType >(
-			Y * v.Z - Z * v.Y,
-			Z * v.X - X * v.Z,
-			X * v.Y - Y * v.X
+			Y * ( ScalarType )v.Z - Z * ( ScalarType )v.Y,
+			Z * ( ScalarType )v.X - X * ( ScalarType )v.Z,
+			X * ( ScalarType )v.Y - Y * ( ScalarType )v.X
 		);
 	}
 
 	template< typename ScalarType >
+	template< typename T >
 	LinearMath::Vector3_tpl< ScalarType >
-	Vector3_tpl< ScalarType >::CrossProduct( const Vector3_tpl< ScalarType >& v ) const
+	Vector3_tpl< ScalarType >::CrossProduct( const Vector3_tpl< T >& v ) const
 	{
-		return *this ^ v;
+		return *this ^  v;
 	}
 
 	template< typename ScalarType >
-	ScalarType Vector3_tpl< ScalarType >::DotProduct( const Vector3_tpl< ScalarType >& v ) const
+	template< typename T >
+	ScalarType Vector3_tpl< ScalarType >::DotProduct( const Vector3_tpl< T >& v ) const
 	{
-		return ( X * v.X ) + ( Y * v.Y ) + ( Z * v.Z );
+		return ( X * ( ScalarType )v.X )
+			   + ( Y * ( ScalarType )v.Y )
+			   + ( Z * ( ScalarType )v.Z );
 	}
 }
-#endif // ifndef _MP_VECTOR_3_H_
+#endif	// ifndef _MP_VECTOR_3_H_
