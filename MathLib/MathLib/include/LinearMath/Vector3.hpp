@@ -34,6 +34,8 @@ namespace LinearMath
 		template< typename T >
 		Vector3_tpl< ScalarType > operator +( const Vector3_tpl< T >& v ) const;
 
+		Vector3_tpl< ScalarType > operator +( void ) const;
+
 		template< typename T >
 		Vector3_tpl< ScalarType >& operator +=( const Vector3_tpl< T >& v );
 
@@ -41,6 +43,8 @@ namespace LinearMath
 
 		template< typename T >
 		Vector3_tpl< ScalarType > operator -( const Vector3_tpl< T >& v ) const;
+
+		Vector3_tpl< ScalarType > operator -( void ) const;
 
 		template< typename T >
 		Vector3_tpl< ScalarType >& operator -=( const Vector3_tpl< T >& v );
@@ -55,7 +59,6 @@ namespace LinearMath
 		{
 			return Vector3_tpl< ScalarType >( v.X * scalar, v.Y * scalar, v.Z * scalar );
 		}
-
 		template< typename T >
 		ScalarType operator *( const Vector3_tpl< T >& v ) const;
 
@@ -127,6 +130,18 @@ namespace LinearMath
 
 	private:
 	};
+
+	template< typename ScalarType >
+	Vector3_tpl< ScalarType > LinearMath::Vector3_tpl< ScalarType >::operator +( void ) const
+	{
+		return Vector3_tpl< ScalarType >( x, y, z );
+	}
+
+	template< typename ScalarType >
+	Vector3_tpl< ScalarType > LinearMath::Vector3_tpl< ScalarType >::operator -( void ) const
+	{
+		return Vector3_tpl< ScalarType >( -x, -y, -z );
+	}
 
 	template< typename ScalarType >
 	template< typename T >
