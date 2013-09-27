@@ -39,6 +39,8 @@ namespace ClassicalMechanics
 				const LinearMath::Vector3_tpl< ScalarType >& max );
 
 
+			AABB3D_tpl();
+
 			
 			/**
 			\brief Copy constructor for the AABB3D_tpl. Copies the minimum and maximum vectors.
@@ -201,6 +203,14 @@ namespace ClassicalMechanics
 			*/
 			LinearMath::Vector3_tpl< ScalarType > m_Maximum;
 		};
+
+		template< typename ScalarType >
+		ClassicalMechanics::Volumes::AABB3D_tpl<ScalarType>::AABB3D_tpl() :
+			m_Minimum(),
+			m_Maximum()
+		{
+
+		}
 
 		template< typename ScalarType >
 		void ClassicalMechanics::Volumes::AABB3D_tpl< ScalarType >::Centre( LinearMath::Vector3_tpl< ScalarType >& vec )
