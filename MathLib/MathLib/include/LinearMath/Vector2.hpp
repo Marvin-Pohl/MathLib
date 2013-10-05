@@ -12,7 +12,8 @@ namespace LinearMath
 	{
 	public:
 
-		typedef ScalarType data_type;
+		typedef ScalarType DataType;
+		static const size_t size = 2U;
 
 		Vector2_tpl( void );
 
