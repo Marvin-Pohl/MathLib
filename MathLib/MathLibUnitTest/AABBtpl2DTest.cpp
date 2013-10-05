@@ -59,7 +59,7 @@ namespace MathLibUnitTest
 		{
 			AABB_tpl2D aabb1 = AABB_tpl2D( Vector2( 0.0f ), Vector2( 1.0f ) );
 			AABB_tpl2D aabb2 = AABB_tpl2D( Vector2( 0.1f ), Vector2( 0.9f ) );
-			AABB_tpl2D aabb3 = AABB_tpl2D( Vector2( 0.0f ), Vector2( 0.1f, 2.0f) );
+			AABB_tpl2D aabb3 = AABB_tpl2D( Vector2( 0.0f ), Vector2( 0.1f, 2.0f ) );
 
 			Vector2 point1( 0.5f );
 			Vector2 point2( 1.0f );
@@ -70,6 +70,26 @@ namespace MathLibUnitTest
 			Assert::IsFalse( aabb1.Contains( point3 ) );
 			Assert::IsTrue( aabb1.Contains( aabb2 ) );
 			Assert::IsFalse( aabb1.Contains( aabb3 ) );
+		}
+
+		TEST_METHOD( AABBFillBounds )
+		{
+			AABB_tpl2D aabb( Vector2( 0.0f ), Vector2( 1.0f ) );
+
+			Vector2 tmp[ 6 ] =
+			{
+				Vector2( -1.0f ), Vector2( -1.0f ), Vector2( -1.0f ), Vector2( -1.0f ), Vector2( -1.0f ),
+				Vector2( -1.0f )
+			};
+
+			aabb.FillBounds( tmp + 1 );
+
+			Assert::IsTrue( tmp[ 0 ] == Vector2( -1.0f ) );
+			Assert::IsTrue( tmp[ 1 ] == Vector2( 0.0f ) );
+			Assert::IsTrue( tmp[ 2 ] == Vector2( 1.0f, 0.0f ) );
+			Assert::IsTrue( tmp[ 3 ] == Vector2( 0.0f, 1.0f ) );
+			Assert::IsTrue( tmp[ 4 ] == Vector2( 1.0f, 1.0f ) );
+			Assert::IsTrue( tmp[ 5 ] == Vector2( -1.0f ) );
 		}
 	};
 }

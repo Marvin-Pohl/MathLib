@@ -15,7 +15,7 @@ namespace ClassicalMechanics
 		- An array named \c data where the Scalars are stored
 		- A static const size_t \c size definition with the dimension of Vector
 		- A typedef \c DataType with the type of the Scalar
-		
+
 		The LinearMath::Vector3_tpl and LinearMath::Vector2_tpl matches those specifications
 
 		\since 1.0
@@ -320,10 +320,11 @@ namespace ClassicalMechanics
 
 			for( size_t i = 0U; i < size; ++i )
 			{
+				tmp = Vec();
+
 				for( size_t k = 0; k < vec_size; ++k )
 				{
-					tmp = Vec();
-					tmp.data[ k ] = ( k & i ) ? m_Maximum.data[ k ] : m_Minimum.data[ k ];
+					tmp.data[ k ] = ( ( 1U << k ) & i ) ? m_Maximum.data[ k ] : m_Minimum.data[ k ];
 				}
 
 				data[ i ] = tmp;

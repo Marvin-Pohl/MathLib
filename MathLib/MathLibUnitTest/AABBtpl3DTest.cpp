@@ -75,5 +75,30 @@ namespace MathLibUnitTest
 			Assert::IsTrue( aabb1.Contains( aabb2 ) );
 			Assert::IsFalse( aabb1.Contains( aabb3 ) );
 		}
+
+		TEST_METHOD( AABBFillBounds )
+		{
+			AABB_tpl3D aabb( Vector3( 0.0f ), Vector3( 1.0f ) );
+
+			Vector3 tmp[ 10 ] =
+			{
+				Vector3( -1.0f ), Vector3( -1.0f ), Vector3( -1.0f ), Vector3( -1.0f ), Vector3( -1.0f ),
+				Vector3( -1.0f ), Vector3( -1.0f ),
+				Vector3( -1.0f ), Vector3( -1.0f ), Vector3( -1.0f )
+			};
+
+			aabb.FillBounds( tmp + 1 );
+
+			Assert::IsTrue( tmp[ 0 ] == Vector3( -1.0f ) );
+			Assert::IsTrue( tmp[ 1 ] == Vector3( 0.0f ) );
+			Assert::IsTrue( tmp[ 2 ] == Vector3( 1.0f, 0.0f, 0.0f ) );
+			Assert::IsTrue( tmp[ 3 ] == Vector3( 0.0f, 1.0f, 0.0f ) );
+			Assert::IsTrue( tmp[ 4 ] == Vector3( 1.0f, 1.0f, 0.0f ) );
+			Assert::IsTrue( tmp[ 5 ] == Vector3( 0.0f, 0.0f, 1.0f ) );
+			Assert::IsTrue( tmp[ 6 ] == Vector3( 1.0f, 0.0f, 1.0f ) );
+			Assert::IsTrue( tmp[ 7 ] == Vector3( 0.0f, 1.0f, 1.0f ) );
+			Assert::IsTrue( tmp[ 8 ] == Vector3( 1.0f, 1.0f, 1.0f ) );
+			Assert::IsTrue( tmp[ 9 ] == Vector3( -1.0f ) );
+		}
 	};
 }
