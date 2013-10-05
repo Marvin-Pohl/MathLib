@@ -1,27 +1,27 @@
 #include "stdafx.hpp"
 #include "CppUnitTest.h"
 #include "Vector3.hpp"
-#include "ClassicalMechanics/Volumes/AABB3D.hpp"
+#include "ClassicalMechanics/Volumes/AABB.hpp"
 
 using namespace ClassicalMechanics::Volumes;
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 template class __declspec ( dllexport )LinearMath::Vector3_tpl< float >;
 
-template class __declspec ( dllexport )AABB3D_tpl< float >;
+template class __declspec ( dllexport )AABB_tpl< LinearMath::Vector3_tpl< float > >;
 
 typedef LinearMath::Vector3_tpl< float > Vector3;
-typedef AABB3D_tpl< float > AABB3D;
+typedef AABB_tpl< LinearMath::Vector3_tpl< float > > AABB_tpl3D;
 
 namespace MathLibUnitTest
 {
-	TEST_CLASS( AABB3DTestClass )
+	TEST_CLASS( AABB_tpl3DTestClass )
 	{
 	public:
 
-		TEST_METHOD( AABB3DConstructorTest )
+		TEST_METHOD( AABBConstructorTest )
 		{
-			AABB3D aabb( Vector3( 0.0f, 0.0f, 0.0f ), Vector3( 1.0f, 1.0f, 1.0f ) );
+			AABB_tpl3D aabb( Vector3( 0.0f, 0.0f, 0.0f ), Vector3( 1.0f, 1.0f, 1.0f ) );
 
 			Vector3 min = aabb.Min();
 			Vector3 max = aabb.Max();
@@ -31,9 +31,9 @@ namespace MathLibUnitTest
 			Assert::AreEqual( 0.0f, min.Z );
 			Assert::AreEqual( 1.0f, max.X );
 			Assert::AreEqual( 1.0f, max.Y );
-			Assert::AreEqual( 1.0f, max.Z );
+			Assert::AreEqual( 1.0f, max.X );
 
-			aabb = AABB3D( Vector3( 1.0f, 1.0f, 1.0f ), Vector3( 0.0f, 0.0f, 0.0f ) );
+			aabb = AABB_tpl3D( Vector3( 1.0f, 1.0f, 1.0f ), Vector3( 0.0f, 0.0f, 0.0f ) );
 
 			min = aabb.Min();
 			max = aabb.Max();
@@ -43,14 +43,14 @@ namespace MathLibUnitTest
 			Assert::AreEqual( 0.0f, min.Z );
 			Assert::AreEqual( 1.0f, max.X );
 			Assert::AreEqual( 1.0f, max.Y );
-			Assert::AreEqual( 1.0f, max.Z );
+			Assert::AreEqual( 1.0f, max.X );
 		}
 
-		TEST_METHOD( AABB3DIntersectTest )
+		TEST_METHOD( AABBIntersectTest )
 		{
-			AABB3D aabb1 = AABB3D( Vector3( 0.0f ), Vector3( 2.0f ) );
-			AABB3D aabb2 = AABB3D( Vector3( 1.0f ), Vector3( 3.0f ) );
-			AABB3D aabb3 = AABB3D( Vector3( 10.0f ), Vector3( 20.0f ) );
+			AABB_tpl3D aabb1 = AABB_tpl3D( Vector3( 0.0f ), Vector3( 2.0f ) );
+			AABB_tpl3D aabb2 = AABB_tpl3D( Vector3( 1.0f ), Vector3( 3.0f ) );
+			AABB_tpl3D aabb3 = AABB_tpl3D( Vector3( 10.0f ), Vector3( 20.0f ) );
 
 			Assert::IsTrue( aabb1.Intersects( aabb2 ) );
 			Assert::IsTrue( aabb2.Intersects( aabb1 ) );
@@ -59,11 +59,11 @@ namespace MathLibUnitTest
 			Assert::IsTrue( aabb1.Intersects( aabb1 ) );
 		}
 
-		TEST_METHOD( AABB3DContainsTest )
+		TEST_METHOD( AABBContainsTest )
 		{
-			AABB3D aabb1 = AABB3D( Vector3( 0.0f ), Vector3( 1.0f ) );
-			AABB3D aabb2 = AABB3D( Vector3( 0.1f ), Vector3( 0.9f ) );
-			AABB3D aabb3 = AABB3D( Vector3( 0.0f ), Vector3( 0.1f, 2.0f, 1.0f ) );
+			AABB_tpl3D aabb1 = AABB_tpl3D( Vector3( 0.0f ), Vector3( 1.0f ) );
+			AABB_tpl3D aabb2 = AABB_tpl3D( Vector3( 0.1f ), Vector3( 0.9f ) );
+			AABB_tpl3D aabb3 = AABB_tpl3D( Vector3( 0.0f ), Vector3( 0.1f, 2.0f, 1.0f ) );
 
 			Vector3 point1( 0.5f );
 			Vector3 point2( 1.0f );
