@@ -11,7 +11,7 @@ namespace LinearMath
 	public:
 
 		typedef ScalarType DataType;
-		static const size_t size = 3U;
+		static const Numerics::uint32 size = 3U;
 
 		Vector3_tpl( void );
 

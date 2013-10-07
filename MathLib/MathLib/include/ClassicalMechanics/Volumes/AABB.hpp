@@ -13,7 +13,7 @@ namespace ClassicalMechanics
 
 		\remark the Template Parameter Vec must have following attributes:
 		- An array named \c data where the Scalars are stored
-		- A static const size_t \c size definition with the dimension of Vector
+		- A static const Numerics::uint32 \c size definition with the dimension of Vector
 		- A typedef \c DataType with the type of the Scalar
 
 		The LinearMath::Vector3_tpl and LinearMath::Vector2_tpl matches those specifications
@@ -25,9 +25,9 @@ namespace ClassicalMechanics
 		{
 		public:
 
-			typedef typename Vec DataType;
+			typedef Vec DataType;
 			typedef typename Vec::DataType Scalar;
-			static const size_t vec_size = Vec::size;
+			static const Numerics::uint32 vec_size = Vec::size;
 
 			/**
 			\brief Creates a new AABB_tpl spanning from min to max
@@ -315,14 +315,14 @@ namespace ClassicalMechanics
 			Vec* data ) const
 		{
 			using namespace Numerics;
-			size_t size = 1U << vec_size;
+			Numerics::uint32 size = 1U << vec_size;
 			Vec tmp;
 
-			for( size_t i = 0U; i < size; ++i )
+			for( Numerics::uint32 i = 0U; i < size; ++i )
 			{
 				tmp = Vec();
 
-				for( size_t k = 0; k < vec_size; ++k )
+				for( Numerics::uint32 k = 0; k < vec_size; ++k )
 				{
 					tmp.data[ k ] = ( ( 1U << k ) & i ) ? m_Maximum.data[ k ] : m_Minimum.data[ k ];
 				}
