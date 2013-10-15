@@ -210,14 +210,14 @@ namespace ClassicalMechanics
 		void ClassicalMechanics::Volumes::AABB_tpl< Vec >::Centre( Vec& vec )
 		const
 		{
-			vec = m_Minimum + ( Vec::DataType )0.5 * m_Maximum;
+			vec = m_Minimum + ( ( m_Maximum - m_Minimum ) / ( Scalar ) 2 );
 		}
 
 		template< typename Vec >
 		Vec ClassicalMechanics::Volumes::AABB_tpl< Vec >::Centre( void )
 		const
 		{
-			return m_Minimum + 0.5f * m_Maximum;
+			return m_Minimum + ( ( m_Maximum - m_Minimum ) / ( Scalar ) 2 );
 		}
 
 		template< typename Vec >
@@ -227,7 +227,7 @@ namespace ClassicalMechanics
 			using namespace LinearMath;
 
 			Vec diff = Centre() - point;
-			Vec size = Size();
+			Vec size = Size() / ( Scalar ) 2;
 
 			for( int i = 0; i < vec_size; ++i )
 			{
