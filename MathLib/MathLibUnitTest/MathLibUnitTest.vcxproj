@@ -166,6 +166,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AABB3DTest.cpp" />
+    <ClCompile Include="AABBtpl2DTest.cpp" />
+    <ClCompile Include="AABBtpl3DTest.cpp" />
+    <ClCompile Include="InterpolatorTest.cpp" />
     <ClCompile Include="QuaternionTest.cpp" />
     <ClCompile Include="RayCast3DTest.cpp" />
     <ClCompile Include="SSEMatrix4x4Test.cpp" />

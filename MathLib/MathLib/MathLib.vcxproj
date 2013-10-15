@@ -175,7 +175,9 @@ xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Analysis\Interpolation\Interpolator.hpp" />
     <ClInclude Include="include\ClassicalMechanics\Algorithms\Ray.hpp" />
+    <ClInclude Include="include\ClassicalMechanics\Volumes\AABB.hpp" />
     <ClInclude Include="include\ClassicalMechanics\Volumes\AABB3D.hpp" />
     <ClInclude Include="include\LinearMath\Matrix4x4.hpp" />
     <ClInclude Include="include\LinearMath\Quaternion.hpp" />

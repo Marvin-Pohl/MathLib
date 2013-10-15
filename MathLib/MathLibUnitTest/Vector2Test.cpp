@@ -64,6 +64,17 @@ namespace MathLibUnitTest
 			Assert::AreEqual( 60.0f, v1.Y );
 		}
 
+		TEST_METHOD( Vector2Add3 )
+		{
+			Vector2 v1( 10, 20 );
+			Vector2 v2( 30, 40 );
+
+			v1 = +v2;
+
+			Assert::AreEqual( 30.0f, v1.X );
+			Assert::AreEqual( 40.0f, v1.Y );
+		}
+
 		TEST_METHOD( Vector2Sub1 )
 		{
 			Vector2 v1( 10, 20 );
@@ -84,6 +95,17 @@ namespace MathLibUnitTest
 
 			Assert::AreEqual( -20.0f, v1.X );
 			Assert::AreEqual( 10.0f, v1.Y );
+		}
+
+		TEST_METHOD( Vector2Sub3 )
+		{
+			Vector2 v1( 10, 20 );
+			Vector2 v2( 30, 40 );
+
+			v1 = -v2;
+
+			Assert::AreEqual( -30.0f, v1.X );
+			Assert::AreEqual( -40.0f, v1.Y );
 		}
 
 		TEST_METHOD( Vector2Mult1 )

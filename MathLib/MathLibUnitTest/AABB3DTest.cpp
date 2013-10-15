@@ -31,7 +31,7 @@ namespace MathLibUnitTest
 			Assert::AreEqual( 0.0f, min.Z );
 			Assert::AreEqual( 1.0f, max.X );
 			Assert::AreEqual( 1.0f, max.Y );
-			Assert::AreEqual( 1.0f, max.X );
+			Assert::AreEqual( 1.0f, max.Z );
 
 			aabb = AABB3D( Vector3( 1.0f, 1.0f, 1.0f ), Vector3( 0.0f, 0.0f, 0.0f ) );
 
@@ -43,7 +43,7 @@ namespace MathLibUnitTest
 			Assert::AreEqual( 0.0f, min.Z );
 			Assert::AreEqual( 1.0f, max.X );
 			Assert::AreEqual( 1.0f, max.Y );
-			Assert::AreEqual( 1.0f, max.X );
+			Assert::AreEqual( 1.0f, max.Z );
 		}
 
 		TEST_METHOD( AABB3DIntersectTest )

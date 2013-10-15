@@ -10,7 +10,7 @@ typedef float Scalar;
 
 typedef LinearMath::Vector3_tpl< Scalar > Vector3;
 
-template class __declspec( dllexport ) Vector3_tpl< Scalar >;
+template class __declspec ( dllexport )Vector3_tpl< Scalar >;
 
 namespace MathLibUnitTest
 {
@@ -45,21 +45,19 @@ namespace MathLibUnitTest
 			Assert::AreEqual( 42.0f, v.Z );
 		}
 
-		TEST_METHOD ( Vector3Constructor4 )
+		TEST_METHOD( Vector3Constructor4 )
 		{
-			Vector3 v1( 1.0f , 2.0f , 3.0f );
+			Vector3 v1( 1.0f, 2.0f, 3.0f );
 			Vector3 v( v1 );
 
 			Assert::AreEqual( 1.0f, v.X );
 			Assert::AreEqual( 2.0f, v.Y );
 			Assert::AreEqual( 3.0f, v.Z );
-
 		}
 
 		TEST_METHOD( Vector3Getters )
 		{
 			Vector3 v( 1.0f, 2.0f, 3.0f );
-
 
 			Assert::AreEqual( 1.0f, v.GetX() );
 			Assert::AreEqual( 2.0f, v.GetY() );
@@ -90,6 +88,18 @@ namespace MathLibUnitTest
 			Assert::AreEqual( 90.0f, v1.Z );
 		}
 
+		TEST_METHOD( Vector3Add3 )
+		{
+			Vector3 v1( 10, 20, 30 );
+			Vector3 v2( 40, 50, 60 );
+
+			v1 = +v2;
+
+			Assert::AreEqual( 40.0f, v1.X );
+			Assert::AreEqual( 50.0f, v1.Y );
+			Assert::AreEqual( 60.0f, v1.Z );
+		}
+
 		TEST_METHOD( Vector3Sub1 )
 		{
 			Vector3 v1( 10, 20, 30 );
@@ -112,6 +122,18 @@ namespace MathLibUnitTest
 			Assert::AreEqual( -30.0f, v1.X );
 			Assert::AreEqual( -30.0f, v1.Y );
 			Assert::AreEqual( -30.0f, v1.Z );
+		}
+
+		TEST_METHOD( Vector3Sub3 )
+		{
+			Vector3 v1( 10, 20, 30 );
+			Vector3 v2( 40, 50, 60 );
+
+			v1 = -v2;
+
+			Assert::AreEqual( -40.0f, v1.X );
+			Assert::AreEqual( -50.0f, v1.Y );
+			Assert::AreEqual( -60.0f, v1.Z );
 		}
 
 		TEST_METHOD( Vector3Mult1 )
@@ -251,7 +273,7 @@ namespace MathLibUnitTest
 			Assert::AreEqual( 1.0f, out.Z );
 		}
 
-		TEST_METHOD ( Vector3Compare )
+		TEST_METHOD( Vector3Compare )
 		{
 			Vector3 v1( 1.0f, 2.0f, 3.0f );
 			Vector3 v2( 1.0f, 2.0f, 3.0f );

@@ -48,6 +48,12 @@
     <ClInclude Include="include\ClassicalMechanics\Algorithms\Ray.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Analysis\Interpolation\Interpolator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ClassicalMechanics\Volumes\AABB.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\LinearMath\SSEVector3.cpp">
