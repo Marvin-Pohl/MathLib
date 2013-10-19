@@ -107,6 +107,9 @@ if not exist %OUT% mkdir %OUT%
 
 xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
     </PostBuildEvent>
+    <Lib>
+      <OutputFile>$(PorjectDir)..\lib$(PlatformArchitecture)\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -123,6 +126,9 @@ xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ImportLibrary>$(SolutionDir)lib\$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
+    <Lib>
+      <OutputFile>$(PorjectDir)..\lib$(PlatformArchitecture)\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -151,6 +157,9 @@ if not exist %OUT% mkdir %OUT%
 
 xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
     </PostBuildEvent>
+    <Lib>
+      <OutputFile>$(PorjectDir)..\lib$(PlatformArchitecture)\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -173,6 +182,9 @@ xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <ImportLibrary>$(SolutionDir)lib\$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
+    <Lib>
+      <OutputFile>$(PorjectDir)..\lib$(PlatformArchitecture)\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Analysis\Interpolation\Interpolator.hpp" />
