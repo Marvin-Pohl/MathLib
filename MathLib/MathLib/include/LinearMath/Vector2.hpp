@@ -22,7 +22,7 @@ namespace LinearMath
 		Vector2_tpl( ScalarType x, ScalarType y );
 
 		template< typename T >
-		Vector2_tpl( const Vector2_tpl< T >& v );
+		explicit Vector2_tpl( const Vector2_tpl< T >& v );
 
 		~Vector2_tpl( void );
 
