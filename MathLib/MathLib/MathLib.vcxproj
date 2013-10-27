@@ -102,10 +102,10 @@
       <ImportLibrary>$(SolutionDir)lib\$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>set OUT="$(SolutionDir)include\"
+      <Command>set OUT="$(ProjectDir)..\include\"
 if not exist %OUT% mkdir %OUT%
 
-xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
+xcopy /D /E /Y "$(ProjectDir)..\MathLib\include\*" %OUT%</Command>
     </PostBuildEvent>
     <Lib>
       <OutputFile>$(ProjectDir)..\lib$(PlatformArchitecture)\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
@@ -129,6 +129,12 @@ xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
     <Lib>
       <OutputFile>$(ProjectDir)..\lib$(PlatformArchitecture)\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Lib>
+    <PostBuildEvent>
+      <Command>set OUT="$(ProjectDir)..\include\"
+if not exist %OUT% mkdir %OUT%
+
+xcopy /D /E /Y "$(ProjectDir)..\MathLib\include\*" %OUT%</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -152,10 +158,10 @@ xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
       <ImportLibrary>$(SolutionDir)lib\$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>set OUT="$(SolutionDir)include\"
+      <Command>set OUT="$(ProjectDir)..\include\"
 if not exist %OUT% mkdir %OUT%
 
-xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
+xcopy /D /E /Y "$(ProjectDir)..\MathLib\include\*" %OUT%</Command>
     </PostBuildEvent>
     <Lib>
       <OutputFile>$(ProjectDir)..\lib$(PlatformArchitecture)\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
@@ -185,6 +191,12 @@ xcopy /D /E /Y "$(SolutionDir)MathLib\include\*" %OUT%</Command>
     <Lib>
       <OutputFile>$(ProjectDir)..\lib$(PlatformArchitecture)\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Lib>
+    <PostBuildEvent>
+      <Command>set OUT="$(ProjectDir)..\include\"
+if not exist %OUT% mkdir %OUT%
+
+xcopy /D /E /Y "$(ProjectDir)..\MathLib\include\*" %OUT%</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Analysis\Interpolation\Interpolator.hpp" />
