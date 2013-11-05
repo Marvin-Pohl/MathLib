@@ -136,7 +136,7 @@ namespace ClassicalMechanics
 			\return \c true if the Point is on an Edge or inside the AABB or \c false if the point is outside.
 
 			*/
-			bool Contains( const Vec& point );
+			bool Contains( const Vec& point ) const;
 
 			/**
 			\brief Returns the centre of the AABB.
@@ -222,7 +222,7 @@ namespace ClassicalMechanics
 
 		template< typename Vec >
 		bool ClassicalMechanics::Volumes::AABB_tpl< Vec >::Contains(
-			const Vec& point )
+			const Vec& point ) const
 		{
 			using namespace LinearMath;
 
