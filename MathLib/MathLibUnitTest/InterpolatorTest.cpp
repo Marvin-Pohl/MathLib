@@ -9,12 +9,12 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 typedef float Scalar;
 
-template class __declspec ( dllexport )Analysis::Interpolator< Scalar, Scalar >;
+template class __declspec ( dllexport )Analysis::Interpolator_tpl< Scalar, Scalar >;
 template class __declspec ( dllexport )LinearMath::Vector2_tpl< Scalar >;
 
-typedef Analysis::Interpolator< Scalar, Scalar > FloatInterpolator;
+typedef Analysis::Interpolator_tpl< Scalar, Scalar > FloatInterpolator;
 typedef LinearMath::Vector2_tpl< Scalar > Vector2;
-typedef Analysis::Interpolator< Vector2, Scalar > VectorInterpolator;
+typedef Analysis::Interpolator_tpl< Vector2, Scalar > VectorInterpolator;
 
 namespace MathLibUnitTest
 {
