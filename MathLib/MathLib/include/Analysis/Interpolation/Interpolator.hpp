@@ -12,7 +12,7 @@ namespace Analysis
 
 	*/
 	template< typename T, typename ScalarType >
-	class Interpolator
+	class Interpolator_tpl
 	{
 	public:
 
@@ -61,17 +61,17 @@ namespace Analysis
 
 	private:
 
-		Interpolator()
+		Interpolator_tpl()
 		{
 		}
-		Interpolator& operator =( const Interpolator& )
+		Interpolator_tpl& operator =( const Interpolator_tpl& )
 		{
 			return *this;
 		}
 	};
 
 	template< typename T, typename ScalarType >
-	T Analysis::Interpolator< T, ScalarType >::SmoothStopInterpolation( const T& start,
+	T Analysis::Interpolator_tpl< T, ScalarType >::SmoothStopInterpolation( const T& start,
 		const T& end,
 		const ScalarType& x )
 	{
@@ -84,7 +84,7 @@ namespace Analysis
 	}
 
 	template< typename T, typename ScalarType >
-	T Analysis::Interpolator< T, ScalarType >::SmoothInterpolation( const T& start, const T& end,
+	T Analysis::Interpolator_tpl< T, ScalarType >::SmoothInterpolation( const T& start, const T& end,
 		const ScalarType& x )
 	{
 		return start
@@ -96,7 +96,7 @@ namespace Analysis
 	}
 
 	template< typename T, typename ScalarType >
-	T Analysis::Interpolator< T, ScalarType >::Lerp( const T& start, const T& end, const ScalarType& x )
+	T Analysis::Interpolator_tpl< T, ScalarType >::Lerp( const T& start, const T& end, const ScalarType& x )
 	{
 		return start + ( end - start ) * x;
 	}
