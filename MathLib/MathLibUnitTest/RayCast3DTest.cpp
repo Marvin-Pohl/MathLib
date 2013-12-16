@@ -35,6 +35,45 @@ namespace MathLibUnitTest
 			Assert::AreEqual( 0.0f, result.CollisionPoint().X );
 			Assert::AreEqual( 0.5f, result.CollisionPoint().Y );
 			Assert::AreEqual( 0.5f, result.CollisionPoint().Z );
+
+			ray = Ray3D( Vector3( 3.0f, 3.0f, 0.5f ), Vector3( -1.0f, 0.0f, 0.0f ), 100.0f );
+
+			result = ray.CheckCollisionTriangle( triangle );
+			Assert::IsFalse( result.CollisionOccurred() );
+			Assert::AreEqual( 0.0f, result.CollisionPoint().X );
+			Assert::AreEqual( 0.0f, result.CollisionPoint().Y );
+			Assert::AreEqual( 0.0f, result.CollisionPoint().Z );
+
+
+			ray = Ray3D( Vector3( 2.0f, 2.0f, 0.5f ), Vector3( -1.0f, 0.0f, 0.0f ), 100.0f );
+
+			result = ray.CheckCollisionTriangle( triangle );
+			Assert::IsTrue( result.CollisionOccurred() );
+			Assert::AreEqual( 0.0f, result.CollisionPoint().X );
+			Assert::AreEqual( 2.0f, result.CollisionPoint().Y );
+			Assert::AreEqual( 0.5f, result.CollisionPoint().Z );
+
+			ray = Ray3D( Vector3( 0.0f, 1.55121f, 1.55098f ), Vector3( -1.0f, 0.0f, 0.0f ), 100.0f );
+
+			result = ray.CheckCollisionTriangle( triangle );
+			Assert::IsFalse( result.CollisionOccurred() );
+			Assert::AreEqual( 0.0f, result.CollisionPoint().X );
+			Assert::AreEqual( 0.0f, result.CollisionPoint().Y );
+			Assert::AreEqual( 0.0f, result.CollisionPoint().Z );
+
+			ray = Ray3D( Vector3( 0.5f, -0.16438f, 1.35815f ), Vector3( -1.0f, 0.0f, 0.0f ), 100.0f );
+
+			result = ray.CheckCollisionTriangle( triangle );
+			Assert::IsFalse( result.CollisionOccurred() );
+			Assert::AreEqual( 0.0f, result.CollisionPoint().X );
+			Assert::AreEqual( 0.0f, result.CollisionPoint().Y );
+			Assert::AreEqual( 0.0f, result.CollisionPoint().Z );
+
+			ray = Ray3D( Vector3( 0.5f, -0.16438f, 1.35815f ), Vector3( -1.0f, 1.67578f, 0.0f ), 100.0f );
+
+			result = ray.CheckCollisionTriangle( triangle );
+			Assert::IsTrue( result.CollisionOccurred() );
+
 		}
 	};
 }

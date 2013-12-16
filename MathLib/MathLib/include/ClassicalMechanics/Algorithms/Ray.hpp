@@ -173,7 +173,7 @@ namespace ClassicalMechanics
 			Vector3_tpl< ScalarType > u = triangle[ 1 ] - triangle[ 0 ];
 			Vector3_tpl< ScalarType > v = triangle[ 2 ] - triangle[ 0 ];
 			Vector3_tpl< ScalarType > w;
-			Vector3_tpl< ScalarType > n = ( u ^ v );
+			Vector3_tpl< ScalarType > n = ( u.CrossProduct( v ) );
 
 			ScalarType denom = n * ( m_Direction * m_Length );
 
@@ -182,13 +182,13 @@ namespace ClassicalMechanics
 				return RayResult_tpl< ScalarType >( Vector3_tpl< ScalarType >( 0 ), false );
 			}
 
-			ScalarType r = ( n * ( triangle[ 0 ] - m_Origin ) ) / denom;
+			ScalarType r = (-( n * ( m_Origin - triangle[ 0 ] ) )) / denom;
 			if( r < 0 || r > m_Length )
 			{
 				return RayResult_tpl< ScalarType >( Vector3_tpl< ScalarType >( 0 ), false );
 			}
 
-			w = ( m_Origin + m_Direction * r ) - triangle[ 0 ];
+			w = ( m_Origin + m_Direction * m_Length * r ) - triangle[ 0 ];
 
 			denom = ( u * v );
 			denom *= denom;
