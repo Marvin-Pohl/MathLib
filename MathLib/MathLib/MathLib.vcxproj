@@ -303,6 +303,7 @@ xcopy /D /E /Y "$(ProjectDir)..\MathLib\include\*" %OUT%</Command>
     <ClInclude Include="include\LinearMath\Vector2.hpp" />
     <ClInclude Include="include\LinearMath\Vector3.hpp" />
     <ClInclude Include="include\LinearMath\MathHelper.hpp" />
+    <ClInclude Include="include\LinearMath\Vector4.hpp" />
     <ClInclude Include="include\MathLibPCH.hpp" />
     <ClInclude Include="include\LinearMath\SSEVector2.hpp" />
   </ItemGroup>

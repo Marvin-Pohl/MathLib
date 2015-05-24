@@ -5,6 +5,7 @@
   #include "MathLibPCH.hpp"
   #include "Vector3.hpp"
   #include "Vector2.hpp"
+  #include "Vector4.hpp"
   #include "MathHelper.hpp"
 
 namespace LinearMath
@@ -76,7 +77,7 @@ namespace LinearMath
     }
     Matrix4x4_tpl operator *( const Matrix4x4_tpl< ScalarType >& matrix ) const;
 
-    Vector3_tpl< ScalarType > operator *( const Vector3_tpl< ScalarType >& vec ) const;
+    Vector4_tpl< ScalarType > operator *( const Vector4_tpl< ScalarType >& vec ) const;
 
     /**
     \brief Multiplies a Vector2 with the matrix.
@@ -313,13 +314,14 @@ namespace LinearMath
   }
 
   template< typename ScalarType >
-  Vector3_tpl< ScalarType > Matrix4x4_tpl< ScalarType >::operator *( const Vector3_tpl< ScalarType >& vec ) const
+  Vector4_tpl< ScalarType > Matrix4x4_tpl< ScalarType >::operator *( const Vector4_tpl< ScalarType >& vec ) const
   {
-    return Vector3_tpl< ScalarType >
+    return Vector4_tpl< ScalarType >
          (
-      vec.X * M_1_1 + vec.Y * M_1_2 * vec.Z * M_1_3 + M_1_4,
-      vec.X * M_2_1 + vec.Y * M_2_2 * vec.Z * M_2_3 + M_2_4,
-      vec.X * M_3_1 + vec.Y * M_3_2 * vec.Z * M_3_3 + M_3_4
+         vec.X * M_1_1 + vec.Y * M_1_2 * vec.Z * M_1_3 + vec.W * M_1_4,
+         vec.X * M_2_1 + vec.Y * M_2_2 * vec.Z * M_2_3 + vec.W * M_2_4,
+         vec.X * M_3_1 + vec.Y * M_3_2 * vec.Z * M_3_3 + vec.W * M_3_4,
+         vec.X * M_4_1 + vec.Y * M_4_2 * vec.Z * M_4_3 + vec.W * M_4_4
          );
   }
 
