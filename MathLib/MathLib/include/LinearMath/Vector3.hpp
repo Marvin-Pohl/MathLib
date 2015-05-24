@@ -5,6 +5,7 @@
 
 namespace LinearMath
 {
+
   template< typename ScalarType >
   class Vector3_tpl
   {
@@ -32,13 +33,11 @@ namespace LinearMath
     Vector3_tpl< ScalarType >& operator =( const Vector3_tpl< ScalarType >& v );
 
     // + Operators
-    template< typename T >
-    Vector3_tpl< ScalarType > operator +( const Vector3_tpl< T >& v ) const;
+    Vector3_tpl< ScalarType > operator +( const Vector3_tpl< ScalarType >& v ) const;
 
     Vector3_tpl< ScalarType > operator +( void ) const;
 
-    template< typename T >
-    Vector3_tpl< ScalarType >& operator +=( const Vector3_tpl< T >& v );
+    Vector3_tpl< ScalarType >& operator +=( const Vector3_tpl< ScalarType >& v );
 
     // - Operators
 
@@ -211,15 +210,13 @@ namespace LinearMath
   }
 
   template< typename ScalarType >
-  template< typename T >
-  Vector3_tpl< ScalarType > Vector3_tpl< ScalarType >::operator +( const Vector3_tpl< T >& v ) const
+  Vector3_tpl< ScalarType > Vector3_tpl< ScalarType >::operator +( const Vector3_tpl< ScalarType >& v ) const
   {
     return Vector3_tpl< ScalarType >( X + ( ScalarType )v.X, Y + ( ScalarType )v.Y, Z + ( ScalarType )v.Z );
   }
 
   template< typename ScalarType >
-  template< typename T >
-  Vector3_tpl< ScalarType >& Vector3_tpl< ScalarType >::operator +=( const Vector3_tpl< T >& v )
+  Vector3_tpl< ScalarType >& Vector3_tpl< ScalarType >::operator +=( const Vector3_tpl< ScalarType >& v )
   {
     X += ( ScalarType )v.X;
     Y += ( ScalarType )v.Y;

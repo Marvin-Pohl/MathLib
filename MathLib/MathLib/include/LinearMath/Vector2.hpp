@@ -120,10 +120,18 @@ namespace LinearMath
     Vector2_tpl< ScalarType > Rotate( const Radian_tpl< ScalarType >& rad,
       const bool relative = true );
 
+    Vector2_tpl< ScalarType > MulPerElem( const Vector2_tpl< ScalarType >& rhs ) const;
+
   protected:
 
   private:
   };
+
+  template< typename ScalarType >
+  Vector2_tpl< ScalarType > LinearMath::Vector2_tpl<ScalarType>::MulPerElem( const Vector2_tpl< ScalarType >& rhs ) const
+  {
+    return Vector2_tpl< ScalarType >( x * rhs.x, y*rhs.y );
+  }
 
   template< typename ScalarType >
   bool LinearMath::Vector2_tpl<ScalarType>::operator!=( const Vector2_tpl< ScalarType >& vec ) const
