@@ -130,7 +130,7 @@ namespace LinearMath
 
   float SSEVector4::GetX() const
   {
-    float result[ 32 ];
+    float result[ 8 ];
     float *data = reinterpret_cast<float*>(
       reinterpret_cast<uintptr_t>( result ) + ( 16 - ( reinterpret_cast<uintptr_t>( result ) % 16 ) ));
     _mm_store_ps( data, vec );
@@ -139,7 +139,7 @@ namespace LinearMath
 
   float SSEVector4::GetY() const
   {
-    float result[ 32 ];
+    float result[ 8 ];
     float *data = reinterpret_cast< float* >( 
       reinterpret_cast< uintptr_t >( result ) +( 16 - ( reinterpret_cast< uintptr_t >( result ) % 16 ) ) );
     _mm_store_ps( data, vec );
@@ -148,7 +148,7 @@ namespace LinearMath
 
   float SSEVector4::GetZ() const
   {
-    float result[ 32 ];
+    float result[ 8 ];
     float *data = reinterpret_cast< float* >( 
       reinterpret_cast< uintptr_t >( result ) +( 16 - ( reinterpret_cast< uintptr_t >( result ) % 16 ) ) );
     _mm_store_ps( data, vec );
@@ -157,7 +157,7 @@ namespace LinearMath
 
   float SSEVector4::GetW() const
   {
-    float result[ 32 ];
+    float result[ 8 ];
     float *data = reinterpret_cast< float* >( 
       reinterpret_cast< uintptr_t >( result ) +( 16 - ( reinterpret_cast< uintptr_t >( result ) % 16 ) ) );
     _mm_store_ps( data, vec );
@@ -166,7 +166,7 @@ namespace LinearMath
 
   LinearMath::SSEVector3 SSEVector4::GetXYZ() const
   {
-    float result[ 32 ];
+    float result[ 8 ];
     float *data = reinterpret_cast< float* >(
       reinterpret_cast< uintptr_t >( result ) +( 16 - ( reinterpret_cast< uintptr_t >( result ) % 16 ) ) );
     _mm_store_ps( data, vec );
