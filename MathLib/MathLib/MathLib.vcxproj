@@ -300,6 +300,7 @@ xcopy /D /E /Y "$(ProjectDir)..\MathLib\include\*" %OUT%</Command>
     <ClInclude Include="include\LinearMath\Quaternion.hpp" />
     <ClInclude Include="include\LinearMath\SSEMatrix4x4.hpp" />
     <ClInclude Include="include\LinearMath\SSEVector3.hpp" />
+    <ClInclude Include="include\LinearMath\SSEVector4.hpp" />
     <ClInclude Include="include\LinearMath\Vector2.hpp" />
     <ClInclude Include="include\LinearMath\Vector3.hpp" />
     <ClInclude Include="include\LinearMath\MathHelper.hpp" />
@@ -310,6 +311,7 @@ xcopy /D /E /Y "$(ProjectDir)..\MathLib\include\*" %OUT%</Command>
   <ItemGroup>
     <ClCompile Include="src\LinearMath\SSEMatrix4x4.cpp" />
     <ClCompile Include="src\LinearMath\SSEVector3.cpp" />
+    <ClCompile Include="src\LinearMath\SSEVector4.cpp" />
     <ClCompile Include="src\MathLibPCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

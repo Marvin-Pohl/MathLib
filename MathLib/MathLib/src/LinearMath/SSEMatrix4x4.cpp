@@ -32,17 +32,13 @@ namespace LinearMath
 
   SSEMatrix4x4::SSEMatrix4x4()
   {
-    float tmp[] =
-    {
-      0, 0, 0, 0
-    };
-    m_col0 = _mm_loadu_ps( tmp );
-    m_col1 = _mm_loadu_ps( tmp );
-    m_col2 = _mm_loadu_ps( tmp );
-    m_col3 = _mm_loadu_ps( tmp );
+    m_col0 = SSEVector4( 0 );
+    m_col1 = SSEVector4( 0 );
+    m_col2 = SSEVector4( 0 );
+    m_col3 = SSEVector4( 0 );
   }
 
-  SSEMatrix4x4::SSEMatrix4x4( const __m128& col0, const __m128& col1, const __m128& col2, const __m128& col3 ) :
+  SSEMatrix4x4::SSEMatrix4x4( const SSEVector4& col0, const SSEVector4& col1, const SSEVector4& col2, const SSEVector4& col3 ) :
     m_col0( col0 ),
     m_col1( col1 ),
     m_col2( col2 ),
@@ -56,10 +52,10 @@ namespace LinearMath
     float M31, float M32, float M33, float M34,
     float M41, float M42, float M43, float M44 )
   {
-    m_col0 = _mm_set_ps( M14, M13, M12, M11 );
-    m_col1 = _mm_set_ps( M24, M23, M22, M21 );
-    m_col2 = _mm_set_ps( M34, M33, M32, M31 );
-    m_col3 = _mm_set_ps( M44, M43, M42, M41 );
+    m_col0 = SSEVector4( M11, M12, M13, M14 );
+    m_col1 = SSEVector4( M21, M22, M23, M24 );
+    m_col2 = SSEVector4( M31, M32, M33, M34 );
+    m_col3 = SSEVector4( M41, M42, M43, M44 );
   }
 
   SSEMatrix4x4::SSEMatrix4x4( const SSEMatrix4x4& matrix )
@@ -83,10 +79,10 @@ namespace LinearMath
 
   SSEMatrix4x4& SSEMatrix4x4::operator +=( const SSEMatrix4x4& matrix )
   {
-    m_col0 = _mm_add_ps( m_col0, matrix.m_col0 );
-    m_col1 = _mm_add_ps( m_col1, matrix.m_col1 );
-    m_col2 = _mm_add_ps( m_col2, matrix.m_col2 );
-    m_col3 = _mm_add_ps( m_col3, matrix.m_col3 );
+    m_col0 = m_col0 + matrix.m_col0;
+    m_col1 = m_col1 + matrix.m_col1;
+    m_col2 = m_col2 + matrix.m_col2;
+    m_col3 = m_col3 + matrix.m_col3;
     return *this;
   }
 
@@ -99,10 +95,10 @@ namespace LinearMath
 
   LinearMath::SSEMatrix4x4 SSEMatrix4x4::operator -=( const SSEMatrix4x4& matrix )
   {
-    m_col0 = _mm_sub_ps( m_col0, matrix.m_col0 );
-    m_col1 = _mm_sub_ps( m_col1, matrix.m_col1 );
-    m_col2 = _mm_sub_ps( m_col2, matrix.m_col2 );
-    m_col3 = _mm_sub_ps( m_col3, matrix.m_col3 );
+    m_col0 = m_col0 - matrix.m_col0;
+    m_col1 = m_col1 - matrix.m_col1;
+    m_col2 = m_col2 - matrix.m_col2;
+    m_col3 = m_col3 - matrix.m_col3;
     return *this;
   }
 
@@ -123,30 +119,30 @@ namespace LinearMath
     __m128 tmp_col2( zero );
     __m128 tmp_col3( zero );
 
-    tmp_col0 = _mm_add_ps( _mm_dp_ps( m_col0, matrix.m_col0, 0xF1 ), tmp_col0 );
-    tmp_col0 = _mm_add_ps( _mm_dp_ps( m_col0, matrix.m_col1, 0xF2 ), tmp_col0 );
-    tmp_col0 = _mm_add_ps( _mm_dp_ps( m_col0, matrix.m_col2, 0xF4 ), tmp_col0 );
-    tmp_col0 = _mm_add_ps( _mm_dp_ps( m_col0, matrix.m_col3, 0xF8 ), tmp_col0 );
+    tmp_col0 = _mm_add_ps( _mm_dp_ps( m_col0.vec, matrix.m_col0.vec, 0xF1 ), tmp_col0 );
+    tmp_col0 = _mm_add_ps( _mm_dp_ps( m_col0.vec, matrix.m_col1.vec, 0xF2 ), tmp_col0 );
+    tmp_col0 = _mm_add_ps( _mm_dp_ps( m_col0.vec, matrix.m_col2.vec, 0xF4 ), tmp_col0 );
+    tmp_col0 = _mm_add_ps( _mm_dp_ps( m_col0.vec, matrix.m_col3.vec, 0xF8 ), tmp_col0 );
 
-    tmp_col1 = _mm_add_ps( _mm_dp_ps( m_col1, matrix.m_col0, 0xF1 ), tmp_col1 );
-    tmp_col1 = _mm_add_ps( _mm_dp_ps( m_col1, matrix.m_col1, 0xF2 ), tmp_col1 );
-    tmp_col1 = _mm_add_ps( _mm_dp_ps( m_col1, matrix.m_col2, 0xF4 ), tmp_col1 );
-    tmp_col1 = _mm_add_ps( _mm_dp_ps( m_col1, matrix.m_col3, 0xF8 ), tmp_col1 );
+    tmp_col1 = _mm_add_ps( _mm_dp_ps( m_col1.vec, matrix.m_col0.vec, 0xF1 ), tmp_col1 );
+    tmp_col1 = _mm_add_ps( _mm_dp_ps( m_col1.vec, matrix.m_col1.vec, 0xF2 ), tmp_col1 );
+    tmp_col1 = _mm_add_ps( _mm_dp_ps( m_col1.vec, matrix.m_col2.vec, 0xF4 ), tmp_col1 );
+    tmp_col1 = _mm_add_ps( _mm_dp_ps( m_col1.vec, matrix.m_col3.vec, 0xF8 ), tmp_col1 );
 
-    tmp_col2 = _mm_add_ps( _mm_dp_ps( m_col2, matrix.m_col0, 0xF1 ), tmp_col2 );
-    tmp_col2 = _mm_add_ps( _mm_dp_ps( m_col2, matrix.m_col1, 0xF2 ), tmp_col2 );
-    tmp_col2 = _mm_add_ps( _mm_dp_ps( m_col2, matrix.m_col2, 0xF4 ), tmp_col2 );
-    tmp_col2 = _mm_add_ps( _mm_dp_ps( m_col2, matrix.m_col3, 0xF8 ), tmp_col2 );
+    tmp_col2 = _mm_add_ps( _mm_dp_ps( m_col2.vec, matrix.m_col0.vec, 0xF1 ), tmp_col2 );
+    tmp_col2 = _mm_add_ps( _mm_dp_ps( m_col2.vec, matrix.m_col1.vec, 0xF2 ), tmp_col2 );
+    tmp_col2 = _mm_add_ps( _mm_dp_ps( m_col2.vec, matrix.m_col2.vec, 0xF4 ), tmp_col2 );
+    tmp_col2 = _mm_add_ps( _mm_dp_ps( m_col2.vec, matrix.m_col3.vec, 0xF8 ), tmp_col2 );
 
-    tmp_col3 = _mm_add_ps( _mm_dp_ps( m_col3, matrix.m_col0, 0xF1 ), tmp_col3 );
-    tmp_col3 = _mm_add_ps( _mm_dp_ps( m_col3, matrix.m_col1, 0xF2 ), tmp_col3 );
-    tmp_col3 = _mm_add_ps( _mm_dp_ps( m_col3, matrix.m_col2, 0xF4 ), tmp_col3 );
-    tmp_col3 = _mm_add_ps( _mm_dp_ps( m_col3, matrix.m_col3, 0xF8 ), tmp_col3 );
+    tmp_col3 = _mm_add_ps( _mm_dp_ps( m_col3.vec, matrix.m_col0.vec, 0xF1 ), tmp_col3 );
+    tmp_col3 = _mm_add_ps( _mm_dp_ps( m_col3.vec, matrix.m_col1.vec, 0xF2 ), tmp_col3 );
+    tmp_col3 = _mm_add_ps( _mm_dp_ps( m_col3.vec, matrix.m_col2.vec, 0xF4 ), tmp_col3 );
+    tmp_col3 = _mm_add_ps( _mm_dp_ps( m_col3.vec, matrix.m_col3.vec, 0xF8 ), tmp_col3 );
 
-    m_col0 = tmp_col0;
-    m_col1 = tmp_col1;
-    m_col2 = tmp_col2;
-    m_col3 = tmp_col3;
+    m_col0 = SSEVector4(tmp_col0);
+    m_col1 = SSEVector4(tmp_col1);
+    m_col2 = SSEVector4(tmp_col2);
+    m_col3 = SSEVector4(tmp_col3);
 
     return *this;
   }
@@ -245,22 +241,22 @@ namespace LinearMath
 
     // _mm_storel_pi((__m64*)(src), minor0);
     // _mm_storeh_pi((__m64*)(src+2), minor0);
-    m_col0 = minor0;
+    m_col0.vec = minor0;
     minor1 = _mm_mul_ps( det, minor1 );
 
     // _mm_storel_pi((__m64*)(src+4), minor1);
     // _mm_storeh_pi((__m64*)(src+6), minor1);
-    m_col1 = minor1;
+    m_col1.vec = minor1;
     minor2 = _mm_mul_ps( det, minor2 );
 
     // _mm_storel_pi((__m64*)(src+ 8), minor2);
     // _mm_storeh_pi((__m64*)(src+10), minor2);
-    m_col2 = minor2;
+    m_col2.vec = minor2;
     minor3 = _mm_mul_ps( det, minor3 );
 
     // _mm_storel_pi((__m64*)(src+12), minor3);
     // _mm_storeh_pi((__m64*)(src+14), minor3);
-    m_col3 = minor3;
+    m_col3.vec = minor3;
   }
 
   LinearMath::SSEMatrix4x4 SSEMatrix4x4::InvertedCopy() const
@@ -279,7 +275,7 @@ namespace LinearMath
 
   void SSEMatrix4x4::Transpose()
   {
-    _MM_TRANSPOSE4_PS( m_col0, m_col1, m_col2, m_col3 );
+    _MM_TRANSPOSE4_PS( m_col0.vec, m_col1.vec, m_col2.vec, m_col3.vec );
 
     // __m128 T3 = _mm_unpacklo_ps(m_col0, m_col1);
     // __m128 T2 = _mm_unpacklo_ps(m_col2, m_col3);
@@ -294,115 +290,94 @@ namespace LinearMath
 
   float SSEMatrix4x4::GetM_1_1() const
   {
-    __m128 xmm0 = m_col0;
-    float result[ 4 ];
-    _mm_storeu_ps( result, xmm0 );
-    return result[ 0 ];
+    return m_col0.GetX();
   }
 
   float SSEMatrix4x4::GetM_1_2() const
   {
-    float result[ 4 ];
-    _mm_storeu_ps( result, m_col0 );
-    return result[ 1 ];
+    return m_col0.GetY();
+
   }
 
   float SSEMatrix4x4::GetM_1_3() const
   {
-    float result[ 4 ];
-    _mm_storeu_ps( result, m_col0 );
-    return result[ 2 ];
+    return m_col0.GetZ();
+
   }
 
   float SSEMatrix4x4::GetM_1_4() const
   {
-    float result[ 4 ];
-    _mm_storeu_ps( result, m_col0 );
-    return result[ 3 ];
+    return m_col0.GetW();
+
   }
 
   float SSEMatrix4x4::GetM_2_1() const
   {
-    float result[ 4 ];
-    _mm_storeu_ps( result, m_col1 );
-    return result[ 0 ];
+    return m_col1.GetX();
   }
 
   float SSEMatrix4x4::GetM_2_2() const
   {
-    float result[ 4 ];
-    _mm_storeu_ps( result, m_col1 );
-    return result[ 1 ];
+    return m_col1.GetY();
+
   }
 
   float SSEMatrix4x4::GetM_2_3() const
   {
-    float result[ 4 ];
-    _mm_storeu_ps( result, m_col1 );
-    return result[ 2 ];
+    return m_col1.GetZ();
+
   }
 
   float SSEMatrix4x4::GetM_2_4() const
   {
-    float result[ 4 ];
-    _mm_storeu_ps( result, m_col1 );
-    return result[ 3 ];
+    return m_col1.GetW();
+
   }
 
   float SSEMatrix4x4::GetM_3_1() const
   {
-    float result[ 4 ];
-    _mm_storeu_ps( result, m_col2 );
-    return result[ 0 ];
+    return m_col2.GetX();
   }
 
   float SSEMatrix4x4::GetM_3_2() const
   {
-    float result[ 4 ];
-    _mm_storeu_ps( result, m_col2 );
-    return result[ 1 ];
+    return m_col2.GetY();
+
   }
 
   float SSEMatrix4x4::GetM_3_3() const
   {
-    float result[ 4 ];
-    _mm_storeu_ps( result, m_col2 );
-    return result[ 2 ];
+    return m_col2.GetZ();
+
   }
 
   float SSEMatrix4x4::GetM_3_4() const
   {
-    float result[ 4 ];
-    _mm_storeu_ps( result, m_col2 );
-    return result[ 3 ];
+    return m_col2.GetW();
+
   }
 
   float SSEMatrix4x4::GetM_4_1() const
   {
-    float result[ 4 ];
-    _mm_storeu_ps( result, m_col3 );
-    return result[ 0 ];
+    return m_col3.GetX();
   }
 
   float SSEMatrix4x4::GetM_4_2() const
   {
-    float result[ 4 ];
-    _mm_storeu_ps( result, m_col3 );
-    return result[ 1 ];
+    return m_col3.GetY();
+
   }
 
   float SSEMatrix4x4::GetM_4_3() const
   {
-    float result[ 4 ];
-    _mm_storeu_ps( result, m_col3 );
-    return result[ 2 ];
+    return m_col3.GetZ();
+
   }
 
   float SSEMatrix4x4::GetM_4_4() const
   {
-    float result[ 4 ];
-    _mm_storeu_ps( result, m_col3 );
-    return result[ 3 ];
+    return m_col3.GetW();
+
   }
 
   LinearMath::SSEMatrix4x4 SSEMatrix4x4::CreateLookAt( const SSEVector3& from,
@@ -443,10 +418,10 @@ namespace LinearMath
 
   void SSEMatrix4x4::GetAsFloatArray( float* arr ) const
   {
-    _mm_storeu_ps( arr, m_col0 );
-    _mm_storeu_ps( arr + 4, m_col1 );
-    _mm_storeu_ps( arr + 8, m_col2 );
-    _mm_storeu_ps( arr + 12, m_col3 );
+    _mm_storeu_ps( arr, m_col0.vec );
+    _mm_storeu_ps( arr + 4, m_col1.vec );
+    _mm_storeu_ps( arr + 8, m_col2.vec );
+    _mm_storeu_ps( arr + 12, m_col3.vec );
   }
 
   LinearMath::SSEMatrix4x4 SSEMatrix4x4::CreateProjectionMatrix( float viewAngle,

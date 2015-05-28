@@ -3,6 +3,7 @@
 #include "../MathLibPCH.hpp"
 #include <xmmintrin.h>
 #include "MathHelper.hpp"
+#include "SSEVector4.hpp"
 
 #ifndef SSEMatrix4x4_h__
   #define SSEMatrix4x4_h__
@@ -16,7 +17,7 @@ namespace LinearMath
   public:
 
     SSEMatrix4x4();
-    SSEMatrix4x4( const __m128& col0, const __m128& col1, const __m128& col2, const __m128& col3 );
+    SSEMatrix4x4( const SSEVector4& col0, const SSEVector4& col1, const SSEVector4& col2, const SSEVector4& col3 );
     SSEMatrix4x4(
       float M11, float M12, float M13, float M14,
       float M21, float M22, float M23, float M24,
@@ -104,7 +105,7 @@ namespace LinearMath
 
   private:
 
-    __m128 m_col0, m_col1, m_col2, m_col3;
+    SSEVector4 m_col0, m_col1, m_col2, m_col3;
   };
 }
 
