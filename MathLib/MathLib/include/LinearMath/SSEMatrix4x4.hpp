@@ -35,6 +35,7 @@ namespace LinearMath
     SSEMatrix4x4 operator -=( const SSEMatrix4x4& matrix );
 
     SSEMatrix4x4 operator *( const SSEMatrix4x4& matrix ) const;
+    SSEVector4 operator *( const SSEVector4& vec ) const;
 
     SSEMatrix4x4& operator *=( const SSEMatrix4x4& matrix );
 

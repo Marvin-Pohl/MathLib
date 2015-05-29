@@ -52,10 +52,10 @@ namespace LinearMath
     float M31, float M32, float M33, float M34,
     float M41, float M42, float M43, float M44 )
   {
-    m_col0 = SSEVector4( M11, M12, M13, M14 );
-    m_col1 = SSEVector4( M21, M22, M23, M24 );
-    m_col2 = SSEVector4( M31, M32, M33, M34 );
-    m_col3 = SSEVector4( M41, M42, M43, M44 );
+    m_col0 = SSEVector4( M11, M21, M31, M41 );
+    m_col1 = SSEVector4( M12, M22, M32, M42 );
+    m_col2 = SSEVector4( M13, M23, M33, M43 );
+    m_col3 = SSEVector4( M14, M24, M34, M44 );
   }
 
   SSEMatrix4x4::SSEMatrix4x4( const SSEMatrix4x4& matrix )
@@ -105,6 +105,17 @@ namespace LinearMath
   LinearMath::SSEMatrix4x4 SSEMatrix4x4::operator *( const SSEMatrix4x4& matrix ) const
   {
     return SSEMatrix4x4( *this ) *= matrix;
+  }
+
+  LinearMath::SSEVector4 SSEMatrix4x4::operator*( const SSEVector4& vec ) const
+  {
+    SSEMatrix4x4 transposed = TransposedCopy();
+    __m128 result = _mm_set_ps( 0, 0, 0, 0 );
+    result = _mm_add_ps( _mm_dp_ps( transposed.m_col0.vec, vec.vec, 0xF1 ), result );
+    result = _mm_add_ps( _mm_dp_ps( transposed.m_col1.vec, vec.vec, 0xF2 ), result );
+    result = _mm_add_ps( _mm_dp_ps( transposed.m_col2.vec, vec.vec, 0xF4 ), result );
+    result = _mm_add_ps( _mm_dp_ps( transposed.m_col3.vec, vec.vec, 0xF8 ), result );
+    return SSEVector4( result );
   }
 
   SSEMatrix4x4& SSEMatrix4x4::operator *=( const SSEMatrix4x4& mat )

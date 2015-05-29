@@ -130,14 +130,14 @@ namespace LinearMath
   float SSEVector2::GetX() const
   {
     float result[ 4 ];
-    _mm_store_ps( result, vec );
+    _mm_storeu_ps( result, vec );
     return result[ 1 ];
   }
 
   float SSEVector2::GetY() const
   {
     float result[ 4 ];
-    _mm_store_ps( result, vec );
+    _mm_storeu_ps( result, vec );
     return result[ 2 ];
   }
 }
