@@ -101,6 +101,11 @@ namespace LinearMath
 
     float GetM_4_4() const;
 
+    const SSEVector4 GetCol0() const;
+    const SSEVector4 GetCol1() const;
+    const SSEVector4 GetCol2() const;
+    const SSEVector4 GetCol3() const;
+
     ~SSEMatrix4x4();
 
   private:

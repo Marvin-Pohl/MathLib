@@ -507,4 +507,25 @@ namespace LinearMath
       0, 0, 0, 1
     );
   }
+
+  const SSEVector4 SSEMatrix4x4::GetCol0() const
+  {
+    return m_col0;
+  }
+
+  const SSEVector4 SSEMatrix4x4::GetCol1() const
+  {
+    return m_col1;
+  }
+
+  const SSEVector4 SSEMatrix4x4::GetCol2() const
+  {
+    return m_col2;
+  }
+
+  const SSEVector4 SSEMatrix4x4::GetCol3() const
+  {
+    return m_col3;
+  }
+
 }
