@@ -140,4 +140,10 @@ namespace LinearMath
     _mm_storeu_ps( result, vec );
     return result[ 2 ];
   }
+
+  LinearMath::SSEVector2 SSEVector2::ComponentMul( const SSEVector2& vec ) const
+  {
+    return SSEVector2( _mm_mul_ps( this->vec, vec.vec ) );
+  }
+
 }
