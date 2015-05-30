@@ -519,24 +519,93 @@ namespace LinearMath
     );
   }
 
-  const SSEVector4 SSEMatrix4x4::GetCol0() const
+  const SSEVector4& SSEMatrix4x4::GetCol0() const
   {
     return m_col0;
   }
 
-  const SSEVector4 SSEMatrix4x4::GetCol1() const
+  const SSEVector4& SSEMatrix4x4::GetCol1() const
   {
     return m_col1;
   }
 
-  const SSEVector4 SSEMatrix4x4::GetCol2() const
+  const SSEVector4& SSEMatrix4x4::GetCol2() const
   {
     return m_col2;
   }
 
-  const SSEVector4 SSEMatrix4x4::GetCol3() const
+  const SSEVector4& SSEMatrix4x4::GetCol3() const
   {
     return m_col3;
+  }
+
+  void SSEMatrix4x4::SetRow0( const SSEVector4& vec )
+  {
+    SetRow( 0, vec );
+  }
+
+  void SSEMatrix4x4::SetRow1( const SSEVector4& vec )
+  {
+    SetRow( 1, vec );
+  }
+
+  void SSEMatrix4x4::SetRow2( const SSEVector4& vec )
+  {
+    SetRow( 2, vec );
+  }
+
+  void SSEMatrix4x4::SetRow3( const SSEVector4& vec )
+  {
+    SetRow( 3, vec );
+  }
+
+  void SSEMatrix4x4::SetRow( Numerics::uint8 idx, const SSEVector4& vec )
+  {
+    float tmp[ 4 ];
+    vec.GetFloatArray( tmp );
+    m_col0.SetElem( idx, tmp[ 0 ] );
+    m_col1.SetElem( idx, tmp[ 1 ] );
+    m_col2.SetElem( idx, tmp[ 2 ] );
+    m_col3.SetElem( idx, tmp[ 3 ] );
+  }
+
+  void SSEMatrix4x4::SetCol0( const SSEVector4& vec )
+  {
+    m_col0 = vec;
+  }
+
+  void SSEMatrix4x4::SetCol1( const SSEVector4& vec )
+  {
+    m_col1 = vec;
+  }
+
+  void SSEMatrix4x4::SetCol2( const SSEVector4& vec )
+  {
+    m_col2 = vec;
+  }
+
+  void SSEMatrix4x4::SetCol3( const SSEVector4& vec )
+  {
+    m_col3 = vec;
+  }
+
+  void SSEMatrix4x4::SetCol( Numerics::uint8 idx, const SSEVector4& vec )
+  {
+    switch( idx )
+    {
+    case 0:
+      SetCol0( vec );
+      break;
+    case 1:
+      SetCol1( vec );
+      break;
+    case 2:
+      SetCol2( vec );
+      break;
+    case 3:
+      SetCol3( vec );
+      break;
+    }
   }
 
 }

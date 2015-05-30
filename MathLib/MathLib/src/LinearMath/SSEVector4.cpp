@@ -173,4 +173,56 @@ namespace LinearMath
     return SSEVector3( data[ 0 ], data[ 1 ], data[ 2 ] );
   }
 
+  void SSEVector4::SetX( float value )
+  {
+    SetElem( 0, value );
+  }
+
+  void SSEVector4::SetY( float value )
+  {
+    SetElem( 1, value );
+  }
+
+  void SSEVector4::SetZ( float value )
+  {
+    SetElem( 2, value );
+  }
+
+  void SSEVector4::SetW( float value )
+  {
+    SetElem( 3, value );
+  }
+
+  void SSEVector4::SetElem(Numerics::uint8 idx, float value )
+  {
+    __m128 val = _mm_set1_ps( value );
+    switch ( idx )
+    {
+    case 0:
+      vec = _mm_insert_ps( vec, val, 0x00 );
+      break;
+    case 1:
+      vec = _mm_insert_ps( vec, val, 0x10 );
+      break;
+    case 2:
+      vec = _mm_insert_ps( vec, val, 0x20 );
+      break;
+    case 3:
+      vec = _mm_insert_ps( vec, val, 0x30 );
+      break;
+    }
+  }
+
+  void SSEVector4::GetFloatArray( float* floats ) const
+  {
+    float result[ 8 ];
+    float *data = reinterpret_cast< float* >(
+      reinterpret_cast< uintptr_t >( result ) +( 16 - ( reinterpret_cast< uintptr_t >( result ) % 16 ) ) );
+    _mm_store_ps( data, vec );
+    floats[ 0 ] = data[ 0 ];
+    floats[ 1 ] = data[ 1 ];
+    floats[ 2 ] = data[ 2 ];
+    floats[ 3 ] = data[ 3 ];
+  }
+
 }

@@ -102,10 +102,23 @@ namespace LinearMath
 
     float GetM_4_4() const;
 
-    const SSEVector4 GetCol0() const;
-    const SSEVector4 GetCol1() const;
-    const SSEVector4 GetCol2() const;
-    const SSEVector4 GetCol3() const;
+    const SSEVector4& GetCol0() const;
+    const SSEVector4& GetCol1() const;
+    const SSEVector4& GetCol2() const;
+    const SSEVector4& GetCol3() const;
+
+    void SetCol0(const SSEVector4& vec);
+    void SetCol1(const SSEVector4& vec);
+    void SetCol2(const SSEVector4& vec);
+    void SetCol3( const SSEVector4& vec );
+    void SetCol(Numerics::uint8 idx, const SSEVector4& vec );
+
+
+    void SetRow0(const SSEVector4& vec);
+    void SetRow1(const SSEVector4& vec);
+    void SetRow2(const SSEVector4& vec);
+    void SetRow3( const SSEVector4& vec );
+    void SetRow(Numerics::uint8 idx, const SSEVector4& vec );
 
     ~SSEMatrix4x4();
 
