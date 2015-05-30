@@ -153,4 +153,9 @@ namespace LinearMath
     return result[ idx ];
   }
 
+  LinearMath::SSEVector2 SSEVector2::ComponentMul( const SSEVector2& vec ) const
+  {
+    return SSEVector2( _mm_mul_ps( this->vec, vec.vec ) );
+  }
+
 }

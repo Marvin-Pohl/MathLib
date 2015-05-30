@@ -40,6 +40,8 @@ namespace LinearMath
 
     SSEVector2& operator /=( const float& scalar );
 
+    SSEVector2 ComponentMul( const SSEVector2& vec) const;
+
     float LengthSquared() const;
 
     float Length() const;
