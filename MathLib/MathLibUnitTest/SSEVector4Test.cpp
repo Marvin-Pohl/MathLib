@@ -236,5 +236,57 @@ namespace MathLibUnitTest
 
       Assert::AreEqual( ( ( 10.0f*50.0f ) + ( 20.0f*60.0f ) + ( 30.0f*70.0f ) + ( 40.0f*80.0f ) ), scal );
     }
+
+    TEST_METHOD( SSEVector4Set )
+    {
+      SSEVector4 v1( 0,0,0,0 );
+
+      Assert::AreEqual( 0.0f, v1.GetX() );
+      Assert::AreEqual( 0.0f, v1.GetY() );
+      Assert::AreEqual( 0.0f, v1.GetZ() );
+      Assert::AreEqual( 0.0f, v1.GetW() );
+
+      v1.SetX( 10.0f );
+
+      Assert::AreEqual( 10.0f, v1.GetX() );
+      Assert::AreEqual( 0.0f, v1.GetY() );
+      Assert::AreEqual( 0.0f, v1.GetZ() );
+      Assert::AreEqual( 0.0f, v1.GetW() );
+
+      v1.SetY( 20.0f );
+
+      Assert::AreEqual( 10.0f, v1.GetX() );
+      Assert::AreEqual( 20.0f, v1.GetY() );
+      Assert::AreEqual( 0.0f, v1.GetZ() );
+      Assert::AreEqual( 0.0f, v1.GetW() );
+
+      v1.SetZ( 30.0f );
+
+      Assert::AreEqual( 10.0f, v1.GetX() );
+      Assert::AreEqual( 20.0f, v1.GetY() );
+      Assert::AreEqual( 30.0f, v1.GetZ() );
+      Assert::AreEqual( 0.0f, v1.GetW() );
+
+      v1.SetW( 40.0f );
+
+      Assert::AreEqual( 10.0f, v1.GetX() );
+      Assert::AreEqual( 20.0f, v1.GetY() );
+      Assert::AreEqual( 30.0f, v1.GetZ() );
+      Assert::AreEqual( 40.0f, v1.GetW() );
+    }
+
+    TEST_METHOD( SSEVector4GetFloatArray )
+    {
+      SSEVector4 v1( 1, 2, 3, 4 );
+
+      float tmp[ 4 ];
+
+      v1.GetFloatArray( tmp );
+
+      Assert::AreEqual( 1.0f, tmp[0] );
+      Assert::AreEqual( 2.0f, tmp[1] );
+      Assert::AreEqual( 3.0f, tmp[2] );
+      Assert::AreEqual( 4.0f, tmp[3] );
+    }
   };
 }

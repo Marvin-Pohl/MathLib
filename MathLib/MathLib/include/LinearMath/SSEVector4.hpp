@@ -52,14 +52,19 @@ namespace LinearMath
     float DotProduct( const SSEVector4& v ) const;
 
     float GetX() const;
-
     float GetY() const;
-
     float GetZ() const;
-
     float GetW() const;
 
+    void GetFloatArray( float* floats ) const;
+
     SSEVector3 GetXYZ() const;
+
+    void SetX(float value);
+    void SetY(float value);
+    void SetZ(float value);
+    void SetW(float value);
+    void SetElem(Numerics::uint8 idx, float value);
 
     __m128 vec;
 
