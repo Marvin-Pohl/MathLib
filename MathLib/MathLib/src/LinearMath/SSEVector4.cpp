@@ -225,4 +225,18 @@ namespace LinearMath
     floats[ 3 ] = data[ 3 ];
   }
 
+  float SSEVector4::GetElem( Numerics::uint8 idx ) const
+  {
+    float result[ 8 ];
+    float *data = reinterpret_cast< float* >(
+      reinterpret_cast< uintptr_t >( result ) +( 16 - ( reinterpret_cast< uintptr_t >( result ) % 16 ) ) );
+    _mm_store_ps( data, vec );
+    return data[ idx ];
+  }
+
+  float SSEVector4::operator[]( Numerics::uint8 idx ) const
+  {
+    return GetElem( idx );
+  }
+
 }

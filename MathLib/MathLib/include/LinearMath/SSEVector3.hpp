@@ -42,6 +42,8 @@ namespace LinearMath
 
     SSEVector3 operator ^( const SSEVector3& v ) const;
 
+    float operator []( Numerics::uint8 idx ) const;
+
     float LengthSquared() const;
 
     float Length() const;
@@ -59,6 +61,12 @@ namespace LinearMath
     float GetY() const;
 
     float GetZ() const;
+    float GetElem(Numerics::uint8 idx) const;
+
+    void SetX( float value );
+    void SetY( float value );
+    void SetZ( float value );
+    void SetElem( Numerics::uint8 idx, float value );
 
     __m128 vec;
 

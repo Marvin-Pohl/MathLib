@@ -54,6 +54,10 @@ namespace LinearMath
 
     float GetY() const;
 
+    float operator []( Numerics::uint8 idx ) const;
+    float GetElem( Numerics::uint8 idx ) const;
+
+
     __m128 vec;
 
   private:

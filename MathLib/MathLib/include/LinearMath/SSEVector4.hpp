@@ -41,6 +41,8 @@ namespace LinearMath
 
     SSEVector4& operator /=( const float& scalar );
 
+    float operator []( Numerics::uint8 idx ) const;
+
     float LengthSquared() const;
 
     float Length() const;
@@ -55,6 +57,7 @@ namespace LinearMath
     float GetY() const;
     float GetZ() const;
     float GetW() const;
+    float GetElem(Numerics::uint8 idx) const;
 
     void GetFloatArray( float* floats ) const;
 

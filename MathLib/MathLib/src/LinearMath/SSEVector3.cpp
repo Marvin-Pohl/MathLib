@@ -178,4 +178,49 @@ namespace LinearMath
     _mm_storeu_ps( result, vec );
     return result[ 3 ];
   }
+
+  void SSEVector3::SetX( float value )
+  {
+    SetElem( 0, value );
+  }
+
+  void SSEVector3::SetY( float value )
+  {
+    SetElem( 1, value );
+  }
+
+  void SSEVector3::SetZ( float value )
+  {
+    SetElem( 2, value );
+  }
+
+  void SSEVector3::SetElem( Numerics::uint8 idx, float value )
+  {
+    __m128 val = _mm_set1_ps( value );
+    switch( idx )
+    {
+    case 0:
+      vec = _mm_insert_ps( vec, val, 0x00 );
+      break;
+    case 1:
+      vec = _mm_insert_ps( vec, val, 0x10 );
+      break;
+    case 2:
+      vec = _mm_insert_ps( vec, val, 0x20 );
+      break;
+    }
+  }
+
+  float SSEVector3::GetElem( Numerics::uint8 idx ) const
+  {
+    float result[ 4 ];
+    _mm_storeu_ps( result, vec );
+    return result[ idx ];
+  }
+
+  float SSEVector3::operator[]( Numerics::uint8 idx ) const
+  {
+    return GetElem( idx );
+  }
+
 }

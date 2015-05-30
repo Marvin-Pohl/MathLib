@@ -140,4 +140,17 @@ namespace LinearMath
     _mm_storeu_ps( result, vec );
     return result[ 2 ];
   }
+
+  float SSEVector2::operator[]( Numerics::uint8 idx ) const
+  {
+    return GetElem( idx );
+  }
+
+  float SSEVector2::GetElem( Numerics::uint8 idx ) const
+  {
+    float result[ 4 ];
+    _mm_storeu_ps( result, vec );
+    return result[ idx ];
+  }
+
 }
