@@ -47,8 +47,14 @@ namespace LinearMath
 
     static SSEMatrix4x4 CreateLookDir( const SSEVector3& dir, const SSEVector3& up );
 
-    static SSEMatrix4x4 CreateProjectionMatrix( float viewAngle, float aspectRatio, float nearPlane,
+    static SSEMatrix4x4 CreateFrustumMatrix( float left,
+      float right,
+      float bottom,
+      float top,
+      float nearPlane,
       float farPlane );
+
+    static SSEMatrix4x4 CreateProjectionMatrix( Radian_tpl<float> viewAngle, float width, float height, float nearPlane, float farPlane );
 
     static SSEMatrix4x4 CreateRotationX( const Radian_tpl< float >& angle );
 
@@ -106,6 +112,12 @@ namespace LinearMath
     const SSEVector4& GetCol1() const;
     const SSEVector4& GetCol2() const;
     const SSEVector4& GetCol3() const;
+
+
+    const SSEVector4& GetRow0() const;
+    const SSEVector4& GetRow1() const;
+    const SSEVector4& GetRow2() const;
+    const SSEVector4& GetRow3() const;
 
     void SetCol0(const SSEVector4& vec);
     void SetCol1(const SSEVector4& vec);
