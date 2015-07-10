@@ -618,24 +618,24 @@ namespace LinearMath
     return CreateFrustumMatrix( -halfScaledAspectRatio, halfScaledAspectRatio, -halfHeight, halfHeight, nearPlane, farPlane );
   }
 
-  const SSEVector4& SSEMatrix4x4::GetRow0() const
+  SSEVector4 SSEMatrix4x4::GetRow0() const
   {
     return SSEVector4( m_col0.GetX(), m_col1.GetX(), m_col2.GetX(), m_col3.GetX() );
   }
 
-  const SSEVector4& SSEMatrix4x4::GetRow1() const
+  SSEVector4 SSEMatrix4x4::GetRow1() const
   {
     return SSEVector4( m_col0.GetY(), m_col1.GetY(), m_col2.GetY(), m_col3.GetY() );
 
   }
 
-  const SSEVector4& SSEMatrix4x4::GetRow2() const
+  SSEVector4 SSEMatrix4x4::GetRow2() const
   {
     return SSEVector4( m_col0.GetZ(), m_col1.GetZ(), m_col2.GetZ(), m_col3.GetZ() );
 
   }
 
-  const SSEVector4& SSEMatrix4x4::GetRow3() const
+  SSEVector4 SSEMatrix4x4::GetRow3() const
   {
     return SSEVector4( m_col0.GetW(), m_col1.GetW(), m_col2.GetW(), m_col3.GetW() );
 

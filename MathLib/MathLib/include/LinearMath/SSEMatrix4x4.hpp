@@ -114,10 +114,10 @@ namespace LinearMath
     const SSEVector4& GetCol3() const;
 
 
-    const SSEVector4& GetRow0() const;
-    const SSEVector4& GetRow1() const;
-    const SSEVector4& GetRow2() const;
-    const SSEVector4& GetRow3() const;
+    SSEVector4 GetRow0() const;
+    SSEVector4 GetRow1() const;
+    SSEVector4 GetRow2() const;
+    SSEVector4 GetRow3() const;
 
     void SetCol0(const SSEVector4& vec);
     void SetCol1(const SSEVector4& vec);
